@@ -1,0 +1,133 @@
+/* GLOBAL CSS */
+body {
+    margin:0;
+    font-family: sans-serif;
+}
+
+a {
+    text-decoration:none;
+}
+
+input:focus{
+    outline:none;
+}
+
+/* HOMEPAGE */
+
+.homepage {
+    min-height: 100vh;
+    background-image: url('../images/bg_homepage.jpg');
+    background-size: cover;
+    background-position: bottom;
+}
+
+.homepage div {
+    padding: 2%;
+    background-color: rgba(38, 38, 39, 0.85);
+    color: #fff;
+    width: 30%;
+    margin: 10% auto;
+}
+
+.homepage div h2 {
+    text-align:center;
+}
+
+.homepage div input, .homepage div button {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 5%;
+    border: none;
+    text-align:center;
+}
+
+.homepage div label {
+    display: block;
+    text-align:center;
+    margin-bottom: 2%;
+}
+
+.homepage input[type=text], input[type=password] {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 3px #3c3c3c inset;
+}
+
+.homepage div button {
+    font-size: 1em;
+    color: #fff;
+    margin-top: 10%;
+    padding: 2% 6%;
+    background-color: rgba(255, 255, 255, 0);
+    border-radius: 5px;
+    border: 2px solid #fff;
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+
+.homepage div button:hover{
+    transition-duration: 0.5s;
+    padding: 2% 10%;
+}
+
+/* HEADER */
+
+header {
+    background-color: #262627;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 2% 0 2% 15%;
+}
+
+header h1 a {
+    color: #fff;
+}
+
+header p {
+    color:#fff;
+    margin-right: 5%;
+    padding: 10px 20px;
+    border: 2px solid #fff;
+    cursor: pointer;
+    transition-duration: 0.5s;
+}
+
+header p:hover {
+    transition-duration: 0.5s;
+    padding: 10px 30px;
+}
+
+nav ul  {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 1% 2%;
+}
+
+nav ul li a {
+    color: #000;
+    border-bottom: 2px solid #fff;
+    transition-duration: 0.5s;
+    padding-bottom: 5px;
+}
+
+nav ul li a:hover {
+    transition-duration: 0.5s;
+    border-bottom: 2px solid black;
+}
+
+/* DASHBOARD */
+
+/* MEETING */
+
+/* CANDIDATES */

@@ -1,0 +1,19 @@
+{
+    "name": "public/lib",
+    
+    "require": {
+        "php": ">=5.3",
+        "smarty/smarty": "~3.1"
+    },
+    
+    "autoload": {
+        "psr-4" : {"AntoninZ\\" : "App/"}
+    },
+    
+    "authors": [
+        {
+            "name": "AntoninZ",
+            "email": "antonin.zimmer@gmail.com"
+        }
+    ]
+}
