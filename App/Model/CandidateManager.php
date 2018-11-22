@@ -65,6 +65,20 @@ class CandidateManager {
         
     }
     
+    public function getAllCandidateWithoutSession()
+    {
+        $candidates = [];
+        
+        $req = $this->_db->query('SELECT * FROM candidates WHERE meeting = "true"');
+        
+        while($data = $req->fetch(\PDO::FETCH_ASSOC))
+        {
+            $candidates[] = new Candidate($data);
+        }
+        
+        return $candidates;
+    }
+    
     public function updateCandidate(Candidate $candidate)
     {
         $req = $this->_db->prepare('UPDATE candidates SET firstname = :firstname, lastname = :lastname, birthDate = :birthDate, gender = :gender, email = :email, phoneNumber = :phoneNumber, cellphoneNumber = :cellphoneNumber, address = :address, allowable = :allowable WHERE idCandidate = :idCandidate');

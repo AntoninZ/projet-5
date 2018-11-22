@@ -56,7 +56,17 @@ class CandidateController
         return $a;
         
     }
-
+    
+    public function getAllCandidateWithoutSesion()
+    {
+        $connection = new ConnectionController();
+        $db = $connection->connect();
+        $manager = new CandidateManager($db);
+        $data= $manager->getAllCandidateWithoutSession();
+        
+        return $data;
+    }
+    
     public function updateCandidate()
     {
         $candidate = new Candidate([

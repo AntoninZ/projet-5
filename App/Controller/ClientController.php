@@ -3,6 +3,7 @@
 namespace AntoninZ\Controller;
 
 use AntoninZ\Model\ClientManager;
+use AntoninZ\Model\Client;
 
 class ClientController
 {
@@ -18,7 +19,8 @@ class ClientController
             'cellphoneNumber' => $_POST['cellphoneNumber']
         ]);
 
-        $db = connect();
+        $connection = new ConnectionController();
+        $db = $connection->connect();
         $manager = new ClientManager($db);
         $manager->createClient($client);
     }
@@ -27,23 +29,27 @@ class ClientController
     {
        $client = new Client([
            'idClient' => $_GET['idClient'],
-           'idCompany' => $_GET['idCompany']
        ]);
 
-       $db = connect();
+       $connection = new ConnectionController();
+       $db = $connection->connect();
        $manager = new ClientManager($db);
-       $data = $manager->getClient($client);
+       $client = $manager->getClient($client);
 
-       return $data;
+       return $client;
     }
 
     public function getAllClient()
     {
-        $db = connect();
+	
+	$client = new Client(['idCompany' => $_GET['idCompany']]);
+	
+        $connection = new ConnectionController();
+        $db = $connection->connect();
         $manager = new ClientManager($db);
-        $data = $manager->getAllClient();
+        $clients = $manager->getAllClient($client);
 
-        return $data;
+        return $clients;
     }
 
     public function updateClient()
@@ -59,7 +65,8 @@ class ClientController
             'cellphoneNumber' => $_POST['cellphoneNumber']
         ]);
 
-        $db = connect();
+        $connection = new ConnectionController();
+        $db = $connection->connect();
         $manager = new ClientManager($db);
         $manager->updateClient($client);
     }
@@ -70,7 +77,8 @@ class ClientController
             'idClient' => $_GET['idClient']
         ]);
 
-        $db = connect();
+        $connection = new ConnectionController();
+        $db = $connection->connect();
         $manager= new ClientManager($db);
         $manager->deleteClient($client);
     }

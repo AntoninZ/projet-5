@@ -12,10 +12,10 @@
                     <tr>
                         <td>{$candidate->lastname}</td>
                         <td>{$candidate->firstname}</td>
-                        <td>{$candidate->birthDate}</td>
+                        <td>{$candidate->birthDate|date_format:"%d/%m/%Y"}</td>
                         <td><a href="?page=candidates&amp;idCandidate={$candidate->idCandidate}">Accéder</a></td>
                     </tr>
-                    {foreachelse}
+                {foreachelse}
                     <td colspan="4">Aucun résultat</td>
                 {/foreach}
             </tbody>

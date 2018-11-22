@@ -19,8 +19,12 @@ class CompanyManager {
    {
        $req = $this->_db->prepare('INSERT INTO companies (name, billAddress) VALUES (:name, :billAddress)');
        $req->bindValue(':name', $company->getName(), \PDO::PARAM_STR);
-       $req->bindValue(':billAddress', $company->getBillAddress(), \PDO::PARAM_STR);
        $req->execute();
+       
+       $req = $this->_db->query('SELECT MAX(idCompany) FROM companies');
+       $idCompany = $req->fetch(\PDO::FETCH_ASSOC);
+        
+        return $idCompany['MAX(idCompany)'];
    }
    
    public function getCompany(Company $company)
@@ -36,6 +40,8 @@ class CompanyManager {
    
    public function getAllCompany()
    {
+       $companies = [];
+       
        $req = $this->_db->prepare('SELECT * FROM companies');
        $req->execute();
 
@@ -49,9 +55,8 @@ class CompanyManager {
    
    public function updateCompany(Company $company)
    {
-       $req = $this->_db->prepare('UPDATE companies SET name = :name, billAddress = :billAddress WHERE idCompany = :idCompany');
+       $req = $this->_db->prepare('UPDATE companies SET name = :name WHERE idCompany = :idCompany');
        $req->bindValue(':name', $company->getName(), \PDO::PARAM_STR);
-       $req->bindValue(':billAddress', $company->getBillAddress(), \PDO::PARAM_STR);
        $req->bindValue(':idCompany', $company->getIdCompany(), \PDO::PARAM_INT);
        $req->execute();
    }

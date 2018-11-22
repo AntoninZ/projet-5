@@ -11,6 +11,7 @@ $userController = new UserController();
 $candidateController = new CandidateController();
 $sessionController = new SessionController();
 $companyController = new CompanyController();
+$clientController = new ClientController();
 $smarty = new Smarty();
 
 
@@ -27,7 +28,13 @@ if(isset($_SESSION['username']))
     {
         $smarty->display('Header.tpl');
         
-        if($_GET['page'] == 'candidates')
+        if($_GET['page'] == 'meeting')
+        {
+            $candidates = $candidateController->getAllCandidateWithoutSesion();
+            $smarty->assign('candidates', $candidates);
+            $smarty->display('Candidate/CandidateWithoutSession.tpl');
+        }
+        elseif($_GET['page'] == 'candidates')
         { 
             if(isset($_GET['idCandidate']))
             {
@@ -35,20 +42,24 @@ if(isset($_SESSION['username']))
                 $candidate = $candidateController->getCandidate();
                 $sessions = $sessionController->getAllSession($idCandidate);
                 
-                
-                foreach ($sessions as $session)
-                {
-                    $companies[$session->getIdCompany()] = $companyController->getCompanyById($session->getIdCompany())->getName();
-                }
-                    
+		if($sessions)
+		{
+		
+		    foreach ($sessions as $session)
+		    {
+			$companies[$session->getIdCompany()] = $companyController->getCompanyById($session->getIdCompany())->getName();
+		    }
+                    $smarty->assign('sessions', $sessions);
+		    $smarty->assign('companies', $companies);
+		}
+		
                 $smarty->assign('candidate', $candidate);
-                $smarty->assign('sessions', $sessions);
-                $smarty->assign('companies', $companies);
-                $smarty->display('Candidate/GetCandidate.tpl');   
+                $smarty->display('Candidate/GetCandidate.tpl');
+                $smarty->display('Session/SessionCreate.tpl');
             }
             elseif(isset($_GET['idSession']))
             {
-                $session = $sessionController->getSession();            // Récupérer l'ID Candidate et faire une jointure dans la partie session
+                $session = $sessionController->getSession();
                 $smarty->assign('session', $session);
                 $smarty->display('Session/GetSession.tpl');
             }
@@ -59,7 +70,25 @@ if(isset($_SESSION['username']))
         }
         elseif($_GET['page'] == 'companies')
         {
-            $smarty->display('Company/Companies.tpl');
+	    if(isset($_GET['idCompany']))
+	    {
+		$clients = $clientController->getAllClient();
+		
+		$smarty->assign('clients', $clients);
+		$smarty->display('Client/GetAllClient.tpl');
+	    }
+	    elseif(isset($_GET['idClient']))
+	    {
+		$client = $clientController->getClient();
+		$smarty->assign('client', $client);
+		$smarty->display('Client/GetClient.tpl');
+	    }
+	    else
+	    {
+		$companies = $companyController->getAllCompany();
+		$smarty->assign('companies', $companies);
+		$smarty->display('Company/CompanieHome.tpl');
+	    }
         }
         elseif($_GET['page'] == "settings")
         {
@@ -89,6 +118,10 @@ if(isset($_SESSION['username']))
         {
             $candidateController->updateCandidate();
         }
+	elseif($_GET['action'] == 'createSession')
+	{
+	    $sessionController->createSession();
+	}
     }
     else
     {

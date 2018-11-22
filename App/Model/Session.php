@@ -6,7 +6,6 @@ class Session implements \JsonSerializable {
     private $_idUser;
     private $_idCandidate;
     private $_idCompany;
-    private $_name;
     private $_date;
     private $_aptitude;
     private $_psychologistNote;
@@ -38,7 +37,6 @@ class Session implements \JsonSerializable {
     public function getIdUser() {return $this->_idUser;}
     public function getIdCandidate() {return $this->_idCandidate;}
     public function getIdCompany() {return $this->_idCompany;}
-    public function getName() {return $this->_name;}
     public function getDate() {return $this->_date;}
     public function getAptitude() {return $this->_aptitude;}
     public function getPsychologistNote() {return $this->_psychologistNote;}
@@ -52,7 +50,6 @@ class Session implements \JsonSerializable {
     public function setIdUser($idUser) {$this->_idUser = $idUser;}
     public function setIdCandidate($idCandidate) {$this->_idCandidate = $idCandidate;}
     public function setIdCompany($idCompany) {$this->_idCompany = $idCompany;}
-    public function setName($name) {$this->_name = $name;}
     public function setDate($date) {$this->_date = $date;}
     public function setAptitude($aptitude) {$this->_aptitude = $aptitude;}
     public function setPsychologistNote($psychologistNote) {$this->_psychologistNote = $psychologistNote;}

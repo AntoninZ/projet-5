@@ -39,6 +39,7 @@ var Candidate = {
                 
                 function(data){
                     window.location.replace("?page=candidates&idCandidate="+data);
+
                 }
             );
         });

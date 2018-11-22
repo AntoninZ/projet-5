@@ -48,6 +48,6 @@ class Client{
     public function setGender($gender) {$this->_gender = $gender;}
     public function setAddress($address) {$this->_address = $address;}
     public function setPhoneNumber($phoneNumber) {$this->_phoneNumber = $phoneNumber;}
-    public function setCellphoneNumber($cellphoneNumber) {$this->_cellphoneNUmber = $cellphoneNumber;}
+    public function setCellphoneNumber($cellphoneNumber) {$this->_cellphoneNumber = $cellphoneNumber;}
     
 }

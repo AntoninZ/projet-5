@@ -26,7 +26,8 @@ class SessionController {
         $connection = new ConnectionController();
         $db = $connection->connect();
         $manager = new SessionManager($db);
-        $manager->createSession($session);  
+        $idSession = $manager->createSession($session); 
+	return $idSession;
     }
     
     public function getSession()

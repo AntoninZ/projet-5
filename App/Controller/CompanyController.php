@@ -13,15 +13,14 @@ class CompanyController {
     {
         $company = new Company([
             'name' => $_POST['name'],
-            'billAddress' => $_POST['billAddress']
         ]);
         
         $connection = new ConnectionController();
         $db = $connection->connect();
         $manager = new CompanyManager($db);
-        $manager->createCompany($company);
+        $idCompany = $manager->createCompany($company);
         
-        return $company;
+        return $idCompany;
     }
     
     public function getCompany() {
@@ -54,9 +53,9 @@ class CompanyController {
         $connection = new ConnectionController();
         $db = $connection->connect();
         $manager = new CompanyManager($db);
-        $data = $manager->getAllCompany();
+        $companies = $manager->getAllCompany();
         
-        return $data;
+        return $companies;
     }
     
     public function updateCompany()
