@@ -32,6 +32,25 @@ class CandidateManager {
         return $data['MAX(idCandidate)'];
     }
     
+    public function createCandidateWithoutSession(Candidate $candidate)
+    {
+	$req = $this->_db->prepare('
+		INSERT INTO candidates
+		(firstname, lastname, email, phoneNumber, cellphoneNumber, creationDate, downPayment, reservationDate, assistantNote, meeting)
+		VALUES
+		(:firstname, :lastname, :email, :phoneNumber, :cellphoneNumber, :creationDate, :downPayment, :reservationDate, :assistantNote, :meeting)');
+	$req->bindValue('firstname', $candidate->getFirstname(), \PDO::PARAM_STR);
+	$req->bindValue('lastname', $candidate->getLastname(), \PDO::PARAM_STR);
+	$req->bindValue('email', $candidate->getEmail(), \PDO::PARAM_STR);
+	$req->bindValue('phoneNumber', $candidate->getPhoneNumber(), \PDO::PARAM_STR);
+	$req->bindValue('cellphoneNumber', $candidate->getCellphoneNumber(), \PDO::PARAM_STR);
+	$req->bindValue('creationDate', $candidate->getCreationDate(), \PDO::PARAM_STR);
+	$req->bindValue('downPayment', $candidate->getDownPayment(), \PDO::PARAM_STR);
+	$req->bindValue('reservationDate', $candidate->getReservationDate(), \PDO::PARAM_STR);
+	$req->bindValue('assistantNote', $candidate->getAssistantNote(), \PDO::PARAM_STR);
+	$req->bindValue('meeting', $candidate->getMeeting(), \PDO::PARAM_STR);
+	$req->execute();
+    }
     public function getCandidate(Candidate $candidate)
     {
         $req = $this->_db->prepare('SELECT * FROM candidates WHERE idCandidate = :idCandidate');
@@ -82,7 +101,8 @@ class CandidateManager {
     public function updateCandidate(Candidate $candidate)
     {
         $req = $this->_db->prepare('UPDATE candidates SET firstname = :firstname, lastname = :lastname, birthDate = :birthDate, gender = :gender, email = :email, phoneNumber = :phoneNumber, cellphoneNumber = :cellphoneNumber, address = :address, allowable = :allowable WHERE idCandidate = :idCandidate');
-        $req->bindValue('firstname', $candidate->getFirstname(), \PDO::PARAM_STR);
+        $req->bindValue('idCandidate', $candidate->getIdCandidate(), \PDO::PARAM_INT);
+	$req->bindValue('firstname', $candidate->getFirstname(), \PDO::PARAM_STR);
         $req->bindValue('lastname', $candidate->getLastname(), \PDO::PARAM_STR);
         $req->bindValue('birthDate', $candidate->getBirthDate(), \PDO::PARAM_STR);
         $req->bindValue('gender', $candidate->getGender(), \PDO::PARAM_STR);
@@ -90,9 +110,26 @@ class CandidateManager {
         $req->bindValue('phoneNumber', $candidate->getPhoneNumber(), \PDO::PARAM_STR);
         $req->bindValue('cellphoneNumber', $candidate->getCellphoneNumber(), \PDO::PARAM_STR);
         $req->bindValue('address', $candidate->getAddress(), \PDO::PARAM_STR);
-        $req->bindValue('allowable', $candidate->getAllowable(), \PDO::PARAM_STR);
-        $req->bindValue('idCandidate', $candidate->getIdCandidate(), \PDO::PARAM_INT);
+	$req->bindValue('allowable', $candidate->getAllowable(), \PDO::PARAM_STR);
         $req->execute();
+    }
+    
+    public function updateCandidateWithoutSession(Candidate $candidate)
+    {
+	$req = $this->_db->prepare('UPDATE candidates SET
+		creationDate = :creationDate,
+		downPayment = :downPayment,
+		reservationDate = :reservationDate,
+		assistantNote = :assistantNote,
+		meeting = :meeting
+		WHERE idCandidate = :idCandidate');
+	$req->bindValue(':idCandidate', $candidate->getIdCandidate(), \PDO::PARAM_INT);
+	$req->bindValue(':creationDate', $candidate->getCreationDate(), \PDO::PARAM_STR);
+	$req->bindValue(':downPayment', $candidate->getDownPayment(), \PDO::PARAM_STR);
+	$req->bindValue(':reservationDate', $candidate->getReservationDate(), \PDO::PARAM_STR);
+	$req->bindValue(':assistantNote', $candidate->getAssistantNote(), \PDO::PARAM_STR);
+	$req->bindValue(':meeting', $candidate->getMeeting(), \PDO::PARAM_STR);
+	$req->execute();	
     }
     
     public function deleteCandidate(Candidate $candidate)

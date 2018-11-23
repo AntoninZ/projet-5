@@ -42,7 +42,7 @@ class CompanyManager {
    {
        $companies = [];
        
-       $req = $this->_db->prepare('SELECT * FROM companies');
+       $req = $this->_db->prepare('SELECT * FROM companies ORDER BY name');
        $req->execute();
 
        while($data = $req->fetch(\PDO::FETCH_ASSOC))

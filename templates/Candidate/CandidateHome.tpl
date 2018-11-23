@@ -1,5 +1,5 @@
 <section class="candidateHome">
-    <article class="createCandidate">
+    <article class="articleForm createCandidate">
 	<h2>Ajouter un candidat</h2>
 	<hr />
 	<form>
@@ -23,6 +23,9 @@
     </article>
     
     <article class="searchCandidate">
+	<h2>Chercher un candidat</h2>
+	<hr />
+	
 	<form class="searchForm" autocomplete="off">
 	    <label for="search">Recherche :</label>
 	    <span class="searchIcon"><i class="fas fa-search"></i></span>

@@ -1,28 +1,64 @@
-<section>
-    <form>
-        <label for="date">Date de passage</label>
-        <input type="date" id="date" name="date" value="{$session->getDate()}">
-        <label for="aptitude">Aptitude</label>
-        <select id="aptitude">
-            <option value="{$session->getAptitude()}">{$session->getAptitude()}</option>
-            <option disabled></option>
-            <option value="Apte">Apte</option>
-            <option value="Inapte">Inapte</option>
-        </select>
-            
-        <label for="psychologistNote">Note du psychologue</label>
-        <textarea id="psychologistNote">{$session->getPsychologistNote()}</textarea>
-       
-        <label for="computerStation">PC COG/FVW :</label>
-        <select id="computerStation">
-            <option value="{$session->getComputerStation()}">{$session->getComputerStation()}</option>
-            <option disabled></option>
-            <option value="4">4</option>
-            <option value="3">3</option>
-            <option value="2">2</option>
-            <option value="1">1</option>
-        </select>
-            
-        <button type="submit" id="btnUpdateSession">Sauvegarder</button>
-    </form>  
+<section class="getSession">
+    <article class="articleForm updateSession">
+	<form>
+	    <div>
+		<input type="text" id="idSession" class="noShow" value="{$smarty.get.idSession}">
+
+		<div>
+		    <label for="date">Date de passage :</label>
+		    <input type="date" id="date" name="date" value="{$session->getDate()}">
+		</div>
+
+		<div>
+		    <label for="idCompany">Entreprise :</label>
+		    <select id="idCompany">
+		    {foreach from=$companies item=company}
+			<option value="{$company->getIdCompany()}" {if $company->getIdCompany() eq $session->getIdCompany()}selected="selected"{/if}>{$company->getName()}</option>
+		    {/foreach}
+		    </select>
+		</div>
+
+		<div>
+		    <label for="idUser">Psychologue :</label>
+		    <select id="idUser">
+		    {foreach from=$users item=user}
+			<option value="{$user->getIdUser()}" {if $user->getIdUser() eq $session->getIdUser()}selected="selected"{/if}>{$user->getUsername()}</option>
+		    {/foreach}
+		    </select>
+		</div>
+
+		<div>
+		    <label for="aptitude">Aptitude :</label>
+		    <select id="aptitude">
+			<option value="Apte" {if $session->getAptitude() eq 'Apte'}selected="selected"{/if}>Apte</option>
+			<option value="Inapte" {if $session->getAptitude() eq 'Inapte'}selected="selected"{/if}>Inapte</option>
+		    </select>
+		</div>
+	    </div>
+		    
+	    <div>    
+		<div>
+		    <label for="computerStation">Ordinateur du candidat :</label>
+		    <select id="computerStation">
+			<option value="4" {if $session->getComputerStation() eq '4'}selected="selected"{/if}>4</option>
+			<option value="3" {if $session->getComputerStation() eq '3'}selected="selected"{/if}>3</option>
+			<option value="2" {if $session->getComputerStation() eq '2'}selected="selected"{/if}>2</option>
+			<option value="1" {if $session->getComputerStation() eq '1'}selected="selected"{/if}>1</option>
+		    </select>
+		</div>
+
+		<div>
+		    <label for="price">Prix de l'évaluation</label>
+		    <input type="text" id="price" value="{$session->getPrice()}">
+		</div>
+	    </div>
+		
+	    <div class="psychologistNote">
+		<label for="psychologistNote">Note du psychologue :</label>
+		<textarea id="psychologistNote">{$session->getPsychologistNote()}</textarea>
+	    </div>
+	    
+	    <button type="submit" id="btnUpdateSession">Sauvegarder</button>
+	</form> 
+    </article>
 </section>

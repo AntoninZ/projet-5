@@ -87,7 +87,24 @@ class CandidateController
         $manager = new CandidateManager($db);
         $manager->updateCandidate($candidate);
     }
-
+    
+    public function updateCandidateWithoutSession()
+    {
+	$candidate = new Candidate([
+	    'idCandidate' => $_POST['idCandidate'],
+	    'creationDate' => $_POST['creationDate'],
+	    'downPayment' => $_POST['downPayment'],
+	    'reservationDate' => $_POST['reservationDate'],
+	    'assistantNote' => $_POST['assistantNote'],
+	    'meeting' => $_POST['meeting']
+	]);
+	
+	$connection = new ConnectionController();
+	$db = $connection->connect();
+	$manager = new CandidateManager($db);
+	$manager->updateCandidateWithoutSession($candidate);
+    }
+    
     public function deleteCandidate()
     {
         $candidate = new Candidate([

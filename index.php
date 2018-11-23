@@ -41,10 +41,11 @@ if(isset($_SESSION['username']))
                 $idCandidate = $_GET['idCandidate'];
                 $candidate = $candidateController->getCandidate();
                 $sessions = $sessionController->getAllSession($idCandidate);
-                
+                $users = $userController->getAllUserWherePsychologist();
+		$companyList = $companyController->getAllCompany();
+		
 		if($sessions)
 		{
-		
 		    foreach ($sessions as $session)
 		    {
 			$companies[$session->getIdCompany()] = $companyController->getCompanyById($session->getIdCompany())->getName();
@@ -53,21 +54,30 @@ if(isset($_SESSION['username']))
 		    $smarty->assign('companies', $companies);
 		}
 		
+		$smarty->assign('users', $users);
                 $smarty->assign('candidate', $candidate);
+		$smarty->assign('companyList', $companyList);
                 $smarty->display('Candidate/GetCandidate.tpl');
-                $smarty->display('Session/SessionCreate.tpl');
-            }
-            elseif(isset($_GET['idSession']))
-            {
-                $session = $sessionController->getSession();
-                $smarty->assign('session', $session);
-                $smarty->display('Session/GetSession.tpl');
             }
             else
             {
                 $smarty->display('Candidate/CandidateHome.tpl');
             }
         }
+	elseif($_GET['page'] == 'session')
+	{
+	    if(isset($_GET['idSession']))
+            {
+                $session = $sessionController->getSession();
+		$users = $userController->getAllUserWherePsychologist();
+		$companies = $companyController->getAllCompany();
+		
+                $smarty->assign('session', $session);
+		$smarty->assign('users', $users);
+		$smarty->assign('companies', $companies);
+                $smarty->display('Session/GetSession.tpl');
+            }
+	}
         elseif($_GET['page'] == 'companies')
         {
 	    if(isset($_GET['idCompany']))
@@ -118,9 +128,18 @@ if(isset($_SESSION['username']))
         {
             $candidateController->updateCandidate();
         }
+	elseif($_GET['action'] == 'updateCandidateWithoutSession')
+	{
+	    $candidateController->updateCandidateWithoutSession();
+	}
 	elseif($_GET['action'] == 'createSession')
 	{
-	    $sessionController->createSession();
+	    $lastId = $sessionController->createSession();
+	    echo $lastId;
+	}
+	elseif($_GET['action'] == 'updateSession')
+	{
+	    $sessionController->updateSession();
 	}
     }
     else

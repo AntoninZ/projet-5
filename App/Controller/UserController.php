@@ -47,6 +47,16 @@ class UserController {
         return $users;
     }
     
+    public function getAllUserWherePsychologist()
+    {
+	$connection = new ConnectionController();
+	$db = $connection->connect();
+	$manager = new UserManager($db);
+	$users = $manager->getAllUserWherePsychologist();
+	
+	return $users;
+    }
+    
     public function updateUser()
     {
         $user = new User([

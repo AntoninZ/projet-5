@@ -71,9 +71,35 @@ var Candidate = {
                 }
             );
         });
+    },
+    
+    updateCandidateWithoutSession: function()
+    {
+	$('#btnUpdateCandidateWithoutSession').click(function(e)
+	{
+	    e.preventDefault();
+	    
+	    $.post(
+                'index.php?action=updateCandidateWithoutSession',
+                {
+                    creationDate : $('#creationDate').val(),
+		    downPayment : $('#downPayment').val(),
+		    reservationDate : $('#reservationDate').val(),
+		    assistantNote : $('#assistantNote').val(),
+		    meeting : $('#meeting').val(),
+                    idCandidate : $('#idCandidate').val()
+                },
+                
+                function(data){
+                    location.reload();
+
+                }
+            );
+	});
     }
 };
 
 Candidate.search();
 Candidate.createCandidate();
 Candidate.updateCandidate();
+Candidate.updateCandidateWithoutSession();

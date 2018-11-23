@@ -11,14 +11,13 @@ class SessionController {
     
     public function createSession()
     {
-        date_default_timezone_set("Europe/Paris");
         $session = new Session([
             'idUser' => $_POST['idUser'],
             'idCandidate' => $_POST['idCandidate'],
-            'date' => \date("Y-m-d"),
+	    'idCompany' => $_POST['idCompany'],
+            'date' => $_POST['date'],
             'aptitude' => $_POST['aptitude'],
             'psychologistNote' => $_POST['psychologistNote'],
-            'downPayment' => $_POST['downPayment'],
             'price' => $_POST['price'],
             'computerStation' => $_POST['computerStation']
         ]);
@@ -26,8 +25,7 @@ class SessionController {
         $connection = new ConnectionController();
         $db = $connection->connect();
         $manager = new SessionManager($db);
-        $idSession = $manager->createSession($session); 
-	return $idSession;
+        $manager->createSession($session); 
     }
     
     public function getSession()
@@ -63,11 +61,10 @@ class SessionController {
         $session = new Session([
             'idSession' => $_POST['idSession'],
             'idUser' => $_POST['idUser'],
-            'idCandidate' => $_POST['idCandidate'],
+	    'idCompany' => $_POST['idCompany'],
             'date' => $_POST['date'],
             'aptitude' => $_POST['aptitude'],
             'psychologistNote' => $_POST['psychologistNote'],
-            'downPayment' => $_POST['downPayment'],
             'price' => $_POST['price'],
             'computerStation' => $_POST['computerStation']
         ]);

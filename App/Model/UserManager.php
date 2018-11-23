@@ -49,14 +49,28 @@ class UserManager {
     
     public function getAllUser()
     {
+	$users = [];
+	
         $req = $this->_db->query('SELECT * FROM users');
-        
         while($data = $req->fetch(\PDO::FETCH_ASSOC))
 	{
             $users[] = new User($data);
 	}
         
         return $users;
+    }
+    
+    public function getAllUserWherePsychologist()
+    {
+	$users = [];
+	
+	$req = $this->_db->query('SELECT idUser, username FROM users WHERE role="psychologist"');
+	while($data = $req->fetch(\PDO::FETCH_ASSOC))
+	{
+	    $users[] = new User($data);
+	}
+	
+	return $users;
     }
     
     public function updateUser(User $user)

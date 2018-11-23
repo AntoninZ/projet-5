@@ -11,6 +11,11 @@ section {
     border: 1px solid #262627;
 }
 
+section.getCandidate, section.getSession, section.getAllCandidateWithoutSession {
+    padding: 15px;
+    box-sizing: border-box;
+}
+
 a {
     text-decoration:none;
 }
@@ -27,6 +32,10 @@ table {
 table, td, th {
     border: 1px solid #000;
     text-align:center;
+}
+
+H2 {
+    margin: 0;
 }
 
 /* HOMEPAGE */
@@ -149,56 +158,60 @@ nav ul li a:hover {
 
 /* CANDIDATE HOME */
 
-.createCandidate {
+.articleForm.createCandidate {
     background-color: #262627;
     color: #f5f5f5;
     padding: 2%;
 }
 
-.createCandidate H2 {
-    margin: 0;
+.articleForm.createCandidate form {
+    padding: 20px 0px;
+    margin: 0 auto 50px auto;
 }
 
-.createCandidate form {
+.articleForm form {
     width: 50%;
     display: flex;
     flex-direction: column;
-    margin: 0 auto;
-    padding: 20px 0px;
-    margin-bottom: 50px;
 }
 
-
-.createCandidate form label {
+.articleForm form label {
     display: inline-block;
-    width: 150px;
+    width: 175px;
     text-align: right;
     margin: 0px 5px 10px 0px;
 }
 
-.createCandidate form input {
+.articleForm form input, select, textarea {
     width: 200px;
     border: 1px solid #ccc;
     padding: 5px 5px 3px 5px;
     border-radius: 4px;
-    background-color: #f5f5f5;
-    
+    background-color: #f5f5f5;    
 }
 
-.createCandidate form button {
+
+.articleForm select {width: 212px;}
+
+.articleForm form button {
     background-color: rgb(255,255,255,0);
-    color: #f5f5f5;
+    color: #262627;
     font-size: 1em;
-    border: 2px solid #f5f5f5;
-    margin: 20px auto 0px auto;
+    border: 2px solid #262627;
+    margin: 50px auto 0px auto;
     padding: 5px 10px;
     transition-duration: 0.5s;
     cursor: pointer;
 }
 
-.createCandidate form button:hover {
+.articleForm form button:hover {
     transition-duration: 0.5s;
     padding: 5px 30px;
+}
+
+.articleForm.createCandidate form button{
+    color: #f5f5f5;
+    border: 2px solid #f5f5f5;
 }
 
 .searchCandidate {
@@ -209,7 +222,7 @@ nav ul li a:hover {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    margin-bottom: 2%;
+    margin: 40px 0;
 }
 
 .searchForm label {
@@ -231,35 +244,73 @@ nav ul li a:hover {
     border-radius: 0px 3px 3px 0px;
 }
 
-.searchCandidate #result {
+table {
     table-layout: fixed;
 }
 
-.searchCandidate #result tr td, .searchCandidate #result tr, .searchCandidate #result tr th {
+tr, td, th {
     padding: 5px;
     box-sizing: border-box;
 }
 
-.searchCandidate #result tr th {
+th {
     background-color: #262627;
     color: #f5f5f5;
     border-right: 1px solid #f5f5f5;
 }
 
-.searchCandidate #result tr th:first-child {
+th:first-child {
     border-left: 1px solid #262627;
 }
 
-.searchCandidate #result tr th:last-child {
+th:last-child {
     border-right: 1px solid #262627;
 }
 
-.searchCandidate #result tr:nth-child(even) {
+tr:nth-child(even) {
     background-color: #e0e0e0;
 }
 
 /* GET CANDIDATE */
 
-#idCandidate {
+.noShow {
     display:none;
+}
+
+.getCandidate article, .getAllCandidateWithoutSession article {
+    margin-bottom: 100px;
+}
+.articleForm.createSession form, .articleForm.updateCandidate form, .articleForm.updateSession form, .articleForm.createCandidateWithoutSession form, .articleForm.updateCandidateWithoutSession form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.psychologistNote, .assistantNote {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.psychologistNote textarea, .assistantNote textarea {
+    display: block;
+    width: 85%;
+    margin: 0 auto;
+    height: 200px;
+    font-size: 1em;
+    font-family: sans-serif;
+}
+
+footer {
+    margin: 100px 0 0 0;
+    background-color: #262627;
+    width: 100%;
+    text-align:center;
+    padding: 20px 0;
+}
+
+footer p {
+    margin: 0;
+    color: #f5f5f5;
 }
