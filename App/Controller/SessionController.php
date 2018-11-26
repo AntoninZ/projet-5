@@ -16,6 +16,7 @@ class SessionController {
             'idCandidate' => $_POST['idCandidate'],
 	    'idCompany' => $_POST['idCompany'],
             'date' => $_POST['date'],
+	    'grade' => $_POST['grade'],
             'aptitude' => $_POST['aptitude'],
             'psychologistNote' => $_POST['psychologistNote'],
             'price' => $_POST['price'],
@@ -56,6 +57,43 @@ class SessionController {
         return $sessions;
     }
     
+    public function getAllSessionByFilter()
+    {
+	if(isset($_POST['idCompany']))
+	{
+	    $session = new Session([
+		'idCompany' => $_POST['idCompany'],
+		'grade' => $_POST['grade'],
+		'aptitude' => $_POST['aptitude'],
+		'date' => $_POST['date']
+	    ]);
+	    
+	    $filterDate = $_POST['filterDate'];
+	}
+	else
+	{
+	    \date_default_timezone_set("Europe/Paris");
+	    
+	    $session = new Session([
+		'idCompany' => '',
+		'grade' => '',
+		'aptitude' => '',
+		'date' => \date("Y-m-d")
+	    ]);
+	    
+	    $filterDate = "month";
+	}
+	
+	$connection = new ConnectionController();
+        $db = $connection->connect();
+        $manager = new SessionManager($db);
+        $sessions = $manager->getAllSessionByFilter($session, $filterDate);
+	
+	$data = \array_chunk($sessions, 100);
+	
+        return $data;
+    }
+    
     public function updateSession()
     {
         $session = new Session([
@@ -64,6 +102,7 @@ class SessionController {
 	    'idCompany' => $_POST['idCompany'],
             'date' => $_POST['date'],
             'aptitude' => $_POST['aptitude'],
+	    'grade' => $_POST['grade'],
             'psychologistNote' => $_POST['psychologistNote'],
             'price' => $_POST['price'],
             'computerStation' => $_POST['computerStation']
@@ -85,5 +124,17 @@ class SessionController {
         $db = $connection->connect();
         $manager = new SessionManager($db);
         $manager->deleteSession($session);
+    }
+    
+    public function deleteSessionByIdCandidate()
+    {
+	$session = new session([
+	    'idCandidate' => $_POST['idCandidate']
+	]);
+	
+	$connection = new ConnectionController();
+	$db = $connection->connect();
+	$manager = new SessionManager($db);
+	$manager->deleteSessionByIdCandidate($session);
     }
 }

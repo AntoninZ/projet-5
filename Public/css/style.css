@@ -253,6 +253,18 @@ tr, td, th {
     box-sizing: border-box;
 }
 
+.tableCandidateWithoutSession {
+    table-layout: auto;
+}
+
+.tdDate {
+    width: 111px;
+}
+
+.tdAccess {
+    width: 75px;
+}
+
 th {
     background-color: #262627;
     color: #f5f5f5;

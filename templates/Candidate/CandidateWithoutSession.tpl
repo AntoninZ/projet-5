@@ -70,17 +70,14 @@
     <article>
 	<h2>Récapitulatif des candidats indépendants</h2>
 	<hr />
-	<table>
+	<table class="tableCandidateWithoutSession">
 	    <thead>
 		<tr>
 		    <th>Date</th>
-		    <th>Téléphone port</th>
 		    <th>Nom</th>
 		    <th>Prénom</th>
-		    <th>Email</th>
-		    <th>Accompte</th>
-		    <th>Rendez-vous</th>
 		    <th>Note</th>
+		    <th>Rendez-vous</th>
 		    <th>Accéder</th>
 		</tr>
 	    </thead>
@@ -88,15 +85,12 @@
 	    <tbody>
 		{foreach from=$candidates item=candidate}
 		<tr>
-		    <td>{$candidate->getCreationDate()}</td>
-		    <td>{$candidate->getCellphoneNumber()}</td>
+		    <td class="tdDate">{$candidate->getCreationDate()}</td>
 		    <td>{$candidate->getLastname()}</td>
 		    <td>{$candidate->getFirstname()}</td>
-		    <td>{$candidate->getEmail()}</td>
-		    <td>{$candidate->getDownPayment()}</td>
-		    <td>{$candidate->getReservationDate()}</td>
 		    <td>{$candidate->getAssistantNote()}</td>
-		    <td><a href="?page=candidates&amp;idCandidate={$candidate->getIdCandidate()}">Accéder</a></td>
+		    <td class="tdDate">{$candidate->getReservationDate()}</td>
+		    <td class="tdAccess"><a href="?page=candidates&amp;idCandidate={$candidate->getIdCandidate()}">Accéder</a></td>
 		</tr>
 		{/foreach}
 	    </tbody>

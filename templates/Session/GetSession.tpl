@@ -28,15 +28,26 @@
 		</div>
 
 		<div>
+		    <label for="grade">Degré d'évaluation :</label>
+		    <select id="grade">
+			<option value="Degré 3" {if $session->getGrade() eq 'Degré 3'}selected="selected"{/if}>Degré 3</option>
+			<option value="Degré 2" {if $session->getGrade() eq 'Degré 2'}selected="selected"{/if}>Degré 2</option>
+			<option value="Degré 1" {if $session->getGrade() eq 'Degré 1'}selected="selected"{/if}>Degré 1</option>
+			<option value="Conducteur" {if $session->getGrade() eq 'Conducteur'}selected="selected"{/if}>Conducteur</option>
+			<option value="Permis" {if $session->getGrade() eq 'Permis'}selected="selected"{/if}>Permis</option>
+		    </select>
+		</div>
+	    </div>
+		    
+	    <div>
+		<div>
 		    <label for="aptitude">Aptitude :</label>
 		    <select id="aptitude">
 			<option value="Apte" {if $session->getAptitude() eq 'Apte'}selected="selected"{/if}>Apte</option>
 			<option value="Inapte" {if $session->getAptitude() eq 'Inapte'}selected="selected"{/if}>Inapte</option>
 		    </select>
 		</div>
-	    </div>
-		    
-	    <div>    
+		
 		<div>
 		    <label for="computerStation">Ordinateur du candidat :</label>
 		    <select id="computerStation">

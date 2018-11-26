@@ -15,14 +15,19 @@ class ClientController
             'lastname' => $_POST['lastname'],
             'gender' => $_POST['gender'],
             'address' => $_POST['address'],
+	    'zipCode' => $_POST['zipCode'],
+	    'city' => $_POST['city'],
             'phoneNumber' => $_POST['phoneNumber'],
-            'cellphoneNumber' => $_POST['cellphoneNumber']
+            'cellphoneNumber' => $_POST['cellphoneNumber'],
+	    'email' => $_POST['email']
         ]);
 
         $connection = new ConnectionController();
         $db = $connection->connect();
         $manager = new ClientManager($db);
-        $manager->createClient($client);
+        $lastId = $manager->createClient($client);
+	
+	return $lastId;
     }
 
     public function getClient()
@@ -61,8 +66,11 @@ class ClientController
             'lastname' => $_POST['lastname'],
             'gender' => $_POST['gender'],
             'address' => $_POST['address'],
+	    'zipCode' => $_POST['zipCode'],
+	    'city' => $_POST['city'],
             'phoneNumber' => $_POST['phoneNumber'],
-            'cellphoneNumber' => $_POST['cellphoneNumber']
+            'cellphoneNumber' => $_POST['cellphoneNumber'],
+	    'email' => $_POST['email']
         ]);
 
         $connection = new ConnectionController();
@@ -74,12 +82,14 @@ class ClientController
     public function deleteClient()
     {
         $client = new Client([
-            'idClient' => $_GET['idClient']
+            'idClient' => $_POST['idClient']
         ]);
 
         $connection = new ConnectionController();
         $db = $connection->connect();
         $manager= new ClientManager($db);
         $manager->deleteClient($client);
+	
+	return $client;
     }
 }

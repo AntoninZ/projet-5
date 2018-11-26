@@ -6,7 +6,8 @@ class Session {
     private $_idUser;
     private $_idCandidate;
     private $_idCompany;
-    private $_date;
+    private $_date; // Evaluation date
+    private $_grade; // driver, d1, d2, d3...
     private $_aptitude;
     private $_psychologistNote;
     private $_price;
@@ -36,6 +37,7 @@ class Session {
     public function getIdCandidate() {return $this->_idCandidate;}
     public function getIdCompany() {return $this->_idCompany;}
     public function getDate() {return $this->_date;}
+    public function getGrade() {return $this->_grade;}
     public function getAptitude() {return $this->_aptitude;}
     public function getPsychologistNote() {return $this->_psychologistNote;}
     public function getPrice() {return $this->_price;}
@@ -47,6 +49,7 @@ class Session {
     public function setIdCandidate($idCandidate) {$this->_idCandidate = $idCandidate;}
     public function setIdCompany($idCompany) {$this->_idCompany = $idCompany;}
     public function setDate($date) {$this->_date = $date;}
+    public function setGrade($grade) {$this->_grade = $grade;}
     public function setAptitude($aptitude) {$this->_aptitude = $aptitude;}
     public function setPsychologistNote($psychologistNote) {$this->_psychologistNote = $psychologistNote;}
     public function setPrice($price) {$this->_price = $price;}

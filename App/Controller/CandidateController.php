@@ -79,6 +79,8 @@ class CandidateController
             'phoneNumber' => $_POST['phoneNumber'],
             'cellphoneNumber' => $_POST['cellphoneNumber'],
             'address' => $_POST['address'],
+	    'zipCode' => $_POST['zipCode'],
+	    'city' => $_POST['city'],
             'allowable' => $_POST['allowable']
         ]);
 
@@ -108,13 +110,15 @@ class CandidateController
     public function deleteCandidate()
     {
         $candidate = new Candidate([
-            'idCandidate' => $_GET['idCandidate']
+            'idCandidate' => $_POST['idCandidate']
         ]);
 
         $connection = new ConnectionController();
         $db = $connection->connect();
         $manager= new CandidateManager($db);
         $manager->deleteCandidate($candidate);
+	
+	return $candidate->getIdCandidate();
     }
 }
 

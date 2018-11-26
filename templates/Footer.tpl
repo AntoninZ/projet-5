@@ -6,5 +6,7 @@
         <script src="./Public/js/User.js"></script>
         <script src="./Public/js/Candidate.js"></script>
 	<script src="./Public/js/Session.js"></script>
+	<script src="./Public/js/Company.js"></script>
+	<script src="./Public/js/Client.js"></script>
     </body>
 </html>

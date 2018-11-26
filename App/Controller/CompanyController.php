@@ -63,15 +63,12 @@ class CompanyController {
         $company = new Company([
             'idCompany' => $_GET['idCompany'],
             'name' => $_POST['name'],
-            'billAddress' => $_POST['billAddress']
         ]);
         
         $connection = new ConnectionController();
         $db = $connection->connect();
         $manager = new CompanyManager($db);
         $manager->updateCompany($company);
-        
-        return $company;
     }
     
     public function deleteCompany()

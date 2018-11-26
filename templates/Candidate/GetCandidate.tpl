@@ -50,6 +50,16 @@
 		    <label for="address">Adresse :</label>
 		    <input type="text" name="address" id="address" value="{$candidate->getAddress()}">
 		</div>
+		
+		<div>
+		    <label for="zipCode">Code postal :</label>
+		    <input type="text" id="zipCode" value="{$candidate->getZipCode()}">
+		</div>
+		
+		<div>
+		    <label for="city">Ville :</label>
+		    <input type="text" id="city" value="{$candidate->getCity()}">
+		</div>
 
 		<div>
 		    <label for="allowable">A déjà annulé</label>
@@ -101,7 +111,7 @@
 		    
 	    <div class="assistantNote">
 		<label for="assistantNote">Note de réservation :</label>
-		<textarea id="assistantNote"></textarea>
+		<textarea id="assistantNote">{$candidate->getAssistantNote()}</textarea>
 	    </div>
 		
 		<button type="submit" id="btnUpdateCandidateWithoutSession">Sauvegarder changement</button>
@@ -130,6 +140,18 @@
 		    </select>
 		</div>
 		<div>
+		    <label for="grade">Degré d'évaluation :</label>
+		    <select id="grade">
+			<option value="Degré 3">Degré 3</option>
+			<option value="Degré 2">Degré 2</option>
+			<option value="Degré 1">Degré 1</option>
+			<option value="Conducteur">Conducteur</option>
+			<option value="Permis">Permis</option>
+		    </select>
+		</div>
+	    </div>
+	    <div>
+		<div>
 		    <label for="aptitude">Aptitude :</label>
 		    <select id="aptitude">
 			<option value=""></option>
@@ -137,9 +159,6 @@
 			<option value="Inapte">Inapte</option>
 		    </select>
 		</div>
-	    </div>
-	    <div>
-
 		<div>
 		    <label for="price">Prix de l'évaluation :</label>
 		    <input type="text" id="price">
@@ -180,6 +199,7 @@
 	    <tr>
 		<th>Date</th>
 		<th>Entreprise</th>
+		<th>Degré d'évaluation</th>
 		<th>Aptitude</th>
 		<th>Accéder</th>
 	    </tr>
@@ -192,12 +212,15 @@
 		    {assign var=idCompany value=$session->getIdCompany()}
 		    {$companies.$idCompany}
 		</td>
+		<td>{$session->getGrade()}</td>
 		<td>{$session->getAptitude()}</td>
 		<td><a href="?page=session&amp;idSession={$session->getIdSession()}&amp;lastname={$candidate->getlastname()}&amp;firstname={$candidate->getFirstname()}">Accéder</a></td>
 	    </tr>  
 	{/foreach}
 	</tbody>
     </table>
+	
     </article>
     {/if}
+    <p class="deleteOption" onclick="Candidate.deleteCandidate({$candidate->getIdCandidate()})">Supprimer toutes les informations du candidat</p>
 </section>

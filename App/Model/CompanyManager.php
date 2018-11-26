@@ -17,7 +17,7 @@ class CompanyManager {
    
    public function createCompany(Company $company)
    {
-       $req = $this->_db->prepare('INSERT INTO companies (name, billAddress) VALUES (:name, :billAddress)');
+       $req = $this->_db->prepare('INSERT INTO companies (name) VALUES (:name)');
        $req->bindValue(':name', $company->getName(), \PDO::PARAM_STR);
        $req->execute();
        
@@ -63,7 +63,7 @@ class CompanyManager {
    
    public function deleteCompany(Company $company)
    {
-       $req = $this->_db->prepare('DELETE * FROM companies WHERE idCompany = :idCompany');
+       $req = $this->_db->prepare('DELETE FROM companies WHERE idCompany = :idCompany');
        $req->bindValue(':idCompany', $company->getIdCompany(), PDO::PARAM_INT);
        $req->execute();
    }

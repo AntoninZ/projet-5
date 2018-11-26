@@ -11,6 +11,8 @@ class Candidate implements \JsonSerializable {
     private $_phoneNumber;
     private $_cellphoneNumber;
     private $_address;
+    private $_zipCode; // postal
+    private $_city;
     
     private $_creationDate;
     private $_downPayment;
@@ -47,6 +49,8 @@ class Candidate implements \JsonSerializable {
     public function getPhoneNumber() {return $this->_phoneNumber;}
     public function getCellphoneNumber() {return $this->_cellphoneNumber;}
     public function getAddress() {return $this->_address;}
+    public function getZipCode() {return $this->_zipCode;}
+    public function getCity() {return $this->_city;}
     
     public function getCreationDate() {return $this->_creationDate;}
     public function getDownPayment() {return $this->_downPayment;}
@@ -66,6 +70,8 @@ class Candidate implements \JsonSerializable {
     public function setPhoneNumber($phoneNumber) {$this->_phoneNumber = $phoneNumber;}
     public function setCellphoneNumber($cellphoneNumber) {$this->_cellphoneNumber = $cellphoneNumber;}
     public function setAddress($address) {$this->_address = $address;}
+    public function setZipCode($zipCode) {$this->_zipCode = $zipCode;}
+    public function setCity($city) {$this->_city = $city;}
     
     public function setCreationDate($creationDate){$this->_creationDate = $creationDate;}
     public function setDownPayment($downPayment) {$this->_downPayment = $downPayment;}

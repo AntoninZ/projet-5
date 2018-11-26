@@ -260,3 +260,4 @@ templates_c/169ce6a3ec218606b97c6d2d9a2ce628b39b155c_0.file.SessionCreate.tpl.ph
 templates_c/5e5affd87d571fc4f2a74283e1df3f6fd9f071aa_0.file.GetAllClient.tpl.php
 templates_c/d7969c28df3cd4a9181b8477eeabca1df2eb3f47_0.file.GetClient.tpl.php
 templates_c/ff0386d7ed171fc41f6757b2f8bd9ee9e918f070_0.file.CompanieHome.tpl.php
+templates_c/40a268c4a0139396e5d4ba8965aaac1f5a9b037b_0.file.getAllSessionByFilter.tpl.php

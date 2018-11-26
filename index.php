@@ -80,14 +80,13 @@ if(isset($_SESSION['username']))
 	}
         elseif($_GET['page'] == 'companies')
         {
-	    if(isset($_GET['idCompany']))
-	    {
-		$clients = $clientController->getAllClient();
-		
-		$smarty->assign('clients', $clients);
-		$smarty->display('Client/GetAllClient.tpl');
-	    }
-	    elseif(isset($_GET['idClient']))
+	    $companies = $companyController->getAllCompany();
+	    $smarty->assign('companies', $companies);
+	    $smarty->display('Company/CompanieHome.tpl');
+        }
+	elseif($_GET['page'] == 'clients')
+	{
+	    if(isset($_GET['idClient']))
 	    {
 		$client = $clientController->getClient();
 		$smarty->assign('client', $client);
@@ -95,11 +94,11 @@ if(isset($_SESSION['username']))
 	    }
 	    else
 	    {
-		$companies = $companyController->getAllCompany();
-		$smarty->assign('companies', $companies);
-		$smarty->display('Company/CompanieHome.tpl');
+		$clients = $clientController->getAllClient();
+		$smarty->assign('clients', $clients);
+		$smarty->display('Client/GetAllClient.tpl');
 	    }
-        }
+	}
         elseif($_GET['page'] == "settings")
         {
             $smarty->display('User/Users.tpl');
@@ -116,7 +115,7 @@ if(isset($_SESSION['username']))
             $data = json_encode($data);
             $smarty->assign('data', $data);
             $smarty->display('Candidate/SearchResult.tpl');
-            echo $data;
+            
         }
         elseif($_GET['action'] == 'createCandidate')
         {
@@ -132,6 +131,11 @@ if(isset($_SESSION['username']))
 	{
 	    $candidateController->updateCandidateWithoutSession();
 	}
+	elseif($_GET['action'] == 'deleteCandidate')
+	{
+	    $sessionController->deleteSessionByIdCandidate();
+	    $candidateController->deleteCandidate();
+	}
 	elseif($_GET['action'] == 'createSession')
 	{
 	    $lastId = $sessionController->createSession();
@@ -141,10 +145,79 @@ if(isset($_SESSION['username']))
 	{
 	    $sessionController->updateSession();
 	}
+	elseif($_GET['action'] == 'deleteSession')
+	{
+	    $sessionController->deleteSession();
+	}
+	elseif($_GET['action'] == 'createCompany')
+	{
+	    $lastId = $companyController->createCompany();
+	    echo $lastId;
+	}
+	elseif($_GET['action'] == 'updateCompany')
+	{
+	    $companyController->updateCompany();
+	}
+	elseif($_GET['action'] == 'deleteCompany')
+	{
+	    $companyController->deleteCompany();
+	}
+	elseif($_GET['action'] == 'createClient')
+	{
+	    $lastId = $clientController->createClient();
+	    echo $lastId;
+	}
+	elseif($_GET['action'] == 'updateClient')
+	{
+	    $clientController->updateClient();
+	}
+	elseif($_GET['action'] == 'deleteClient')
+	{
+	    $data = $clientController->deleteClient();
+	    echo $data->getIdClient();
+	}
+	elseif($_GET['action'] == 'getAllSessionByFilter')
+	{
+	    
+	    $sessions = $sessionController->getAllSessionByFilter();
+	    
+	    if($sessions)
+	    {
+		for($i = 0; $i < count($sessions); $i++)
+		{
+		    for($j = 0; $j < count($sessions[$i]); $j++)
+		    $companies[$sessions[$i][$j]->getIdCompany()] = $companyController->getCompanyById($sessions[$i][$j]->getIdCompany())->getName();
+		}
+		
+		$smarty->assign('sessions', $sessions);
+		$smarty->assign('companies', $companies);
+	    }
+	    
+	    $smarty->display('Session/getAllSessionByFilter.tpl');
+	}
     }
     else
     {
         $smarty->display('Header.tpl');
+	
+	$companyList = $companyController->getAllCompany();
+	$sessions = $sessionController->getAllSessionByFilter();
+	
+	if($sessions)
+	{
+	    for($i = 0; $i < count($sessions); $i++)
+	    {
+		for($j = 0; $j < count($sessions); $j++)
+		{
+		    $companies[$sessions[$i][$j]->getIdCompany()] = $companyController->getCompanyById($sessions[$i][$j]->getIdCompany())->getName();
+		}
+	    }
+	    
+	    $smarty->assign('sessions', $sessions);
+	    $smarty->assign('companies', $companies);
+	}
+	
+	$smarty->assign('companyList', $companyList);
         $smarty->display('Dashboard.tpl');
         $smarty->display('Footer.tpl');
     }

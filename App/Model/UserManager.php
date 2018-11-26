@@ -88,7 +88,7 @@ class UserManager {
     
     public function deleteUser(User $user)
     {
-        $req = $this->_db->prepare('DELETE * FROM users WHERE idUser = :idUser');
+        $req = $this->_db->prepare('DELETE FROM users WHERE idUser = :idUser');
         $req->bindValue(':idUser', $user->getIdUser(), PDO::PARAM_INT);
         $req->execute();
     }

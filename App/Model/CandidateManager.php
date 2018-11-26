@@ -100,7 +100,7 @@ class CandidateManager {
     
     public function updateCandidate(Candidate $candidate)
     {
-        $req = $this->_db->prepare('UPDATE candidates SET firstname = :firstname, lastname = :lastname, birthDate = :birthDate, gender = :gender, email = :email, phoneNumber = :phoneNumber, cellphoneNumber = :cellphoneNumber, address = :address, allowable = :allowable WHERE idCandidate = :idCandidate');
+        $req = $this->_db->prepare('UPDATE candidates SET firstname = :firstname, lastname = :lastname, birthDate = :birthDate, gender = :gender, email = :email, phoneNumber = :phoneNumber, cellphoneNumber = :cellphoneNumber, address = :address, zipCode = :zipCode, city = :city, allowable = :allowable WHERE idCandidate = :idCandidate');
         $req->bindValue('idCandidate', $candidate->getIdCandidate(), \PDO::PARAM_INT);
 	$req->bindValue('firstname', $candidate->getFirstname(), \PDO::PARAM_STR);
         $req->bindValue('lastname', $candidate->getLastname(), \PDO::PARAM_STR);
@@ -110,6 +110,8 @@ class CandidateManager {
         $req->bindValue('phoneNumber', $candidate->getPhoneNumber(), \PDO::PARAM_STR);
         $req->bindValue('cellphoneNumber', $candidate->getCellphoneNumber(), \PDO::PARAM_STR);
         $req->bindValue('address', $candidate->getAddress(), \PDO::PARAM_STR);
+	$req->bindValue('zipCode', $candidate->getZipCode(), \PDO::PARAM_STR);
+	$req->bindValue('city', $candidate->getCity(), \PDO::PARAM_STR);
 	$req->bindValue('allowable', $candidate->getAllowable(), \PDO::PARAM_STR);
         $req->execute();
     }
@@ -134,8 +136,8 @@ class CandidateManager {
     
     public function deleteCandidate(Candidate $candidate)
     {
-       $req = $this->_db->prepare('DELETE * FROM candidates WHERE idCandidate = :idCandidate');
-       $req->bindValue('idCandidate', $candidate->getIdCandidate(), PDO::PARAM_INT);
+       $req = $this->_db->prepare('DELETE FROM candidates WHERE idCandidate = :idCandidate');
+       $req->bindValue('idCandidate', $candidate->getIdCandidate(), \PDO::PARAM_INT);
        $req->execute();
     }
     

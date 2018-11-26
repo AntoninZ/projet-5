@@ -13,6 +13,7 @@ var Session = {
 		    idCandidate : $('#idCandidate').val(),
 		    idCompany : $('#idCompany').val(),
                     date : $('#date').val(),
+		    grade : $('#grade').val(),
 		    aptitude : $('#aptitude').val(),
 		    psychologistNote : $('#psychologistNote').val(),
 		    price : $('#price').val(),
@@ -39,6 +40,7 @@ var Session = {
 		    idUser : $('#idUser').val(),
 		    idCompany : $('#idCompany').val(),
                     date : $('#date').val(),
+		    grade : $('#grade').val(),
 		    aptitude : $('#aptitude').val(),
 		    psychologistNote : $('#psychologistNote').val(),
 		    price : $('#price').val(),
@@ -50,6 +52,29 @@ var Session = {
                 }
             );
         });
+    },
+    
+    getAllSessionByFilter: function()
+    {
+	$('#btnGetAllSessionByFilter').click(function(e)
+	{
+	    e.preventDefault();
+	    
+	    $.post(
+		'index.php?action=getAllSessionByFilter',
+		{
+		  date : $('#date').val(),
+		  filterDate : $('#filterDate').val(),
+		  idCompany : $('#idCompany').val(),
+		  grade : $('#grade').val(),
+		  aptitude : $('#aptitude').val()
+		},
+		
+		function(data){
+		    $('#resultSession').html(data);
+		}
+	    );
+	});
     }
     
     
@@ -57,3 +82,4 @@ var Session = {
 
 Session.createSession();
 Session.updateSession();
+Session.getAllSessionByFilter();

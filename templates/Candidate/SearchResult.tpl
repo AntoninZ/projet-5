@@ -13,7 +13,7 @@
                         <td>{$candidate->lastname}</td>
                         <td>{$candidate->firstname}</td>
                         <td>{$candidate->birthDate|date_format:"%d/%m/%Y"}</td>
-                        <td><a href="?page=candidates&amp;idCandidate={$candidate->idCandidate}">Accéder</a></td>
+                        <td><a href="?page=candidates&amp;idCandidate={$candidate->idCandidate}"><i class="fas fa-external-link-alt"></i></a></td>
                     </tr>
                 {foreachelse}
                     <td colspan="4">Aucun résultat</td>

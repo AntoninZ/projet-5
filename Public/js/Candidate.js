@@ -4,22 +4,26 @@ var Candidate = {
     {
         $('#search').keyup(function(e)
         {
-            e.preventDefault();
+	    
+	    e.preventDefault();
+	    
+	    if($(this).val().length > 0)
+	    {
+		$.post(
+		    'index.php?action=search',
+		    {
+			lastname : $('#search').val(),
+			email : $('#search').val(),
+			phoneNumber : $('#search').val(),
+			cellphoneNumber : $('#search').val()
+		    },
 
-            $.post(
-                'index.php?action=search',
-                {
-                    lastname : $('#search').val(),
-                    email : $('#search').val(),
-                    phoneNumber : $('#search').val(),
-                    cellphoneNumber : $('#search').val()
-                },
-
-                function(data)
-                {
-                    $('#result').html(data);
-                }
-            );
+		    function(data)
+		    {
+			$('#result').html(data);
+		    }
+		);
+	    }
         });
     },
     
@@ -62,6 +66,8 @@ var Candidate = {
                     phoneNumber : $('#phoneNumber').val(),
                     cellphoneNumber : $('#cellphoneNumber').val(),
                     address : $('#address').val(),
+		    zipCode : $('#zipCode').val(),
+		    city : $('#city').val(),
                     allowable : $('#allowable').val(),
                     idCandidate : $('#idCandidate').val()
                 },
@@ -96,6 +102,25 @@ var Candidate = {
                 }
             );
 	});
+    },
+    
+    deleteCandidate: function(idCandidate)
+    {
+	var confirmation = confirm('Attention, la suppression de ce candidat est définitive !');
+
+	if(confirmation)
+	{
+	    $.post(
+		'index.php?action=deleteCandidate',
+		{
+		    idCandidate : idCandidate
+		},
+
+		function(data){
+		    location.reload();
+		}
+	    );
+	}
     }
 };
 
