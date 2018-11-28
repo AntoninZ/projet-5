@@ -89,9 +89,7 @@ class SessionController {
         $manager = new SessionManager($db);
         $sessions = $manager->getAllSessionByFilter($session, $filterDate);
 	
-	$data = \array_chunk($sessions, 100);
-	
-        return $data;
+        return $sessions;
     }
     
     public function updateSession()

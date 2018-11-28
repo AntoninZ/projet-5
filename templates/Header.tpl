@@ -5,6 +5,7 @@
         <meta name="viewport" content="width=device-width" />
         <title>Psychafeb - Intranet</title>
         <link rel="icon" type="image/png" href="./Public/images/favicon.png" />
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 	<link rel="stylesheet" type="text/css" href="./Public/css/style.css" />
     </head>
     

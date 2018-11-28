@@ -92,13 +92,15 @@ class SessionManager {
 	
 	$sessions = [];
 
-	
-	while($data = $req->fetch(\PDO::FETCH_ASSOC))
-	{
-	    $sessions[] = new Session($data);
-	}
-	
-	return $sessions;
+	    while($data = $req->fetch(\PDO::FETCH_ASSOC))
+	    {
+		
+		$sessions[] = new Session ($data);
+		
+	    }
+	    
+	    return $sessions;
+	    
 	
     }
     

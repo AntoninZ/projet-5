@@ -101,7 +101,7 @@ if(isset($_SESSION['username']))
 	}
         elseif($_GET['page'] == "settings")
         {
-            $smarty->display('User/Users.tpl');
+            $smarty->display('User/UserHome.tpl');
         }
         
         $smarty->display('Footer.tpl');
@@ -111,10 +111,9 @@ if(isset($_SESSION['username']))
         if($_GET['action'] == 'search')
         {
             $candidateController = new CandidateController();
-            $data = $candidateController->getAllCandidate();
-            $data = json_encode($data);
-            $smarty->assign('data', $data);
-            $smarty->display('Candidate/SearchResult.tpl');
+            $candidates = $candidateController->getAllCandidate();
+            $smarty->assign('candidates', $candidates);
+            $smarty->display('Candidate/GetAllCandidate.tpl');
             
         }
         elseif($_GET['action'] == 'createCandidate')
@@ -178,21 +177,24 @@ if(isset($_SESSION['username']))
 	}
 	elseif($_GET['action'] == 'getAllSessionByFilter')
 	{
-	    
 	    $sessions = $sessionController->getAllSessionByFilter();
-	    
-	    if($sessions)
+	
+	    foreach ($sessions as $session)
 	    {
-		for($i = 0; $i < count($sessions); $i++)
-		{
-		    for($j = 0; $j < count($sessions[$i]); $j++)
-		    $companies[$sessions[$i][$j]->getIdCompany()] = $companyController->getCompanyById($sessions[$i][$j]->getIdCompany())->getName();
-		}
-		
-		$smarty->assign('sessions', $sessions);
-		$smarty->assign('companies', $companies);
+		$companies[$session->getIdCompany()] = $companyController->getCompanyById($session->getIdCompany())->getName();
+
+		$candidate = $candidateController->getCandidateById($session->getIdCandidate());
+		$candidatesFirstname[$session->getIdCandidate()] = $candidate->getFirstName();
+		$candidatesLastname[$session->getIdCandidate()] = $candidate->getLastname();	    
 	    }
 	    
+	    if($sessions){
+		$smarty->assign('companies', $companies);
+		$smarty->assign('candidatesFirstname', $candidatesFirstname);
+		$smarty->assign('candidatesLastname', $candidatesLastname);
+	    }
+	    
+	    $smarty->assign('sessions', $sessions);
 	    $smarty->display('Session/getAllSessionByFilter.tpl');
 	}
     }
@@ -203,20 +205,23 @@ if(isset($_SESSION['username']))
 	$companyList = $companyController->getAllCompany();
 	$sessions = $sessionController->getAllSessionByFilter();
 	
-	if($sessions)
+	foreach ($sessions as $session)
 	{
-	    for($i = 0; $i < count($sessions); $i++)
-	    {
-		for($j = 0; $j < count($sessions); $j++)
-		{
-		    $companies[$sessions[$i][$j]->getIdCompany()] = $companyController->getCompanyById($sessions[$i][$j]->getIdCompany())->getName();
-		}
-	    }
+	    $companies[$session->getIdCompany()] = $companyController->getCompanyById($session->getIdCompany())->getName();
 	    
-	    $smarty->assign('sessions', $sessions);
-	    $smarty->assign('companies', $companies);
+	    $candidate = $candidateController->getCandidateById($session->getIdCandidate());
+	    $candidatesFirstname[$session->getIdCandidate()] = $candidate->getFirstName();
+	    $candidatesLastname[$session->getIdCandidate()] = $candidate->getLastname();	    
 	}
 	
+	if($sessions)
+	{
+	    $smarty->assign('companies', $companies);
+	    $smarty->assign('candidatesFirstname', $candidatesFirstname);
+	    $smarty->assign('candidatesLastname', $candidatesLastname);
+	}
+	
+	$smarty->assign('sessions', $sessions);
 	$smarty->assign('companyList', $companyList);
         $smarty->display('Dashboard.tpl');
         $smarty->display('Footer.tpl');

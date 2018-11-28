@@ -1,6 +1,6 @@
 <section class="getAllClient">
     
-    <article class="articleForm createClient">
+    <article class="articleForm columns-disabled createClient">
 	<h2>Ajouter un client</h2>
 	<hr />
 	
@@ -26,9 +26,10 @@
     </article>
     
     <article>
-	<table>
+	<table class="dataTable">
 	    <thead>
 		<tr>
+		    <th>N°</th>
 		    <th>Nom</th>
 		    <th>Prénom</th>
 		    <th>Tél fixe</th>
@@ -41,6 +42,7 @@
 	    <tbody>
 		{foreach from=$clients item=client}
 		<tr>
+		    <td></td>
 		    <td>{$client->getLastname()}</td>
 		    <td>{$client->getFirstname()}</td>
 		    <td>{$client->getPhoneNumber()}</td>

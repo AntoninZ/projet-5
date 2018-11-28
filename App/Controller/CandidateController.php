@@ -38,7 +38,18 @@ class CandidateController
 
        return $data;
     }
-
+    
+    public function getCandidateById($idCandidate){
+        $candidate = new Candidate(['idCandidate' => $idCandidate]);
+        
+        $connection = new ConnectionController();
+        $db = $connection->connect();
+        $manager = new CandidateManager($db);
+        $data = $manager->getCandidate($candidate);
+        
+        return $data;
+    }
+    
     public function getAllCandidate()
     {
         $candidate = new Candidate([

@@ -1,5 +1,7 @@
 <section class="getSession">
-    <article class="articleForm updateSession">
+    <article class="articleForm columns-2 updateSession">
+	<h2>Session du {$session->getDate()|date_format:"%d/%m/%Y"} - {$smarty.get.lastname|upper} {$smarty.get.firstname}</h2>
+	<hr />
 	<form>
 	    <div>
 		<input type="text" id="idSession" class="noShow" value="{$smarty.get.idSession}">

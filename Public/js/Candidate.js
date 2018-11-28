@@ -20,7 +20,8 @@ var Candidate = {
 
 		    function(data)
 		    {
-			$('#result').html(data);
+			$('#getAllCandidate').html(data);
+			DataTable.init();
 		    }
 		);
 	    }
@@ -122,6 +123,8 @@ var Candidate = {
 	    );
 	}
     }
+    
+    
 };
 
 Candidate.search();

@@ -39,29 +39,27 @@ class CandidateManager {
 		(firstname, lastname, email, phoneNumber, cellphoneNumber, creationDate, downPayment, reservationDate, assistantNote, meeting)
 		VALUES
 		(:firstname, :lastname, :email, :phoneNumber, :cellphoneNumber, :creationDate, :downPayment, :reservationDate, :assistantNote, :meeting)');
-	$req->bindValue('firstname', $candidate->getFirstname(), \PDO::PARAM_STR);
-	$req->bindValue('lastname', $candidate->getLastname(), \PDO::PARAM_STR);
-	$req->bindValue('email', $candidate->getEmail(), \PDO::PARAM_STR);
-	$req->bindValue('phoneNumber', $candidate->getPhoneNumber(), \PDO::PARAM_STR);
-	$req->bindValue('cellphoneNumber', $candidate->getCellphoneNumber(), \PDO::PARAM_STR);
-	$req->bindValue('creationDate', $candidate->getCreationDate(), \PDO::PARAM_STR);
-	$req->bindValue('downPayment', $candidate->getDownPayment(), \PDO::PARAM_STR);
-	$req->bindValue('reservationDate', $candidate->getReservationDate(), \PDO::PARAM_STR);
-	$req->bindValue('assistantNote', $candidate->getAssistantNote(), \PDO::PARAM_STR);
-	$req->bindValue('meeting', $candidate->getMeeting(), \PDO::PARAM_STR);
+	$req->bindValue(':firstname', $candidate->getFirstname(), \PDO::PARAM_STR);
+	$req->bindValue(':lastname', $candidate->getLastname(), \PDO::PARAM_STR);
+	$req->bindValue(':email', $candidate->getEmail(), \PDO::PARAM_STR);
+	$req->bindValue(':phoneNumber', $candidate->getPhoneNumber(), \PDO::PARAM_STR);
+	$req->bindValue(':cellphoneNumber', $candidate->getCellphoneNumber(), \PDO::PARAM_STR);
+	$req->bindValue(':creationDate', $candidate->getCreationDate(), \PDO::PARAM_STR);
+	$req->bindValue(':downPayment', $candidate->getDownPayment(), \PDO::PARAM_STR);
+	$req->bindValue(':reservationDate', $candidate->getReservationDate(), \PDO::PARAM_STR);
+	$req->bindValue(':assistantNote', $candidate->getAssistantNote(), \PDO::PARAM_STR);
+	$req->bindValue(':meeting', $candidate->getMeeting(), \PDO::PARAM_STR);
 	$req->execute();
     }
     public function getCandidate(Candidate $candidate)
     {
         $req = $this->_db->prepare('SELECT * FROM candidates WHERE idCandidate = :idCandidate');
-        $req->execute(array(
-            'idCandidate' => $candidate->getIdCandidate()
-        ));
-        
+        $req->bindValue(':idCandidate', $candidate->getIdCandidate(), \PDO::PARAM_INT);
+	$req->execute();
+	
         $data = $req->fetch(\PDO::FETCH_ASSOC);
         
-        return $a = new Candidate($data);
-        
+        return $candidate = new Candidate($data);
     }
     
     public function getAllCandidate(Candidate $candidate)
@@ -69,10 +67,10 @@ class CandidateManager {
         $candidates = [];
         
         $req = $this->_db->prepare('SELECT * FROM candidates WHERE lastname LIKE :lastname OR email LIKE :email OR phoneNumber LIKE :phoneNumber OR cellphoneNumber LIKE :cellphoneNumber');
-        $req->bindValue('lastname', $candidate->getLastname().'%', \PDO::PARAM_STR);
-        $req->bindValue('email', $candidate->getEmail().'%', \PDO::PARAM_STR);
-        $req->bindValue('phoneNumber', $candidate->getPhoneNumber().'%', \PDO::PARAM_STR);
-        $req->bindValue('cellphoneNumber', $candidate->getCellphoneNumber().'%', \PDO::PARAM_STR);
+        $req->bindValue(':lastname', $candidate->getLastname().'%', \PDO::PARAM_STR);
+        $req->bindValue(':email', $candidate->getEmail().'%', \PDO::PARAM_STR);
+        $req->bindValue(':phoneNumber', $candidate->getPhoneNumber().'%', \PDO::PARAM_STR);
+        $req->bindValue(':cellphoneNumber', $candidate->getCellphoneNumber().'%', \PDO::PARAM_STR);
         $req->execute();
         
         while($data = $req->fetch(\PDO::FETCH_ASSOC))

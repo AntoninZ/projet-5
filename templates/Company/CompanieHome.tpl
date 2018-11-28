@@ -1,5 +1,5 @@
 <section>
-    <article class="articleForm createCompany">
+    <article class="articleForm columns-disabled createCompany">
 	<h2>Ajouter une entreprise</h2>
 	<hr />
 	<form>
@@ -14,9 +14,10 @@
     <article>
 	<h2>Liste des entreprises</h2>
 	<hr />
-	<table>
+	<table class="dataTable">
 	    <thead>
 		<tr>
+		    <th>N°</th>
 		    <th>Entreprise</th>
 		    <th>Accéder</th>
 		</tr>  
@@ -26,6 +27,7 @@
 		{if $company->getName() eq 'INDEPENDANT'}
 		{else}
 		<tr>
+		    <td>{* INDEX generate by DataTable *}</td>
 		    <td>{$company->getName()}</td>
 		    <td><a href="?page=clients&amp;idCompany={$company->getIdCompany()}">Accéder</a></td>
 		</tr>

@@ -1,5 +1,5 @@
 <section class="getCandidate">
-    <article class="articleForm updateCandidate">
+    <article class="articleForm columns-2 updateCandidate">
 	<h2>Information candidat</h2>
 	<hr />
 	
@@ -74,7 +74,7 @@
 	</form>
     </article>
 		    
-    <article class="articleForm updateCandidateWithoutSession">
+    <article class="articleForm columns-2 updateCandidateWithoutSession">
 	<h2>Information de réservation</h2>
 	<hr />
 	<form>
@@ -118,7 +118,7 @@
 	</form>
     </article>
 		    
-    <article class="articleForm createSession">
+    <article class="articleForm columns-2 createSession">
 	<h2>Créer une session</h2>
 	<hr />
 	<form>
@@ -194,9 +194,10 @@
     <article>
     <h2>Sessions du candidat</h2>
     <hr />
-    <table>
+    <table class="dataTable">
 	<thead>
 	    <tr>
+		<th>N°</th>
 		<th>Date</th>
 		<th>Entreprise</th>
 		<th>Degré d'évaluation</th>
@@ -207,6 +208,7 @@
 	<tbody>
 	{foreach from=$sessions item=session}
 	    <tr>
+		<td></td>
 		<td>{$session->getDate()|date_format:"%d/%m/%Y"}</td>
 		<td>
 		    {assign var=idCompany value=$session->getIdCompany()}

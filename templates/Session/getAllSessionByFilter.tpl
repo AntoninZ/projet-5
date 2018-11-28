@@ -1,11 +1,6 @@
-{if $sessions}
-    
-    {for $i = 1 to $sessions|@count}
-	<p id="idPage-{$i}">{$i}</p>
-    {/for}
-{/if}
-FINIR LE SYSTEME DE PAGINATION 
-<table>
+<table class="dataTable">
+    <h2>Résultats de la recherche</h2>
+    <hr />
     <thead>
 	<tr>
 	    <th>N°</th>
@@ -18,32 +13,18 @@ FINIR LE SYSTEME DE PAGINATION
 	</tr>
     </thead>
     <tbody>
-
-	{if $sessions}
-	    {assign var=a value=0}
-	    {for $i = 0 to $sessions|@count-1}
-		{for $j = 0 to $sessions[$i]|@count-1} 
-		    <tr>
-			<td>
-			    {assign var=a value=$a+1}
-			    {$a}
-			</td>
-			<td>{$sessions[$i][$j]->getDate()}</td>
-			<td>{$sessions[$i][$j]->getIdCandidate()}</td>
-			<td>{$sessions[$i][$j]->getIdCandidate()}</td>
-			<td>
-			    {assign var=idCompany value=$sessions[$i][$j]->getIdCompany()}
-			    {$companies.$idCompany}
-			</td>
-			<td>{$sessions[$i][$j]->getGrade()}</td>
-			<td>{$sessions[$i][$j]->getAptitude()}</td>
-		    </tr>
-		{/for}
-	    {/for}
-	{else}
-	    <tr>
-		<td colspan="7">Aucun résultat</td>
-	    </tr>
-	{/if}
+	{foreach from=$sessions item=session}
+	    {assign var=idCompany value=$session->getIdCompany()}
+	    {assign var=idCandidate value=$session->getIdCandidate()}
+	<tr>
+	    <td>{* DATA generate by DataTables *}</td>
+	    <td>{$session->getDate()}</td>
+	    <td>{$candidatesLastname.$idCandidate}</td>
+	    <td>{$candidatesFirstname.$idCandidate}</td>
+	    <td>{$companies.$idCompany}</td>
+	    <td>{$session->getGrade()}</td>
+	    <td>{$session->getAptitude()}</td>
+	</tr>
+	{/foreach}
     </tbody>
 </table>

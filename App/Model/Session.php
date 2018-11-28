@@ -1,7 +1,7 @@
 <?php
 namespace AntoninZ\Model;
 
-class Session {
+class Session implements \JsonSerializable {
     private $_idSession;
     private $_idUser;
     private $_idCandidate;
@@ -55,4 +55,20 @@ class Session {
     public function setPrice($price) {$this->_price = $price;}
     public function setComputerStation($computerStation) {$this->_computerStation = $computerStation;}
     
+    public function JsonSerialize()
+    {
+        return 
+        [
+	    'idSession' => $this->_idSession,
+	    'idUser' => $this->_idUser,
+            'idCandidate' => $this->_idCandidate,
+	    'idCompany' => $this->_idCompany,
+	    'date' => $this->_date,
+	    'grade' => $this->_grade,
+	    'aptitude' => $this->_aptitude,
+	    'psychologistNote' => $this->_psychologistNote,
+	    'price' => $this->_price,
+	    'computerStation' => $this->_computerStation
+        ];
+    }
 }

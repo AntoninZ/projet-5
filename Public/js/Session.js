@@ -71,11 +71,12 @@ var Session = {
 		},
 		
 		function(data){
-		    $('#resultSession').html(data);
+		    $('#articleGetAllSessionByFilter').html(data);
+		    DataTable.init();
 		}
 	    );
 	});
-    }
+    },
     
     
 };
@@ -83,3 +84,4 @@ var Session = {
 Session.createSession();
 Session.updateSession();
 Session.getAllSessionByFilter();
+

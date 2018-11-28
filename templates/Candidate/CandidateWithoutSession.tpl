@@ -1,5 +1,5 @@
 <section class="getAllCandidateWithoutSession">
-    <article class="articleForm createCandidateWithoutSession">
+    <article class="articleForm columns-2 createCandidateWithoutSession">
 	<h2>Ajouter un indépendant</h2>
 	<hr />
 	<form>
@@ -70,9 +70,10 @@
     <article>
 	<h2>Récapitulatif des candidats indépendants</h2>
 	<hr />
-	<table class="tableCandidateWithoutSession">
+	<table class="dataTable">
 	    <thead>
 		<tr>
+		    <th>N°</th>
 		    <th>Date</th>
 		    <th>Nom</th>
 		    <th>Prénom</th>
@@ -85,6 +86,7 @@
 	    <tbody>
 		{foreach from=$candidates item=candidate}
 		<tr>
+		    <td></td>
 		    <td class="tdDate">{$candidate->getCreationDate()}</td>
 		    <td>{$candidate->getLastname()}</td>
 		    <td>{$candidate->getFirstname()}</td>

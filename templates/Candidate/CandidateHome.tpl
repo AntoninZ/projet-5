@@ -1,5 +1,5 @@
 <section class="candidateHome">
-    <article class="articleForm createCandidate">
+    <article class="articleForm columns-disabled createCandidate">
 	<h2>Ajouter un candidat</h2>
 	<hr />
 	<form>
@@ -31,22 +31,9 @@
 	    <span class="searchIcon"><i class="fas fa-search"></i></span>
 	    <input type="text" id="search" name="search" placeholder="Nom, email, téléphone fixe, portable">
 	</form>
-	<table id="result">
-	    <thead>
-                <tr>
-                    <th>Nom</th>
-                    <th>Prénom</th>
-                    <th>Date de naissance</th>
-                    <th>Accéder</th>
-                </tr>
-            </thead>
+	
+	<div id="getAllCandidate">
 	    
-            <tbody>
-	    <tr>
-		<td colspan="4">Rechercher un candidat</td>
-	    </tr>
-	    </tbody>
-	</table>
-	    {* SearchViewCandidate.tpl from JS *}
+	</div>
     </article>  
 </section>
