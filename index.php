@@ -39,7 +39,7 @@ if(isset($_SESSION['username']))
             if(isset($_GET['idCandidate']))
             {
                 $idCandidate = $_GET['idCandidate'];
-                $candidate = $candidateController->getCandidate();
+                $candidate = $candidateController->getCandidateById($idCandidate);
                 $sessions = $sessionController->getAllSession($idCandidate);
                 $users = $userController->getAllUserWherePsychologist();
 		$companyList = $companyController->getAllCompany();
@@ -94,16 +94,70 @@ if(isset($_SESSION['username']))
 	    }
 	    else
 	    {
+		$idCompany = $_GET['idCompany'];
+		$company = $companyController->getCompanyById($idCompany);
 		$clients = $clientController->getAllClient();
+		
+		$smarty->assign('company', $company);
 		$smarty->assign('clients', $clients);
 		$smarty->display('Client/GetAllClient.tpl');
 	    }
 	}
         elseif($_GET['page'] == "settings")
         {
-            $smarty->display('User/UserHome.tpl');
+            $user = $userController->getUser();
+	    
+	    $smarty->assign('user', $user);
+	    $smarty->display('User/UserHome.tpl');
         }
-        
+	elseif($_GET['page'] == "getAllUser")
+	{
+	    $users = $userController->getAllUser();
+	    
+	    $smarty->assign('users', $users);
+	    $smarty->display('User/GetAllUser.tpl');
+	}
+	elseif($_GET['page'] == "getUser")
+	{
+	    $idUser = $_GET['idUser'];
+	    $user = $userController->getUserById($idUser);
+	    
+	    $smarty->assign('user', $user);
+	    $smarty->display('User/GetUser.tpl');
+	}
+        elseif($_GET['page'] == "dashboard")
+	{
+	
+	    $companyList = $companyController->getAllCompany();
+	    $sessions = $sessionController->getAllSessionByFilter();
+
+	    foreach ($sessions as $session)
+	    {
+		$companies[$session->getIdCompany()] = $companyController->getCompanyById($session->getIdCompany())->getName();
+
+		$candidate = $candidateController->getCandidateById($session->getIdCandidate());
+		$candidatesFirstname[$session->getIdCandidate()] = $candidate->getFirstName();
+		$candidatesLastname[$session->getIdCandidate()] = $candidate->getLastname();	    
+	    }
+
+	    if($sessions)
+	    {
+		$smarty->assign('companies', $companies);
+		$smarty->assign('candidatesFirstname', $candidatesFirstname);
+		$smarty->assign('candidatesLastname', $candidatesLastname);
+	    }
+
+	    $smarty->assign('sessions', $sessions);
+	    $smarty->assign('companyList', $companyList);
+	    $smarty->display('Dashboard.tpl');
+	}
+	else
+	{
+	    $error = "La page demandée n'existe pas.";
+	    $smarty->assign('error', $error);
+	    $smarty->display('Error.tpl');
+	}
+	
         $smarty->display('Footer.tpl');
     }
     elseif(isset($_GET['action']))
@@ -142,11 +196,28 @@ if(isset($_SESSION['username']))
 	}
 	elseif($_GET['action'] == 'updateSession')
 	{
-	    $sessionController->updateSession();
+	    $data = $sessionController->updateSession();
+	    echo $data;
 	}
 	elseif($_GET['action'] == 'deleteSession')
 	{
 	    $sessionController->deleteSession();
+	}
+	elseif($_GET['action'] == 'printAttestation')
+	{
+	    $session = $sessionController->getSession();
+	    $user = $userController->getUserById($session->getIdUser());
+	    $company = $companyController->getCompanyById($session->getIdCompany());
+	    $candidate = $candidateController->getCandidateById($session->getIdCandidate());
+	    
+	    utf8_encode(setlocale (LC_TIME, 'fr_FR','fra'));
+	    $session->setDate(strftime($session->getDate()));
+	    
+	    $smarty->assign('session', $session);
+	    $smarty->assign('user', $user);
+	    $smarty->assign('company', $company);
+	    $smarty->assign('candidate', $candidate);
+	    $smarty->display('Session/PrintAttestation.tpl');
 	}
 	elseif($_GET['action'] == 'createCompany')
 	{
@@ -156,10 +227,6 @@ if(isset($_SESSION['username']))
 	elseif($_GET['action'] == 'updateCompany')
 	{
 	    $companyController->updateCompany();
-	}
-	elseif($_GET['action'] == 'deleteCompany')
-	{
-	    $companyController->deleteCompany();
 	}
 	elseif($_GET['action'] == 'createClient')
 	{
@@ -197,34 +264,20 @@ if(isset($_SESSION['username']))
 	    $smarty->assign('sessions', $sessions);
 	    $smarty->display('Session/getAllSessionByFilter.tpl');
 	}
+	elseif($_GET['action'] == 'updateUserAccount')
+	{
+	    $userController->updateUserAccount();
+	}
+	elseif($_GET['action'] == 'updateUserPassword')
+	{
+	    $userController->updateUserPassword();
+	}
     }
     else
     {
-        $smarty->display('Header.tpl');
-	
-	$companyList = $companyController->getAllCompany();
-	$sessions = $sessionController->getAllSessionByFilter();
-	
-	foreach ($sessions as $session)
-	{
-	    $companies[$session->getIdCompany()] = $companyController->getCompanyById($session->getIdCompany())->getName();
-	    
-	    $candidate = $candidateController->getCandidateById($session->getIdCandidate());
-	    $candidatesFirstname[$session->getIdCandidate()] = $candidate->getFirstName();
-	    $candidatesLastname[$session->getIdCandidate()] = $candidate->getLastname();	    
-	}
-	
-	if($sessions)
-	{
-	    $smarty->assign('companies', $companies);
-	    $smarty->assign('candidatesFirstname', $candidatesFirstname);
-	    $smarty->assign('candidatesLastname', $candidatesLastname);
-	}
-	
-	$smarty->assign('sessions', $sessions);
-	$smarty->assign('companyList', $companyList);
-        $smarty->display('Dashboard.tpl');
-        $smarty->display('Footer.tpl');
+	$error = "La page demandée n'existe pas.";
+	$smarty->assign('error', $error);
+	$smarty->display('Error.tpl');
     }
 }
 else

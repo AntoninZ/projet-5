@@ -1,5 +1,5 @@
 <section class="dashboard">
-    <article class="articleForm columns-2">
+    <article class="articleForm columns-2 coloredForm">
 	<h2>Recherche par sessions</h2>
 	<hr />
 	<form>

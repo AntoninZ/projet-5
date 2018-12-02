@@ -25,20 +25,6 @@ class CandidateController
         return $lastId;
     }
 
-    public function getCandidate()
-    {
-       $candidate = new Candidate([
-           'idCandidate' => $_GET['idCandidate']
-       ]);
-
-       $connection = new ConnectionController();
-       $db = $connection->connect();
-       $manager = new CandidateManager($db);
-       $data = $manager->getCandidate($candidate);
-
-       return $data;
-    }
-    
     public function getCandidateById($idCandidate){
         $candidate = new Candidate(['idCandidate' => $idCandidate]);
         
@@ -52,20 +38,19 @@ class CandidateController
     
     public function getAllCandidate()
     {
-        $candidate = new Candidate([
-            'lastname' => $_POST['lastname'],
-            'email' => $_POST['email'],
-            'phoneNumber' => $_POST['phoneNumber'],
-            'cellphoneNumber' => $_POST['cellphoneNumber']
-        ]);
-        
-        $connection = new ConnectionController();
-        $db = $connection->connect();
-        $manager = new CandidateManager($db);
-        $a = $manager->getAllCandidate($candidate);
-        
-        return $a;
-        
+	    $candidate = new Candidate([
+		'lastname' => $_POST['lastname'],
+		'email' => $_POST['email'],
+		'phoneNumber' => $_POST['phoneNumber'],
+		'cellphoneNumber' => $_POST['cellphoneNumber']
+	    ]);
+
+	    $connection = new ConnectionController();
+	    $db = $connection->connect();
+	    $manager = new CandidateManager($db);
+	    $data = $manager->getAllCandidate($candidate);
+
+	    return $data;    
     }
     
     public function getAllCandidateWithoutSesion()

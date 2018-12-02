@@ -101,15 +101,24 @@ class SessionController {
             'date' => $_POST['date'],
             'aptitude' => $_POST['aptitude'],
 	    'grade' => $_POST['grade'],
-            'psychologistNote' => $_POST['psychologistNote'],
             'price' => $_POST['price'],
             'computerStation' => $_POST['computerStation']
         ]);
         
+	if(empty($session->getPsychologistNote()))
+	{
+	    $request = "";
+	}
+	else
+	{
+	    $request = " psychologistNote = :psychologistNote,";
+	}
+	    
         $connection = new ConnectionController();
         $db = $connection->connect();
         $manager = new SessionManager($db);
-        $manager->updateSession($session);
+        $data = $manager->updateSession($session, $request);
+	echo $data;
     }
     
     public function deleteSession()

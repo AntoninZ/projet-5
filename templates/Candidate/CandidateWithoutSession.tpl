@@ -1,5 +1,5 @@
 <section class="getAllCandidateWithoutSession">
-    <article class="articleForm columns-2 createCandidateWithoutSession">
+    <article class="articleForm columns-2 coloredForm">
 	<h2>Ajouter un indépendant</h2>
 	<hr />
 	<form>
@@ -70,7 +70,7 @@
     <article>
 	<h2>Récapitulatif des candidats indépendants</h2>
 	<hr />
-	<table class="dataTable">
+	<table class="dataTable responsive wrap">
 	    <thead>
 		<tr>
 		    <th>N°</th>
@@ -87,12 +87,12 @@
 		{foreach from=$candidates item=candidate}
 		<tr>
 		    <td></td>
-		    <td class="tdDate">{$candidate->getCreationDate()}</td>
+		    <td class="tdDate">{$candidate->getCreationDate()|date_format:"%d/%m/%g"}</td>
 		    <td>{$candidate->getLastname()}</td>
 		    <td>{$candidate->getFirstname()}</td>
 		    <td>{$candidate->getAssistantNote()}</td>
-		    <td class="tdDate">{$candidate->getReservationDate()}</td>
-		    <td class="tdAccess"><a href="?page=candidates&amp;idCandidate={$candidate->getIdCandidate()}">Accéder</a></td>
+		    <td class="tdDate">{$candidate->getReservationDate()|date_format:"%d/%m/%g"}</td>
+		    <td class="tdAccess"><a href="?page=candidates&amp;idCandidate={$candidate->getIdCandidate()}"><i class="fas fa-external-link-alt"></i></a></td>
 		</tr>
 		{/foreach}
 	    </tbody>

@@ -22,9 +22,11 @@ var DataTable = {
 			    "previous" :	    "Précédent"
 			}
 		},
+		
 		"searching": false,
 		"order" : [[1, 'desc']],
-		"responsive" : true
+		"responsive" : true,
+		"columnDefs": [ {"targets": 0, "orderable": false} ]
 	    });
 
 	    table.on('order.dt search.dt', function(){

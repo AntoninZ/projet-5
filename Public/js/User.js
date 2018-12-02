@@ -33,7 +33,7 @@ var User = {
                 {
                    if(data)
                    {
-                       location.reload(); 
+                       $(location).attr('href',"?page=dashboard");
                    }
                    else
                    {
@@ -54,8 +54,49 @@ var User = {
                 $(location).attr('href',"index.php");
             });
         });
+    },
+    
+    updateUserAccount: function()
+    {
+	$("#btnUpdateUserAccount").click(function(e)
+	{
+	    e.preventDefault();
+	    
+	    $.post(
+		'index.php?action=updateUserAccount',
+		{
+		    username : $('#username').val(),
+		    gender : $('#gender').val(),
+		    role : $('#role').val(),
+		    adeliNumber : $('#adeliNumber').val(),
+		    idUser : $('#idUser').val()
+		}
+	    );
+	});
+    },
+    
+    updateUserPassword: function()
+    {
+	$("#btnUpdateUserPassword").click(function(e)
+	{
+	    e.preventDefault();
+
+	    if($('#password').val() == $('#passwordCheck').val())
+	    {
+		$.post(
+		    'index.php?action=updateUserPassword',
+		    {
+			password : $('#password').val(),
+			idUser : $('#idUser').val()
+		    }
+		)
+	    }
+	});
     }
+    
 };
 
 User.signIn();
 User.signOut();
+User.updateUserAccount();
+User.updateUserPassword();

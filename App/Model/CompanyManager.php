@@ -60,11 +60,4 @@ class CompanyManager {
        $req->bindValue(':idCompany', $company->getIdCompany(), \PDO::PARAM_INT);
        $req->execute();
    }
-   
-   public function deleteCompany(Company $company)
-   {
-       $req = $this->_db->prepare('DELETE FROM companies WHERE idCompany = :idCompany');
-       $req->bindValue(':idCompany', $company->getIdCompany(), PDO::PARAM_INT);
-       $req->execute();
-   }
 }

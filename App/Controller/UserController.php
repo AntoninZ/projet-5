@@ -13,7 +13,8 @@ class UserController {
             'username' => $_POST['username'],
             'password' => $_POST['password'],
             'gender' => $_POST['gender'],
-            'role' => $_POST['role']
+            'role' => $_POST['role'],
+	    'adeliNumber' => $_POST['adeliNumber']
         ]);
         
         $connection = new ConnectionController();
@@ -24,9 +25,17 @@ class UserController {
     
     public function getUser()
     {
+	if(isset ($_SESSION['username']))
+	{
+	    $username = $_SESSION['username'];
+	}
+	else
+	{
+	    $username = $_POST['username'];
+	}
+	
         $user = new User([
-            'idUser' => $_GET['idUser'],
-            'username' => $_POST['username']
+            'username' => $username
         ]);
         
         $connection = new ConnectionController();
@@ -34,7 +43,21 @@ class UserController {
         $manager = new UserManager($db);
         $data = $manager->getUser($user);
         
-        return $a = new User($data);
+        return $data;
+    }
+    
+    public function getUserById($idUser)
+    {
+	$user = new User([
+	    'idUser' => $idUser
+	]);
+	
+	$connection = new ConnectionController();
+	$db = $connection->connect();
+	$manager = new UserManager($db);
+	$user = $manager->getUser($user);
+	
+	return $user;
     }
     
     public function getAllUser()
@@ -57,20 +80,33 @@ class UserController {
 	return $users;
     }
     
-    public function updateUser()
+    public function updateUserAccount()
     {
         $user = new User([
             'username' => $_POST['username'],
-            'password' => $_POST['password'],
             'gender' => $_POST['gender'],
             'role' => $_POST['role'],
-            'idUser' => $_GET['idUser']
+	    'adeliNumber' => $_POST['adeliNumber'],
+            'idUser' => $_POST['idUser']
         ]);
         
         $connection = new ConnectionController();
         $db = $connection->connect();
         $manager = new UserManager($db);
-        $manager->updateUser($user);
+	$manager->updateUserAccount($user);
+    }
+    
+    public function updateUserPassword()
+    {
+	$user = new User([
+	    'password' => $_POST['password'],
+	    'idUser' => $_POST['idUser']
+	]);
+	
+	$connection = new ConnectionController();
+	$db = $connection->connect();
+	$manager = new UserManager($db);
+	$manager->updateUserPassword($user);
     }
     
     public function deleteUser()

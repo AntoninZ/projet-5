@@ -33,6 +33,12 @@ var Session = {
         {
             e.preventDefault();
             
+	    var psychologistNote;
+	    
+	    if($('#psychologistNote')){
+		psychologistNote = $('#psychologistNote').val();
+	    }
+	    
             $.post(
                 'index.php?action=updateSession',
                 {
@@ -42,7 +48,7 @@ var Session = {
                     date : $('#date').val(),
 		    grade : $('#grade').val(),
 		    aptitude : $('#aptitude').val(),
-		    psychologistNote : $('#psychologistNote').val(),
+		    psychologistNote : psychologistNote,
 		    price : $('#price').val(),
 		    computerStation : $('#computerStation').val()  
                 },

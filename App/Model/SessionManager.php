@@ -104,20 +104,26 @@ class SessionManager {
 	
     }
     
-    public function updateSession(Session $session)
+    public function updateSession(Session $session, $request)
     {
-        $req = $this->_db->prepare('UPDATE sessions SET idUser = :idUser, idCompany = :idCompany, date = :date, grade = :grade, aptitude = :aptitude, psychologistNote = :psychologistNote, price = :price, computerStation = :computerStation WHERE idSession = :idSession');
+        $req = $this->_db->prepare('UPDATE sessions SET idUser = :idUser, idCompany = :idCompany, date = :date, grade = :grade, aptitude = :aptitude,'.$request.' price = :price, computerStation = :computerStation WHERE idSession = :idSession');
         $req->bindValue(':idSession', $session->getIdSession(), \PDO::PARAM_INT);
 	$req->bindValue(':idUser', $session->getIdUser(), \PDO::PARAM_INT);
 	$req->bindValue(':idCompany', $session->getIdCompany(), \PDO::PARAM_INT);
         $req->bindValue(':date', $session->getDate(), \PDO::PARAM_STR);
 	$req->bindValue(':grade', $session->getGrade(), \PDO::PARAM_STR);
         $req->bindValue(':aptitude', $session->getAptitude(), \PDO::PARAM_STR);
-        $req->bindValue(':psychologistNote', $session->getPsychologistNote(), \PDO::PARAM_STR);
+	
+	if(!empty($session->getPsychologistNote()))
+	{
+	    $req->bindValue(':psychologistNote', $session->getPsychologistNote(), \PDO::PARAM_STR);
+	}
+	
         $req->bindValue(':price', $session->getPrice(), \PDO::PARAM_STR);
         $req->bindValue(':computerStation', $session->getComputerStation(), \PDO::PARAM_INT);
         $req->execute();
-        
+	
+        $data = $req->fetch(\PDO::FETCH_ASSOC);
     }
     
     public function deleteSession(Session $session)

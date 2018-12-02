@@ -28,7 +28,8 @@ var Company = {
             $.post(
                 'index.php?action=updateCompany',
                 {
-		    name : $('#name').val()
+		    name : $('#name').val(),
+		    idCompany : $('#idCompany').val()
                 },
                 
                 function(data){

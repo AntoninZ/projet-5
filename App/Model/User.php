@@ -7,6 +7,7 @@ class User implements \JsonSerializable {
     private $_password;
     private $_gender;
     private $_role;
+    private $_adeliNumber;
 
     public function __construct(array $donnees)
     {
@@ -32,6 +33,7 @@ class User implements \JsonSerializable {
     public function getPassword() {return $this->_password;}
     public function getGender() {return $this->_gender;}
     public function getRole() {return $this->_role;}
+    public function getAdeliNumber() {return $this->_adeliNumber;}
     
     // SETTER
     public function setIdUser($idUser) {$this->_idUser = $idUser;}
@@ -39,6 +41,7 @@ class User implements \JsonSerializable {
     public function setPassword($password) {$this->_password = $password;}
     public function setGender($gender) {$this->_gender = $gender;}
     public function setRole($role) {$this->_role = $role;}
+    public function setAdeliNumber($adeliNumber) {$this->_adeliNumber = $adeliNumber;}
 
     public function JsonSerialize()
     {
@@ -48,7 +51,8 @@ class User implements \JsonSerializable {
             'username' => $this->_username,
             'password' => $this->_password,
             'gender' => $this->_gender,
-            'role' => $this->_role
+            'role' => $this->_role,
+	    'adeliNumber' => $this->_adeliNumber
         ];
     }
 }

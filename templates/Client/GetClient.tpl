@@ -1,7 +1,6 @@
 <section class="getClient">
     <article class="articleForm columns-2 updateClient">
-	<h2>Information client</h2>
-	<hr />
+	<h2 class="colored-title">Information client</h2>
 	<form>
 	    <input type="text" class="noShow" id="idCompany" value="{$client->getIdCompany()}">
 	    <input type="text" class="noShow" id="idClient" value="{$client->getIdClient()}">

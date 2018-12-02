@@ -1,9 +1,18 @@
 <section class="getAllClient">
-    
-    <article class="articleForm columns-disabled createClient">
-	<h2>Ajouter un client</h2>
-	<hr />
+    <article class="articleForm columns-disabled">
+	<h2 class="center">Entreprise : {$company->getName()}</h2>
 	
+	<h3 class="colored-title">Modifier l'entreprise</h3>
+	<form>
+	    <input type="text" class="noShow" id="idCompany" value="{$smarty.get.idCompany}">
+	    <div>
+		<label for="name">Nom :</label>
+		<input type="text" id="name" value="{$company->getName()}">
+	    </div>
+	    <button type="submit" id="btnUpdateCompany">Sauvegarder</button>
+	</form>
+	
+	<h3 class="colored-title">Ajouter un client</h3>
 	<form>
 	    <input type="text" class="noShow" id="idCompany" value="{$smarty.get.idCompany}">
 	    <div>
@@ -48,7 +57,7 @@
 		    <td>{$client->getPhoneNumber()}</td>
 		    <td>{$client->getCellphoneNumber()}</td>
 		    <td>{$client->getEmail()}</td>
-		    <td><a href="?page=clients&amp;idClient={$client->getIdClient()}">Accéder</a></td>
+		    <td><a href="?page=clients&amp;idClient={$client->getIdClient()}"><i class="fas fa-external-link-alt"></i></a></td>
 		    <td><button onclick="Client.deleteClient({$client->getIdClient()})"><i class="fas fa-trash-alt"></i></button></td>
 		</tr>
 		{/foreach}

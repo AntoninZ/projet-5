@@ -1,5 +1,5 @@
 <section>
-    <article class="articleForm columns-disabled createCompany">
+    <article class="articleForm columns-disabled coloredForm">
 	<h2>Ajouter une entreprise</h2>
 	<hr />
 	<form>
@@ -29,7 +29,7 @@
 		<tr>
 		    <td>{* INDEX generate by DataTable *}</td>
 		    <td>{$company->getName()}</td>
-		    <td><a href="?page=clients&amp;idCompany={$company->getIdCompany()}">Accéder</a></td>
+		    <td><a href="?page=clients&amp;idCompany={$company->getIdCompany()}"><i class="fas fa-external-link-alt"></i></a></td>
 		</tr>
 		{/if}
 		{/foreach}

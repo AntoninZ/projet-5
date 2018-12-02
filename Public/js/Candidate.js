@@ -32,21 +32,36 @@ var Candidate = {
     {
         $('#btnCreateCandidate').click(function(e)
         {
+	    
+	    var lastname = $('#lastname').val();
+	    var firstname = $('#firstname').val();
+	    var birthDate = $('#birthDate').val();
+	    
             e.preventDefault();
-            
-            $.post(
-                'index.php?action=createCandidate',
-                {
-                    lastname : $('#lastname').val(),
-                    firstname : $('#firstname').val(),
-                    birthDate : $('#birthDate').val()
-                },
-                
-                function(data){
-                    window.location.replace("?page=candidates&idCandidate="+data);
+	    
+            if(lastname.length === 0 || lastname.length === 0 || birthDate.length === 0)
+	    {
+		if($('#error').length === 0)
+		{
+		    $('#btnCreateCandidate').after('<p class="center" id="error">Veuillez remplir tous les champs.</p>');
+		}
+	    }
+	    else
+	    {
+		$.post(
+		    'index.php?action=createCandidate',
+		    {
+			lastname : $('#lastname').val(),
+			firstname : $('#firstname').val(),
+			birthDate : $('#birthDate').val()
+		    },
 
-                }
-            );
+		    function(data){
+			window.location.replace("?page=candidates&idCandidate="+data);
+
+		    }
+		);
+	    }
         });
     },
     
@@ -55,28 +70,35 @@ var Candidate = {
         $('#btnUpdateCandidate').click(function(e)
         {
             e.preventDefault();
-        
-            $.post(
-                'index.php?action=updateCandidate',
-                {
-                    firstname : $('#firstname').val(),
-                    lastname : $('#lastname').val(),
-                    birthDate : $('#birthDate').val(),
-                    gender : $('#gender').val(),
-                    email : $('#email').val(),
-                    phoneNumber : $('#phoneNumber').val(),
-                    cellphoneNumber : $('#cellphoneNumber').val(),
-                    address : $('#address').val(),
-		    zipCode : $('#zipCode').val(),
-		    city : $('#city').val(),
-                    allowable : $('#allowable').val(),
-                    idCandidate : $('#idCandidate').val()
-                },
-                
-                function(data){
-                    location.reload();
-                }
-            );
+	    var verifyPhoneNumber = DataValidate.phoneNumber();
+	    var verifyCellphoneNumber = DataValidate.cellphoneNumber();
+	    var verifyEmail = DataValidate.email();
+	    var verifyZipCode = DataValidate.zipCode();
+	    
+	    if(verifyPhoneNumber === true && verifyCellphoneNumber === true && verifyEmail === true && verifyZipCode === true)
+	    {
+		$.post(
+		    'index.php?action=updateCandidate',
+		    {
+			firstname : $('#firstname').val(),
+			lastname : $('#lastname').val(),
+			birthDate : $('#birthDate').val(),
+			gender : $('#gender').val(),
+			email : $('#email').val(),
+			phoneNumber : $('#phoneNumber').val(),
+			cellphoneNumber : $('#cellphoneNumber').val(),
+			address : $('#address').val(),
+			zipCode : $('#zipCode').val(),
+			city : $('#city').val(),
+			allowable : $('#allowable').val(),
+			idCandidate : $('#idCandidate').val()
+		    },
+
+		    function(data){
+			location.reload();
+		    }
+		);
+	    }
         });
     },
     

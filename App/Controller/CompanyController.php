@@ -61,25 +61,13 @@ class CompanyController {
     public function updateCompany()
     {
         $company = new Company([
-            'idCompany' => $_GET['idCompany'],
-            'name' => $_POST['name'],
+            'idCompany' => $_POST['idCompany'],
+            'name' => $_POST['name']
         ]);
         
         $connection = new ConnectionController();
         $db = $connection->connect();
         $manager = new CompanyManager($db);
         $manager->updateCompany($company);
-    }
-    
-    public function deleteCompany()
-    {
-        $company = new Company([
-            'idCompany' => $_GET['idCompany']
-        ]);
-        
-        $connection = new ConnectionController();
-        $db = $connection->connect();
-        $manager = new CompanyManager($db);
-        $manager->deleteCompany($company);
     }
 }

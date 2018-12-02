@@ -31,7 +31,7 @@ class UserManager {
     public function getUser(User $user)
     {
         $req = $this->_db->prepare('SELECT * FROM users WHERE idUser = :idUser OR username = :username');
-        $req->bindValue(':idUser', $user->getIdUser(), \PDO::PARAM_INT);
+	$req->bindValue(':idUser', $user->getIdUser(), \PDO::PARAM_INT);
         $req->bindValue(':username', $user->getUsername(), \PDO::PARAM_STR);
         $req->execute();
         
@@ -39,7 +39,7 @@ class UserManager {
         
         if(!empty($data))
         {
-            return $a = new User($data);
+            return $user = new User($data);
         }
         else
         {
@@ -73,17 +73,25 @@ class UserManager {
 	return $users;
     }
     
-    public function updateUser(User $user)
+    public function updateUserAccount(User $user)
     {
-        $passwordHash = password_hash($user->getPassword(), PASSWORD_DEFAULT);
-        
-        $req = $this->_db->prepare('UPDATE users SET username = :username, password = :password, gender = :gender, role = :role WHERE idUser = :idUser');
+        $req = $this->_db->prepare('UPDATE users SET username = :username, gender = :gender, role = :role, adeliNumber = :adeliNumber WHERE idUser = :idUser');
         $req->bindValue(':username', $user->getUsername(), \PDO::PARAM_STR);
-        $req->bindValue(':password', $passwordHash, \PDO::PARAM_STR);
         $req->bindValue(':gender', $user->getGender(), \PDO::PARAM_STR);
         $req->bindValue(':role', $user->getRole(), \PDO::PARAM_STR);
-        $req->bindValue(':idUser', $user->getUser(), \PDO::PARAM_INT);
-        $req->execute();        
+	$req->bindValue(':adeliNumber', $user->getAdeliNumber(), \PDO::PARAM_INT);
+        $req->bindValue(':idUser', $user->getIdUser(), \PDO::PARAM_INT);
+        $req->execute();
+    }
+    
+    public function updateUserPassword(User $user)
+    {
+	$passwordHash = password_hash($user->getPassword(), PASSWORD_DEFAULT);
+	
+	$req = $this->_db->prepare('UPDATE users SET password = :password WHERE idUser = :idUser');
+	$req->bindValue(':password', $passwordHash, \PDO::PARAM_STR);
+	$req->bindValue(':idUser', $user->getIdUser(), \PDO::PARAM_INT);
+	$req->execute();
     }
     
     public function deleteUser(User $user)

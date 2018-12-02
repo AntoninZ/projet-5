@@ -1,7 +1,6 @@
 <section class="getCandidate">
     <article class="articleForm columns-2 updateCandidate">
-	<h2>Information candidat</h2>
-	<hr />
+	<h2 class="colored-title">Information candidat</h2>
 	
 	<form>
 	    <div>
@@ -75,8 +74,7 @@
     </article>
 		    
     <article class="articleForm columns-2 updateCandidateWithoutSession">
-	<h2>Information de réservation</h2>
-	<hr />
+	<h2 class="colored-title">Information de réservation</h2>
 	<form>
 	    <div>
 		<div>
@@ -119,8 +117,7 @@
     </article>
 		    
     <article class="articleForm columns-2 createSession">
-	<h2>Créer une session</h2>
-	<hr />
+	<h2 class="colored-title">Créer une session</h2>
 	<form>
 	    <div>
 		<div>
@@ -192,8 +189,7 @@
 	    
     {if isset($sessions)}
     <article>
-    <h2>Sessions du candidat</h2>
-    <hr />
+    <h2 class="colored-title">Sessions du candidat</h2>
     <table class="dataTable">
 	<thead>
 	    <tr>

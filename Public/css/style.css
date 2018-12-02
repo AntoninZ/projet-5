@@ -3,39 +3,59 @@ body {
     margin:0;
     font-family: sans-serif;
     background-color: #f9f9f9;
+    background-image : url('/projet-5/Public/images/cubes.png');
 }
 
-section {
+section:not(.printAttestation) {
     max-width: 1024px;
     margin: 0px auto;
-    border: 1px solid #262627;
+    background-color: #f9f9f9;
+    border: 1px solid #d0d0d0;
+    border-radius: 3px;
 }
 
-section:not(.candidateHome) {
-    padding: 15px;
-    box-sizing: border-box;
+article {
+    padding: 20px 20px 100px 20px;
 }
 
-a {
-    text-decoration:none;
-}
+a {text-decoration:none;}
 
-input:focus{
-    outline:none;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-table, td, th {
-    border: 1px solid #000;
-    text-align:center;
-}
+input:focus{outline:none;}
 
 H2 {
     margin: 0;
+}
+
+H3 {
+    margin:0;
+    font-size: 1.5em;
+    margin-top: 20px
+}
+
+.colored-title {
+    background-color: #bb617b;
+    padding: 10px 0px 10px 10px;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+hr {margin-bottom: 30px;}
+
+.noShow {display:none;}
+
+.flex-inline {width: 100%;}
+
+footer {
+    margin: 100px 0 0 0;
+    background-color: #2d4059;
+    width: 100%;
+    text-align:center;
+    padding: 20px 0;
+}
+
+footer p {
+    margin: 0;
+    color: #fff;
 }
 
 /* HOMEPAGE */
@@ -55,9 +75,7 @@ H2 {
     margin: 10% auto;
 }
 
-.homepage div h2 {
-    text-align:center;
-}
+.homepage div h2 {text-align:center;}
 
 .homepage div input, .homepage div button {
     display: block;
@@ -73,7 +91,7 @@ H2 {
     margin-bottom: 2%;
 }
 
-.homepage input[type=text], input[type=password] {
+.homepage input[type=text], .homepage input[type=password] {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -99,22 +117,21 @@ H2 {
 
 /* HEADER */
 
-header {
-    background-color: #262627;
+header:not(.printHeader) {
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #2d4059;
+    box-shadow: 0px 3px 15px #000000;
+    z-index: 3;
 }
 
-header h1 {
-    margin: 2% 0 2% 15%;
-}
+header:not(.printHeader) h1 {margin: 1% 0 1% 15%;}
 
-header h1 a {
-    color: #fff;
-}
+header:not(.printHeader) h1 a {color: #fff;}
 
-header p {
+header:not(.printHeader) p {
     color: #fff;
     margin-right: 5%;
     padding: 10px 20px;
@@ -123,7 +140,7 @@ header p {
     transition-duration: 0.5s;
 }
 
-header p:hover {
+header:not(.printHeader) p:hover {
     transition-duration: 0.5s;
     padding: 10px 30px;
 }
@@ -133,42 +150,98 @@ nav ul  {
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
+    margin: 0;
+    padding: 20px 0;
 }
 
 nav ul li {
     display: inline-block;
-    margin: 1% 2%;
+    padding: 1% 2%;
+}
+
+nav ul li.active {
+    background-color: #a26950;
+    box-shadow: 0px 1px 6px #441b1b inset;
 }
 
 nav ul li a {
     color: #000;
     border-bottom: 2px solid rgb(255,255,255,0);
-    transition-duration: 0.5s;
     padding-bottom: 5px;
+    font-family: monospace;
+    font-size: 1.5em;
+    transition-duration: 0.5s;
+    
 }
 
 nav ul li a:hover {
     transition-duration: 0.5s;
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid #000;
 }
 
-/* DASHBOARD */
+/* ColoredForm*/
 
-/* MEETING */
+.articleForm.coloredForm {
+    background-color: #bb617b;
+    color: #fff;
+}
 
-/* CANDIDATE HOME */
-
-.articleForm.createCandidate {
-    background-color: #262627;
+.articleForm.coloredForm form button{
     color: #f5f5f5;
-    padding: 2%;
+    border: 2px solid #f5f5f5;
 }
 
-.articleForm.columns-disabled form {
+article.searchCandidate {padding: 5% 2%;}
+
+form.searchForm {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 40px 0;
+}
+
+.searchForm label {display:none;}
+
+.searchForm .searchIcon {
+    background-color: #2d4059;
+    border-radius: 10px 0px 0px 10px;
+    padding: 7px 15px;
+    color: #fff;
+}
+
+.searchForm input {
+    margin: 0;
+    border: 2px solid #2d4059;
+    width: 300px;
+    padding: 0px 10px; 
+    border-radius: 0px 3px 3px 0px;
+}
+
+
+/* GLOBAL FORMS */
+
+.articleForm form {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+.articleForm.columns-2 form{ /* forms are in 2 columns */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.articleForm.columns-2 form>div {
+    width: 50%;
+}
+
+.articleForm.columns-disabled form { /* forms are in one column */
     padding: 20px 0px;
     margin: 0 auto 50px auto;
 }
-
 
 .articleForm form label {
     display: inline-block;
@@ -185,8 +258,21 @@ nav ul li a:hover {
     background-color: #f5f5f5;    
 }
 
-
 .articleForm select {width: 212px;}
+
+.psychologistNote, .assistantNote {
+    width: 100% !important;
+    margin-top: 20px;
+}
+
+.psychologistNote textarea, .assistantNote textarea {
+    display: block;
+    width: 85%;
+    margin: 0 auto;
+    height: 200px;
+    font-size: 1em;
+    font-family: sans-serif;
+}
 
 .articleForm form button {
     display: block;
@@ -205,130 +291,143 @@ nav ul li a:hover {
     padding: 5px 30px;
 }
 
-.articleForm.createCandidate form button{
-    color: #f5f5f5;
-    border: 2px solid #f5f5f5;
+
+/* PERSONNALISE DataTables */
+.dataTables_wrapper .dataTables_length {
+    margin-bottom: 20px;
 }
 
-.searchCandidate {
-    padding: 5% 2%;
+.dataTables_wrapper .dataTables_length select {
+    width: 56px;
 }
 
-.searchForm {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    margin: 40px 0;
+table.dataTable {
+    border-collapse: collapse;
+    margin-bottom: 20px;
 }
 
-.searchForm label {
-    display:none;
+table.dataTable, td, th {
+    border: 1px solid #989898;
 }
 
-.searchForm .searchIcon {
-    background-color: #262627;
-    border-radius: 10px 0px 0px 10px;
-    padding: 7px 15px;
+table.dataTable thead th, table.dataTable thead td {
+    border-bottom: 1px solid #989898;
+}
+
+table.dataTable th {
+    background-color: #2d4059;
     color: #fff;
 }
 
-.searchForm input {
-    margin: 0;
-    border: 2px solid #262627;
-    width: 300px;
-    padding: 0px 10px; 
-    border-radius: 0px 3px 3px 0px;
+table.dataTable tbody tr.even {
+    background-color: #ececec;
+}
+table.dataTable tbody tr:hover {
+    background-color: #d0597c;
+    color: #fff;
 }
 
-table {
-    table-layout: fixed;
-}
-
-tr, td, th {
-    padding: 5px;
-    box-sizing: border-box;
-}
-
-.tableCandidateWithoutSession {
-    table-layout: auto;
-}
-
-.tdDate {
-    width: 111px;
-}
-
-.tdAccess {
-    width: 75px;
-}
-
-th {
-    background-color: #262627;
-    color: #f5f5f5;
-    border-right: 1px solid #f5f5f5;
-}
-
-th:first-child {
-    border-left: 1px solid #262627;
-}
-
-th:last-child {
-    border-right: 1px solid #262627;
-}
-
-tr:nth-child(even) {
-    background-color: #e0e0e0;
-}
-
-/* GET CANDIDATE */
-
-.noShow {
-    display:none;
-}
-
-.getCandidate article, .getAllCandidateWithoutSession article {
-    margin-bottom: 100px;
-}
-.articleForm.columns-2 form{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    width: 100%;
-}
-
-.articleForm form {
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-}
-
-.flex-inline {
-    width: 100%;
-}
-
-.psychologistNote, .assistantNote {
-    width: 100%;
-    margin-top: 20px;
-}
-
-.psychologistNote textarea, .assistantNote textarea {
-    display: block;
-    width: 85%;
-    margin: 0 auto;
-    height: 200px;
-    font-size: 1em;
-    font-family: sans-serif;
-}
-
-footer {
-    margin: 100px 0 0 0;
-    background-color: #262627;
-    width: 100%;
+table.dataTable tbody td {
     text-align:center;
-    padding: 20px 0;
 }
 
-footer p {
+
+/* FONT AWESOME ICONS */
+
+svg.svg-inline--fa.fa-print.fa-w-16 { /* In session to print */
+    float: right;
+    color: #bb617b;
+    border-radius: 50%;
+    padding: 5px;
+    margin-top: 9px;
+    margin-right: 9px;
+    background-color: #fff;
+    font-size: 1.3em;
+    transition-duration: 0.5s;
+}
+
+svg.svg-inline--fa.fa-print.fa-w-16:hover {
+    color: #fff;
+    transition-duration: 0.5s;
+    background-color: #bb617b;
+}
+
+/* PRINT ATTESTATION */
+
+.printAttestation {
+    max-width: 725px;
+    background-color: #fff;
+    padding: 40px 34px;
+    font-family: serif;
+    margin: 0 auto;
+}
+
+.printHeader {
+    position: relative;
+    height: 125px;
+    margin-bottom: 45px;
+}
+
+.printHeader img {
+    position: absolute;
+    width: 128px;
+    left: 30px;
+}
+
+.printHeader p { 
+    text-align: center;
+    color: #0521e4;
+    padding-top: 25px;
     margin: 0;
-    color: #f5f5f5;
+    font-size: 1.05em;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.size-10 {
+    font-size: 0.875em;
+}
+
+.size-12 {
+    font-size: 1.1em;
+}
+
+.size-16 {
+    font-size: 1.4em;
+}
+
+.center {
+    text-align:center;
+    display: block;
+}
+
+.right {
+    margin: 0;
+    text-align: right;
+}
+
+.justify {
+    text-align:justify;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.flexible {
+    display:flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    margin-top: 175px;
+}
+
+.no-margin-top{
+    margin-top:0;
 }

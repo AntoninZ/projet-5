@@ -5,7 +5,7 @@ var Client = {
         $('#btnCreateClient').click(function(e)
         {
             e.preventDefault();
-            
+	    
             $.post(
                 'index.php?action=createClient',
                 {

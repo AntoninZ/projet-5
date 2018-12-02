@@ -1,7 +1,7 @@
 <section class="getSession">
-    <article class="articleForm columns-2 updateSession">
-	<h2>Session du {$session->getDate()|date_format:"%d/%m/%Y"} - {$smarty.get.lastname|upper} {$smarty.get.firstname}</h2>
-	<hr />
+    <article class="articleForm columns-2">
+	<a href="?action=printAttestation&idSession={$smarty.get.idSession}"><i class="fas fa-print"></i><a>
+	<h2 class="colored-title">Session du {$session->getDate()|date_format:"%d/%m/%Y"} - {$smarty.get.lastname|upper} {$smarty.get.firstname}</h2>
 	<form>
 	    <div>
 		<input type="text" id="idSession" class="noShow" value="{$smarty.get.idSession}">
@@ -66,10 +66,12 @@
 		</div>
 	    </div>
 		
-	    <div class="psychologistNote">
-		<label for="psychologistNote">Note du psychologue :</label>
-		<textarea id="psychologistNote">{$session->getPsychologistNote()}</textarea>
-	    </div>
+	    {if $smarty.session.role == "psychologist"}
+		<div class="psychologistNote">
+		    <label for="psychologistNote">Note du psychologue :</label>
+		    <textarea id="psychologistNote">{$session->getPsychologistNote()}</textarea>
+		</div>
+	    {/if}
 	    
 	    <button type="submit" id="btnUpdateSession">Sauvegarder</button>
 	</form> 
