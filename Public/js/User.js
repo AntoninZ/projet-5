@@ -8,18 +8,20 @@ var User = {
         {
             e.preventDefault();
             
-            var username = $('#username').val();
-            var password = $('#password').val();
+            var requiredUsername = DataValidate.required($('#username').attr('id'));
+            var requiredPassword = DataValidate.required($('#password').attr('id'));
             
-            if(username.length <= 0)
+            if(!requiredUsername || !requiredPassword)
             {
-                $('username').css('border', '1px solid #ff4f4f');
-                $('#error').html('Vous devez remplir tous les champs du formulaire.');
-            }
-            else if(password.length <= 0)
-            {
-                $('#password').css('border', '1px solid #ff4f4f');
-                $('#error').html('Vous devez remplir tous les champs du formulaire.');
+		if($('#confirm').length === 0)
+		{
+		    $('#connexion').after('<p id="confirm">Erreur : champs vide(s).</p>');
+		    setInterval(function(){
+			$('#confirm').fadeOut('slow', function(){
+			    $('#confirm').remove();
+			});
+		    }, 2000);
+		}
             }
             else
             {
@@ -37,7 +39,12 @@ var User = {
                    }
                    else
                    {
-                       $('#error').html('Erreur: Pseudo ou mot de passe invalide.');
+                       $('#connexion').after('<p id="confirm">Erreur : Le pseudo ou le mot de passe est invalide</p>');
+		    setInterval(function(){
+			$('#confirm').fadeOut('slow', function(){
+			    $('#confirm').remove();
+			});
+		    }, 2000);
                    }
                 });
             }
@@ -62,16 +69,42 @@ var User = {
 	{
 	    e.preventDefault();
 	    
-	    $.post(
-		'index.php?action=updateUserAccount',
+	    var requiredUsername = DataValidate.required($('#username').attr('id'));
+	    
+	    if(!requiredUsername)
+	    {
+		if($('#confirm').length === 0)
 		{
-		    username : $('#username').val(),
-		    gender : $('#gender').val(),
-		    role : $('#role').val(),
-		    adeliNumber : $('#adeliNumber').val(),
-		    idUser : $('#idUser').val()
+		    $('#btnUpdateUserAccount').after('<p id="confirm">Erreur : champs vide.</p>');
+		    setInterval(function(){
+			$('#confirm').fadeOut('slow', function(){
+			    $('#confirm').remove();
+			});
+		    }, 2000);
 		}
-	    );
+	    }
+	    else
+	    {
+		$.post(
+		    'index.php?action=updateUserAccount',
+		    {
+			username : $('#username').val(),
+			gender : $('#gender').val(),
+			role : $('#role').val(),
+			adeliNumber : $('#adeliNumber').val(),
+			idUser : $('#idUser').val()
+		    },
+		    
+		    function(){
+			$('#btnUpdateUserAccount').after('<p id="confirm">Informations sauvegardées.</p>');
+			setInterval(function(){
+			    $('#confirm').fadeOut('slow', function(){
+				$('#confirm').remove();
+			    });
+			}, 2000);
+		    }
+		);
+	    }
 	});
     },
     
@@ -80,16 +113,52 @@ var User = {
 	$("#btnUpdateUserPassword").click(function(e)
 	{
 	    e.preventDefault();
-
-	    if($('#password').val() == $('#passwordCheck').val())
+	    
+	    var requiredPassword = DataValidate.required($('#password').attr('id'));
+	    var requiredPasswordCheck = DataValidate.required($('#passwordCheck').attr('id'));
+	    
+	    if(!requiredPassword || !requiredPasswordCheck)
 	    {
-		$.post(
-		    'index.php?action=updateUserPassword',
-		    {
-			password : $('#password').val(),
-			idUser : $('#idUser').val()
-		    }
-		)
+		if($('#error').length === 0)
+		{
+		    $('#btnUpdateUserPassword').after('<p id="confirm">Erreur : champs vide(s).</p>');
+		    setInterval(function(){
+			$('#confirm').fadeOut('slow', function(){
+			    $('#confirm').remove();
+			});
+		    }, 2000);
+		}
+	    }
+	    else
+	    {
+		if($('#password').val() == $('#passwordCheck').val())
+		{
+		    $.post(
+			'index.php?action=updateUserPassword',
+			{
+			    password : $('#password').val(),
+			    idUser : $('#idUser').val()
+			},
+		    
+			function(){
+			    $('#btnUpdateUserPassword').after('<p id="confirm">Informations sauvegardées.</p>');
+			    setInterval(function(){
+				$('#confirm').fadeOut('slow', function(){
+				    $('#confirm').remove();
+				});
+			    }, 2000);
+			}
+		    );
+		}
+		else
+		{
+		    $('#btnUpdateUserPassword').after('<p id="confirm">Erreur : les mots de passe ne correspondent pas.</p>');
+		    setInterval(function(){
+			$('#confirm').fadeOut('slow', function(){
+			    $('#confirm').remove();
+			});
+		    }, 2000);
+		}
 	    }
 	});
     }

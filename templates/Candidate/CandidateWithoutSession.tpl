@@ -52,7 +52,7 @@
 
 		<div>
 		    <label for="meeting">Afficher le candidat :</label>
-		    <select>
+		    <select id="meeting">
 			<option value="true">Oui</option>
 			<option value="false">Non</option>
 		    </select>

@@ -24,7 +24,7 @@ var DataTable = {
 		},
 		
 		"searching": false,
-		"order" : [[1, 'desc']],
+		"order" : [[1, 'asc']],
 		"responsive" : true,
 		"columnDefs": [ {"targets": 0, "orderable": false} ]
 	    });

@@ -30,7 +30,7 @@ if(isset($_SESSION['username']))
         
         if($_GET['page'] == 'meeting')
         {
-            $candidates = $candidateController->getAllCandidateWithoutSesion();
+            $candidates = $candidateController->getAllCandidateWithoutSession();
             $smarty->assign('candidates', $candidates);
             $smarty->display('Candidate/CandidateWithoutSession.tpl');
         }
@@ -180,6 +180,12 @@ if(isset($_SESSION['username']))
         {
             $candidateController->updateCandidate();
         }
+	elseif($_GET['action'] == 'createCandidateWithoutSession')
+	{
+	    $lastId = $candidateController->createCandidateWithoutSession();
+	    
+	    echo $lastId;
+	}
 	elseif($_GET['action'] == 'updateCandidateWithoutSession')
 	{
 	    $candidateController->updateCandidateWithoutSession();
@@ -271,6 +277,12 @@ if(isset($_SESSION['username']))
 	elseif($_GET['action'] == 'updateUserPassword')
 	{
 	    $userController->updateUserPassword();
+	}
+	else
+	{
+	    $error = "La page demandée n'existe pas.";
+	    $smarty->assign('error', $error);
+	    $smarty->display('Error.tpl');
 	}
     }
     else

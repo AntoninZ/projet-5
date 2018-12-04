@@ -11,7 +11,9 @@
 	    </div>
 	    <button type="submit" id="btnUpdateCompany">Sauvegarder</button>
 	</form>
-	
+    </article>
+	    
+    <article class="articleForm columns-disabled">
 	<h3 class="colored-title">Ajouter un client</h3>
 	<form>
 	    <input type="text" class="noShow" id="idCompany" value="{$smarty.get.idCompany}">

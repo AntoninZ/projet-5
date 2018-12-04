@@ -32,6 +32,21 @@ H3 {
     margin-top: 20px
 }
 
+.deleteOption {
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: auto;
+    width: 326px;
+    color: #ff6565;
+    border-bottom: 1px solid rgb(255,255,255,0);
+    transition-duration: 0.5s;
+}
+
+.deleteOption:hover {
+    border-bottom: 1px solid #ff6565;
+    transition-duration: 0.5s;
+}
+
 .colored-title {
     background-color: #bb617b;
     padding: 10px 0px 10px 10px;
@@ -220,6 +235,10 @@ form.searchForm {
 
 /* GLOBAL FORMS */
 
+.articleForm {
+    position: relative;
+}
+
 .articleForm form {
     width: 50%;
     display: flex;
@@ -291,6 +310,11 @@ form.searchForm {
     padding: 5px 30px;
 }
 
+#confirm {
+    position:absolute;
+    left:40%;
+    bottom:0%
+}
 
 /* PERSONNALISE DataTables */
 .dataTables_wrapper .dataTables_length {

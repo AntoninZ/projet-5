@@ -32,17 +32,17 @@
 	    <div>
 		<div>
 		    <label for="email">Email :</label>
-		    <input type="text" name="email" id="email" value="{$candidate->getEmail()}">
+		    <input type="text" name="email" id="email" value="{$candidate->getEmail()}" placeholder ="xxxx@xxxx.xxx">
 		</div>
 
 		<div>
 		    <label for="phoneNumber">Tél fixe :</label>
-		    <input type="text" name="phoneNumber" id="phoneNumber" value="{$candidate->getPhoneNumber()}">
+		    <input type="text" name="phoneNumber" id="phoneNumber" value="{$candidate->getPhoneNumber()}" placeholder="0102030405">
 		</div>
 
 		<div>
 		    <label for="cellphoneNumber">Tél port :</label>
-		    <input type="text" name="cellphoneNumber" id="cellphoneNumber" value="{$candidate->getCellphoneNumber()}">
+		    <input type="text" name="cellphoneNumber" id="cellphoneNumber" value="{$candidate->getCellphoneNumber()}" placeholder="0601020304">
 		</div>
 
 		<div>
@@ -52,7 +52,7 @@
 		
 		<div>
 		    <label for="zipCode">Code postal :</label>
-		    <input type="text" id="zipCode" value="{$candidate->getZipCode()}">
+		    <input type="text" id="zipCode" value="{$candidate->getZipCode()}" placeholder="91260">
 		</div>
 		
 		<div>
@@ -68,8 +68,9 @@
 		    </select>
 		</div>
 	    </div>
-		    
-	    <button type="submit" id="btnUpdateCandidate">Sauvegarder changement</button>
+	    <div>    
+		<button type="submit" id="btnUpdateCandidate">Sauvegarder changement</button>
+	    </div>
 	</form>
     </article>
 		    
@@ -158,7 +159,7 @@
 		</div>
 		<div>
 		    <label for="price">Prix de l'évaluation :</label>
-		    <input type="text" id="price">
+		    <input type="text" id="price" placeholder="000">
 		</div>
 
 		<div>
@@ -220,5 +221,7 @@
 	
     </article>
     {/if}
-    <p class="deleteOption" onclick="Candidate.deleteCandidate({$candidate->getIdCandidate()})">Supprimer toutes les informations du candidat</p>
+    {if $smarty.session.role == 'psychologist'}
+	<p class="deleteOption" onclick="Candidate.deleteCandidate({$candidate->getIdCandidate()})">Supprimer toutes les informations du candidat</p>
+    {/if}
 </section>

@@ -53,7 +53,29 @@ class CandidateController
 	    return $data;    
     }
     
-    public function getAllCandidateWithoutSesion()
+    public function createCandidateWithoutSession()
+    {
+	$candidate = new Candidate([
+	    'lastname' => $_POST['lastname'],
+	    'firstname' => $_POST['firstname'],
+	    'email' => $_POST['email'],
+	    'phoneNumber' => $_POST['phoneNumber'],
+	    'cellphoneNumber' => $_POST['cellphoneNumber'],
+	    'creationDate' => $_POST['creationDate'],
+	    'downPayment' => $_POST['downPayment'],
+	    'reservationDate' => $_POST['reservationDate'],
+	    'meeting' => $_POST['meeting'],
+	    'assistantNote' => $_POST['assistantNote']
+	]);
+	
+	$connection = new ConnectionController();
+	$db = $connection->connect();
+	$manager = new CandidateManager($db);
+	$lastId = $manager->createCandidateWithoutSession($candidate);
+	return $lastId;
+    }
+    
+    public function getAllCandidateWithoutSession()
     {
         $connection = new ConnectionController();
         $db = $connection->connect();

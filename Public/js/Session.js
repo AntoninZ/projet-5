@@ -21,7 +21,7 @@ var Session = {
                 },
                 
                 function(data){
-                    location.reload();
+                    console.log(data)
                 }
             );
         });

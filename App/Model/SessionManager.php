@@ -30,6 +30,9 @@ class SessionManager {
         $req->bindValue(':price', $session->getPrice(), \PDO::PARAM_STR);
         $req->bindValue(':computerStation', $session->getComputerStation(), \PDO::PARAM_STR);
 	$req->execute();
+	$data = $req->fetch(\PDO::FETCH_ASSOC);
+        return $data;
+	
     }
     
     public function getSession(Session $session)

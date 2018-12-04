@@ -56,8 +56,9 @@
 		    <input type="text"id="email" value="{$client->getEmail()}">
 		</div>
 	    </div>
-	    
-	    <button id="btnUpdateClient">Sauvegarder changement</button>
+	    <div>
+		<button id="btnUpdateClient">Sauvegarder changement</button>
+	    </div>
 	</form>
 	
     </article>

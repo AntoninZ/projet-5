@@ -50,6 +50,11 @@ class CandidateManager {
 	$req->bindValue(':assistantNote', $candidate->getAssistantNote(), \PDO::PARAM_STR);
 	$req->bindValue(':meeting', $candidate->getMeeting(), \PDO::PARAM_STR);
 	$req->execute();
+	
+	$req = $this->_db->query('SELECT MAX(idCandidate) FROM candidates');
+        $data = $req->fetch(\PDO::FETCH_ASSOC);
+        
+        return $data['MAX(idCandidate)'];
     }
     public function getCandidate(Candidate $candidate)
     {
