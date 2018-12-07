@@ -1,5 +1,5 @@
 <section>
-    <article class="articleForm columns-2 coloredForm">
+    <article class="articleForm articlePadding columns-2 coloredForm">
 	<h2>Ajouter un utilisateur</h2>
 	<hr/>
 	<form>
@@ -40,7 +40,7 @@
 	    <button type="submit" id="btnCreateUser">Ajouter</button>
 	</form>
     </article>
-    <article class="articleForm columns-disabled">
+    <article class="articleForm articlePadding columns-disabled">
 	<table class="dataTable responsive wrap">
 	    <thead>
 		<tr>

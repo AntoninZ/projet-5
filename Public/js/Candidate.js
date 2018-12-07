@@ -70,14 +70,16 @@ var Candidate = {
         {
             e.preventDefault();
 	    
-	    var verifyLastname = DataValidate.required($('#lastname').attr('id'));
-	    var verifyFirstname = DataValidate.required($('#firstname').attr('id'));
+	    var requiredLastname = DataValidate.required($('#lastname').attr('id'));
+	    var requiredFirstname = DataValidate.required($('#firstname').attr('id'));
+	    var verifyFirstname = DataValidate.firstname();
+	    var verifyLastname = DataValidate.lastname();
 	    var verifyPhoneNumber = DataValidate.phoneNumber();
 	    var verifyCellphoneNumber = DataValidate.cellphoneNumber();
 	    var verifyEmail = DataValidate.email();
 	    var verifyZipCode = DataValidate.zipCode();
 	    
-	    if(!verifyLastname || !verifyFirstname || !verifyPhoneNumber || !verifyCellphoneNumber || !verifyEmail || !verifyZipCode)
+	    if(!requiredFirstname || !requiredLastname || !verifyLastname || !verifyFirstname || !verifyPhoneNumber || !verifyCellphoneNumber || !verifyEmail || !verifyZipCode)
 	    {
 		if($('#confirm').length === 0)
 		{

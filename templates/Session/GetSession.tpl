@@ -1,6 +1,6 @@
 <section class="getSession">
     <article class="articleForm columns-2">
-	<a href="?action=printAttestation&idSession={$smarty.get.idSession}"><i class="fas fa-print"></i><a>
+	<a href="?action=printAttestation&idSession={$smarty.get.idSession}" class="print"><i class="fas fa-print"></i></a>
 	<h2 class="colored-title">Session du {$session->getDate()|date_format:"%d/%m/%Y"} - {$smarty.get.lastname|upper} {$smarty.get.firstname}</h2>
 	<form>
 	    <div>

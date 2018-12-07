@@ -1,5 +1,5 @@
 <section class="candidateHome">
-    <article class="articleForm columns-disabled coloredForm">
+    <article class="articleForm articlePadding columns-disabled coloredForm">
 	<h2>Ajouter un candidat</h2>
 	<hr />
 	<form>

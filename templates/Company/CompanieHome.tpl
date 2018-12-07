@@ -1,5 +1,5 @@
-<section>
-    <article class="articleForm columns-disabled coloredForm">
+<section class="companiesHome">
+    <article class="articleForm articlePadding columns-disabled coloredForm">
 	<h2>Ajouter une entreprise</h2>
 	<hr />
 	<form>
@@ -11,7 +11,7 @@
 	    <button id="btnCreateCompany">Ajouter une entreprise</button>
 	</form>
     </article>
-    <article>
+    <article class="articlePadding">
 	<h2>Liste des entreprises</h2>
 	<hr />
 	<table class="dataTable">

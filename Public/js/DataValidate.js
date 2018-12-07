@@ -1,5 +1,5 @@
 var DataValidate = {
-    regex_alphabetic : new RegExp(/([A-Za-z])/),
+    regex_alphabetic : new RegExp(/(^[A-Za-z]+$)/),
     regex_phone : new RegExp(/(^0[0-9]{9}$)/),
     regex_zipCode : new RegExp(/([0-9]{5}$)/),
     regex_email : new RegExp(/([\w-\.]+@[\w\.]+\.{1}[\w]+)/),

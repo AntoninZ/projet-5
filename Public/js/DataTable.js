@@ -19,7 +19,7 @@ var DataTable = {
 			    "first":	    "Premier",
 			    "last" :	    "Dernier",
 			    "next" :	    "Suivant",
-			    "previous" :	    "Précédent"
+			    "previous" :    "Précédent"
 			}
 		},
 		
@@ -31,13 +31,13 @@ var DataTable = {
 
 	    table.on('order.dt search.dt', function(){
 		table
-			.column(0, {order:'applied'})
-			.nodes()
-			.each(
-			    function(cell, i){
-			    cell.innerHTML = i+1;
-			    }
-			);
+		    .column(0, {order:'applied'})
+		    .nodes()
+		    .each(
+			function(cell, i){
+			cell.innerHTML = i+1;
+			}
+		    );
 
 	    }).draw();
 	}

@@ -20,7 +20,7 @@ class UserManager {
     {
         $passwordHash = password_hash($user->getPassword(), PASSWORD_DEFAULT);
         
-        $req = $this->_db->prepare('INSERT INTO users (username, password, gender, role) VALUES (:username, :password, :gender, :role)');
+        $req = $this->_db->prepare('INSERT INTO p5_users (username, password, gender, role) VALUES (:username, :password, :gender, :role)');
         $req->bindValue(':username', $user->getUsername(), \PDO::PARAM_STR);
         $req->bindValue(':password', $passwordHash , \PDO::PARAM_STR);
         $req->bindValue(':gender', $user->getGender(), \PDO::PARAM_STR);
@@ -30,7 +30,7 @@ class UserManager {
     
     public function getUser(User $user)
     {
-        $req = $this->_db->prepare('SELECT * FROM users WHERE idUser = :idUser OR username = :username');
+        $req = $this->_db->prepare('SELECT * FROM p5_users WHERE idUser = :idUser OR username = :username');
 	$req->bindValue(':idUser', $user->getIdUser(), \PDO::PARAM_INT);
         $req->bindValue(':username', $user->getUsername(), \PDO::PARAM_STR);
         $req->execute();
@@ -51,7 +51,7 @@ class UserManager {
     {
 	$users = [];
 	
-        $req = $this->_db->query('SELECT * FROM users');
+        $req = $this->_db->query('SELECT * FROM p5_users');
         while($data = $req->fetch(\PDO::FETCH_ASSOC))
 	{
             $users[] = new User($data);
@@ -64,7 +64,7 @@ class UserManager {
     {
 	$users = [];
 	
-	$req = $this->_db->query('SELECT idUser, username FROM users WHERE role="psychologist"');
+	$req = $this->_db->query('SELECT idUser, username FROM p5_users WHERE role="psychologist"');
 	while($data = $req->fetch(\PDO::FETCH_ASSOC))
 	{
 	    $users[] = new User($data);
@@ -75,7 +75,7 @@ class UserManager {
     
     public function updateUserAccount(User $user)
     {
-        $req = $this->_db->prepare('UPDATE users SET username = :username, gender = :gender, role = :role, adeliNumber = :adeliNumber WHERE idUser = :idUser');
+        $req = $this->_db->prepare('UPDATE p5_users SET username = :username, gender = :gender, role = :role, adeliNumber = :adeliNumber WHERE idUser = :idUser');
         $req->bindValue(':username', $user->getUsername(), \PDO::PARAM_STR);
         $req->bindValue(':gender', $user->getGender(), \PDO::PARAM_STR);
         $req->bindValue(':role', $user->getRole(), \PDO::PARAM_STR);
@@ -88,7 +88,7 @@ class UserManager {
     {
 	$passwordHash = password_hash($user->getPassword(), PASSWORD_DEFAULT);
 	
-	$req = $this->_db->prepare('UPDATE users SET password = :password WHERE idUser = :idUser');
+	$req = $this->_db->prepare('UPDATE p5_users SET password = :password WHERE idUser = :idUser');
 	$req->bindValue(':password', $passwordHash, \PDO::PARAM_STR);
 	$req->bindValue(':idUser', $user->getIdUser(), \PDO::PARAM_INT);
 	$req->execute();
@@ -96,7 +96,7 @@ class UserManager {
     
     public function deleteUser(User $user)
     {
-        $req = $this->_db->prepare('DELETE FROM users WHERE idUser = :idUser');
+        $req = $this->_db->prepare('DELETE FROM p5_users WHERE idUser = :idUser');
         $req->bindValue(':idUser', $user->getIdUser(), PDO::PARAM_INT);
         $req->execute();
     }

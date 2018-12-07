@@ -1,5 +1,5 @@
 <section class="getAllCandidateWithoutSession">
-    <article class="articleForm columns-2 coloredForm">
+    <article class="articleForm articlePadding columns-2 coloredForm">
 	<h2>Ajouter un indépendant</h2>
 	<hr />
 	<form>
@@ -67,10 +67,10 @@
 	    <button type="submit" id="btnCreateCandidateWithoutSession">Ajouter</button>
 	</form>
     </article>
-    <article>
+    <article class="articlePadding">
 	<h2>Récapitulatif des candidats indépendants</h2>
 	<hr />
-	<table class="dataTable responsive wrap">
+	<table class="dataTable responsive wrap" width="100%">
 	    <thead>
 		<tr>
 		    <th>N°</th>

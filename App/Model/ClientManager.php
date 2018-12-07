@@ -18,7 +18,7 @@ class ClientManager {
     
     public function createClient(Client $client)
     {
-        $req = $this->_db->prepare('INSERT INTO clients
+        $req = $this->_db->prepare('INSERT INTO p5_clients
                 (idCompany, firstname, lastname, gender, address, zipCode, city, phoneNumber, cellphoneNumber, email)
                 VALUES
                 (:idCompany, :firstname, :lastname, :gender, :address, :zipCode, :city, :phoneNumber, :cellphoneNumber, :email)');
@@ -34,7 +34,7 @@ class ClientManager {
 	$req->bindValue(':email', $client->getEmail(), \PDO::PARAM_STR);
         $req->execute();
 	
-	$req = $this->_db->query('SELECT MAX(idClient) FROM clients');
+	$req = $this->_db->query('SELECT MAX(idClient) FROM p5_clients');
 	$idClient = $req->fetch(\PDO::FETCH_ASSOC);
         
         return $idClient['MAX(idClient)'];
@@ -42,7 +42,7 @@ class ClientManager {
     
     public function getClient(Client $client)
     {
-        $req = $this->_db->prepare('SELECT * FROM clients WHERE idClient = :idClient');
+        $req = $this->_db->prepare('SELECT * FROM p5_clients WHERE idClient = :idClient');
         $req->bindValue(':idClient', $client->getIdClient(), \PDO::PARAM_INT);
         $req->execute();
         
@@ -54,7 +54,7 @@ class ClientManager {
     {
 	$clients = [];
 	
-        $req = $this->_db->prepare('SELECT * FROM clients WHERE idCompany = :idCompany');
+        $req = $this->_db->prepare('SELECT * FROM p5_clients WHERE idCompany = :idCompany');
 	$req->bindValue(':idCompany', $client->getIdCompany(), \PDO::PARAM_INT);
         $req->execute();
         
@@ -68,7 +68,7 @@ class ClientManager {
     
     public function updateClient(Client $client)
     {
-        $req = $this->_db->prepare('UPDATE clients SET
+        $req = $this->_db->prepare('UPDATE p5_clients SET
             idCompany = :idCompany,
             firstname = :firstname,
             lastname = :lastname,
@@ -96,7 +96,7 @@ class ClientManager {
     
     public function deleteClient(Client $client)
     {
-        $req = $this->_db->prepare('DELETE FROM clients WHERE idClient = :idClient');
+        $req = $this->_db->prepare('DELETE FROM p5_clients WHERE idClient = :idClient');
         $req->bindValue(':idClient', $client->getIdClient(), \PDO::PARAM_INT);
         $req->execute();
     }

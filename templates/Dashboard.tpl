@@ -1,5 +1,5 @@
 <section class="dashboard">
-    <article class="articleForm columns-2 coloredForm">
+    <article class="articleForm articlePadding columns-2 coloredForm">
 	<h2>Recherche par sessions</h2>
 	<hr />
 	<form>
@@ -57,7 +57,7 @@
 	</form>
     </article>
 	
-    <article id="articleGetAllSessionByFilter">
+    <article id="articleGetAllSessionByFilter" class="articlePadding">
 	<h2>Sessions du mois</h2>
 	<hr />
 	<table class="dataTable">

@@ -125,32 +125,6 @@ if(isset($_SESSION['username']))
 	    $smarty->assign('user', $user);
 	    $smarty->display('User/GetUser.tpl');
 	}
-        elseif($_GET['page'] == "dashboard")
-	{
-	
-	    $companyList = $companyController->getAllCompany();
-	    $sessions = $sessionController->getAllSessionByFilter();
-
-	    foreach ($sessions as $session)
-	    {
-		$companies[$session->getIdCompany()] = $companyController->getCompanyById($session->getIdCompany())->getName();
-
-		$candidate = $candidateController->getCandidateById($session->getIdCandidate());
-		$candidatesFirstname[$session->getIdCandidate()] = $candidate->getFirstName();
-		$candidatesLastname[$session->getIdCandidate()] = $candidate->getLastname();	    
-	    }
-
-	    if($sessions)
-	    {
-		$smarty->assign('companies', $companies);
-		$smarty->assign('candidatesFirstname', $candidatesFirstname);
-		$smarty->assign('candidatesLastname', $candidatesLastname);
-	    }
-
-	    $smarty->assign('sessions', $sessions);
-	    $smarty->assign('companyList', $companyList);
-	    $smarty->display('Dashboard.tpl');
-	}
 	else
 	{
 	    $error = "La page demandée n'existe pas.";
@@ -286,10 +260,32 @@ if(isset($_SESSION['username']))
 	}
     }
     else
-    {
-	$error = "La page demandée n'existe pas.";
-	$smarty->assign('error', $error);
-	$smarty->display('Error.tpl');
+	{
+
+	$companyList = $companyController->getAllCompany();
+	$sessions = $sessionController->getAllSessionByFilter();
+
+	foreach ($sessions as $session)
+	{
+	    $companies[$session->getIdCompany()] = $companyController->getCompanyById($session->getIdCompany())->getName();
+
+	    $candidate = $candidateController->getCandidateById($session->getIdCandidate());
+	    $candidatesFirstname[$session->getIdCandidate()] = $candidate->getFirstName();
+	    $candidatesLastname[$session->getIdCandidate()] = $candidate->getLastname();	    
+	}
+
+	if($sessions)
+	{
+	    $smarty->assign('companies', $companies);
+	    $smarty->assign('candidatesFirstname', $candidatesFirstname);
+	    $smarty->assign('candidatesLastname', $candidatesLastname);
+	}
+
+	$smarty->assign('sessions', $sessions);
+	$smarty->assign('companyList', $companyList);
+	$smarty->display('Header.tpl');
+	$smarty->display('Dashboard.tpl');
+	$smarty->display('Footer.tpl');
     }
 }
 else

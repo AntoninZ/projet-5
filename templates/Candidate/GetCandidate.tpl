@@ -1,6 +1,6 @@
 <section class="getCandidate">
     <article class="articleForm columns-2 updateCandidate">
-	<h2 class="colored-title">Information candidat</h2>
+	<h2 class="colored-title"><i class="fas fa-minus"></i>Information candidat</h2>
 	
 	<form>
 	    <div>
@@ -75,7 +75,7 @@
     </article>
 		    
     <article class="articleForm columns-2 updateCandidateWithoutSession">
-	<h2 class="colored-title">Information de réservation</h2>
+	<h2 class="colored-title"><i class="fas fa-plus"></i>Information de réservation</h2>
 	<form>
 	    <div>
 		<div>
@@ -118,7 +118,7 @@
     </article>
 		    
     <article class="articleForm columns-2 createSession">
-	<h2 class="colored-title">Créer une session</h2>
+	<h2 class="colored-title"><i class="fas fa-plus"></i>Créer une session</h2>
 	<form>
 	    <div>
 		<div>
@@ -190,35 +190,36 @@
 	    
     {if isset($sessions)}
     <article>
-    <h2 class="colored-title">Sessions du candidat</h2>
-    <table class="dataTable">
-	<thead>
-	    <tr>
-		<th>N°</th>
-		<th>Date</th>
-		<th>Entreprise</th>
-		<th>Degré d'évaluation</th>
-		<th>Aptitude</th>
-		<th>Accéder</th>
-	    </tr>
-	</thead>
-	<tbody>
-	{foreach from=$sessions item=session}
-	    <tr>
-		<td></td>
-		<td>{$session->getDate()|date_format:"%d/%m/%Y"}</td>
-		<td>
-		    {assign var=idCompany value=$session->getIdCompany()}
-		    {$companies.$idCompany}
-		</td>
-		<td>{$session->getGrade()}</td>
-		<td>{$session->getAptitude()}</td>
-		<td><a href="?page=session&amp;idSession={$session->getIdSession()}&amp;lastname={$candidate->getlastname()}&amp;firstname={$candidate->getFirstname()}">Accéder</a></td>
-	    </tr>  
-	{/foreach}
-	</tbody>
-    </table>
-	
+    <h2 class="colored-title"><i class="fas fa-plus"></i>Sessions du candidat</h2>
+    <div class="tablePadding">
+	<table class="dataTable">
+	    <thead>
+		<tr>
+		    <th>N°</th>
+		    <th>Date</th>
+		    <th>Entreprise</th>
+		    <th>Degré d'évaluation</th>
+		    <th>Aptitude</th>
+		    <th>Accéder</th>
+		</tr>
+	    </thead>
+	    <tbody>
+	    {foreach from=$sessions item=session}
+		<tr>
+		    <td></td>
+		    <td>{$session->getDate()|date_format:"%d/%m/%Y"}</td>
+		    <td>
+			{assign var=idCompany value=$session->getIdCompany()}
+			{$companies.$idCompany}
+		    </td>
+		    <td>{$session->getGrade()}</td>
+		    <td>{$session->getAptitude()}</td>
+		    <td><a href="?page=session&amp;idSession={$session->getIdSession()}&amp;lastname={$candidate->getlastname()}&amp;firstname={$candidate->getFirstname()}"><i class="fas fa-external-link-alt"></i></a></td>
+		</tr>  
+	    {/foreach}
+	    </tbody>
+	</table>
+    </div>
     </article>
     {/if}
     {if $smarty.session.role == 'psychologist'}

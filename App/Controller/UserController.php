@@ -134,7 +134,7 @@ class UserController {
         $manager = new UserManager($db);
         $user = $manager->getUser($userVerify);
         
-        
+	
         if($user)
         {
             if(password_verify($userVerify->getPassword(), $user->getPassword()))

@@ -6,6 +6,7 @@
         <title>Psychafeb - Intranet</title>
         <link rel="icon" type="image/png" href="/Public/images/favicon.png" />
 	<link rel="stylesheet" type="text/css" href="./Public/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="./Public/css/mediaqueries.css" />
     </head>
     
     <body class="homepage">

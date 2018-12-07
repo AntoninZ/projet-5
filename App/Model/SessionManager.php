@@ -17,7 +17,7 @@ class SessionManager {
     
     public function createSession(Session $session)
     {
-        $req = $this->_db->prepare('INSERT INTO sessions 
+        $req = $this->_db->prepare('INSERT INTO p5_sessions 
                 (idUser, idCandidate, idCompany, date, grade, aptitude, psychologistNote, price, computerStation)
                 VALUES (:idUser, :idCandidate, :idCompany, :date, :grade, :aptitude, :psychologistNote, :price, :computerStation)');
         $req->bindValue(':idUser', $session->getIdUser(), \PDO::PARAM_INT);
@@ -37,7 +37,7 @@ class SessionManager {
     
     public function getSession(Session $session)
     {
-        $req = $this->_db->prepare('SELECT * FROM sessions WHERE idSession = :idSession');
+        $req = $this->_db->prepare('SELECT * FROM p5_sessions WHERE idSession = :idSession');
         $req->bindValue(':idSession', $session->getIdSession(), \PDO::PARAM_INT);
         $req->execute();
         
@@ -49,7 +49,7 @@ class SessionManager {
     {
         $sessions = [];
         
-        $req = $this->_db->prepare('SELECT * FROM sessions WHERE idCandidate = :idCandidate ORDER BY date DESC');
+        $req = $this->_db->prepare('SELECT * FROM p5_sessions WHERE idCandidate = :idCandidate ORDER BY date DESC');
         $req->bindValue(':idCandidate', $session->getIdCandidate(), \PDO::PARAM_STR);
         $req->execute();
         
@@ -64,7 +64,7 @@ class SessionManager {
     public function getAllSessionByFilter(Session $session, $filterDate)
     {
 	$req = $this->_db->prepare('
-	    SELECT * FROM sessions WHERE 
+	    SELECT * FROM p5_sessions WHERE 
 		(idCompany =
 		CASE
 		    WHEN :idCompany = "" THEN idCompany
@@ -109,7 +109,7 @@ class SessionManager {
     
     public function updateSession(Session $session, $request)
     {
-        $req = $this->_db->prepare('UPDATE sessions SET idUser = :idUser, idCompany = :idCompany, date = :date, grade = :grade, aptitude = :aptitude,'.$request.' price = :price, computerStation = :computerStation WHERE idSession = :idSession');
+        $req = $this->_db->prepare('UPDATE p5_sessions SET idUser = :idUser, idCompany = :idCompany, date = :date, grade = :grade, aptitude = :aptitude,'.$request.' price = :price, computerStation = :computerStation WHERE idSession = :idSession');
         $req->bindValue(':idSession', $session->getIdSession(), \PDO::PARAM_INT);
 	$req->bindValue(':idUser', $session->getIdUser(), \PDO::PARAM_INT);
 	$req->bindValue(':idCompany', $session->getIdCompany(), \PDO::PARAM_INT);
@@ -131,14 +131,14 @@ class SessionManager {
     
     public function deleteSession(Session $session)
     {
-        $req = $this->_db->prepare('DELETE FROM sessions WHERE idSession = :idSession');
+        $req = $this->_db->prepare('DELETE FROM p5_sessions WHERE idSession = :idSession');
         $req->bindValue('idSession', $session->getIdSession(), \PDO::PARAM_INT);
         $req->execute();
     }
     
     public function deleteSessionByIdCandidate(Session $session)
     {
-	$req = $this->_db->prepare('DELETE FROM sessions WHERE idCandidate = :idCandidate');
+	$req = $this->_db->prepare('DELETE FROM p5_sessions WHERE idCandidate = :idCandidate');
 	$req->bindValue('idCandidate', $session->getIdCandidate(), \PDO::PARAM_INT);
 	$req->execute();
     }

@@ -1,6 +1,9 @@
 /* GLOBAL CSS */
 body {
     margin:0;
+    min-height: 100vh;
+    height:100%;
+    position:relative;
     font-family: sans-serif;
     background-color: #f9f9f9;
     background-image : url('/projet-5/Public/images/cubes.png');
@@ -8,17 +11,24 @@ body {
 
 section:not(.printAttestation) {
     max-width: 1024px;
-    margin: 0px auto;
+    margin: 0px auto 160px auto;
     background-color: #f9f9f9;
     border: 1px solid #d0d0d0;
     border-radius: 3px;
 }
 
 article {
+    padding-bottom: 2px;
+}
+
+.articlePadding, .tablePadding {
     padding: 20px 20px 100px 20px;
 }
 
-a {text-decoration:none;}
+a {
+    text-decoration:none;
+    color:#000;
+}
 
 input:focus{outline:none;}
 
@@ -51,8 +61,15 @@ H3 {
     background-color: #bb617b;
     padding: 10px 0px 10px 10px;
     color: #fff;
-    margin-bottom: 30px;
+    cursor: pointer;
 }
+#menu-responsive {
+    margin: 0;
+}
+
+.nav-responsive {display:none;}
+svg.svg-inline--fa.fa-bars.fa-w-14 {display:none;}
+svg.svg-inline--fa.fa-plus.fa-w-14, svg.svg-inline--fa.fa-minus.fa-w-14 {margin-right: 20px;}
 
 hr {margin-bottom: 30px;}
 
@@ -61,8 +78,10 @@ hr {margin-bottom: 30px;}
 .flex-inline {width: 100%;}
 
 footer {
-    margin: 100px 0 0 0;
+    margin: 0;
     background-color: #2d4059;
+    position:absolute;
+    bottom: 0;
     width: 100%;
     text-align:center;
     padding: 20px 0;
@@ -160,7 +179,7 @@ header:not(.printHeader) p:hover {
     padding: 10px 30px;
 }
 
-nav ul  {
+.nav-lg ul  {
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
@@ -169,29 +188,35 @@ nav ul  {
     padding: 20px 0;
 }
 
-nav ul li {
+.nav-lg ul li {
     display: inline-block;
     padding: 1% 2%;
 }
 
-nav ul li.active {
-    background-color: #a26950;
-    box-shadow: 0px 1px 6px #441b1b inset;
-}
-
-nav ul li a {
+.nav-lg ul li a {
     color: #000;
     border-bottom: 2px solid rgb(255,255,255,0);
     padding-bottom: 5px;
     font-family: monospace;
     font-size: 1.5em;
     transition-duration: 0.5s;
-    
 }
 
-nav ul li a:hover {
+.nav-lg ul li a:hover {
     transition-duration: 0.5s;
     border-bottom: 2px solid #000;
+}
+
+.nav-lg ul li .nav-active {
+    color: #bb617b;
+    cursor: auto;
+    border-bottom: none;
+    transition-duration:0;
+}
+
+.nav-lg ul li .nav-active:hover{
+    border-bottom : none;
+    transition-duration:0;
 }
 
 /* ColoredForm*/
@@ -235,6 +260,15 @@ form.searchForm {
 
 /* GLOBAL FORMS */
 
+form {
+    padding : 20px 20px 100px 20px;
+    box-sizing: border-box;
+}
+
+.articlePadding form {
+    padding: 0;
+}
+
 .articleForm {
     position: relative;
 }
@@ -269,7 +303,7 @@ form.searchForm {
     margin: 0px 5px 10px 0px;
 }
 
-.articleForm form input, select, textarea {
+.articleForm form input, .articleForm form select, .articleForm form textarea {
     width: 200px;
     border: 1px solid #ccc;
     padding: 5px 5px 3px 5px;
@@ -317,6 +351,11 @@ form.searchForm {
 }
 
 /* PERSONNALISE DataTables */
+
+table#DataTables_Table_0 {
+    width: 100% !important;
+}
+
 .dataTables_wrapper .dataTables_length {
     margin-bottom: 20px;
 }
@@ -346,7 +385,8 @@ table.dataTable th {
 table.dataTable tbody tr.even {
     background-color: #ececec;
 }
-table.dataTable tbody tr:hover {
+
+table.dataTable tbody tr:hover, table.dataTable tbody tr:hover a {
     background-color: #d0597c;
     color: #fff;
 }

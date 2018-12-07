@@ -1,0 +1,162 @@
+@media only screen and (max-width: 480px), only screen and (min-width:481px) and (max-width: 620px), only screen and (min-width:621px) and (max-width:960px)
+{
+    /* HOMEPAGE */
+    .homepage div {
+	box-sizing: border-box;
+	width: 100%;
+	margin-top: 20%;
+    }
+    
+    .homepage div h2 {
+	margin-bottom: 20px;
+    }
+    
+    .homepage div input, .homepage div button {
+	box-sizing: border-box;
+	width: 90%;
+    }
+    
+    /* GLOBAL */
+    
+    section:not(.printAttestation) {
+	margin: 0 0 56px 0;
+    }
+    
+    header:not(.printHeader) h1 {
+	margin: 10px auto;
+    }
+    
+    .colored-title {
+	margin-bottom: 0px;
+	text-align: left;
+    }
+    
+    h1 {
+	font-size: 1.7em;
+    }
+    
+    h2, h3 {
+	font-size: 1.275em;
+	text-align: center;
+    }
+    
+    .print{
+	display:none;
+    }
+    
+    .deleteOption {
+	display:none;
+    }
+    
+    .deleteOption:hover {
+	border: none;
+    }
+    
+    /* HEADER */
+    header .signOut {
+	display:none;
+    }
+    
+    svg.svg-inline--fa.fa-bars.fa-w-14 {
+	display: block;
+	position:fixed;
+	right: 10px;
+	top: 10px;
+	z-index: 50;
+	color: #d2d2d2;
+	font-size: 1.7em;
+    }
+    
+    #menu-responsive {
+	margin: 0;
+    }
+    
+    .nav-lg {
+	display: none;
+    }
+    
+    .nav-responsive {
+	display:none;
+	position:fixed;
+	overflow-y: scroll;
+	top:0;
+	height: 100%;
+	width:100%;
+	z-index: 49;
+	background-color: #bb617b;
+    }
+    
+    .nav-responsive ul {
+	list-style: none;
+	padding:0;
+	text-align: center;
+	font-size: 1.5em;
+	margin-top: 100px;
+    }
+    
+    .nav-responsive li {
+	border-bottom: 1px solid #fff;
+	width: 60%;
+	margin: 0px auto 0px auto;
+	padding: 15px 0;
+    }
+    
+    .nav-responsive li a, .nav-responsive li p {
+	color: #fff;
+	margin: 0;
+    }
+    
+    .tablePadding {
+	padding: 20px 20px 100px 20px;
+	box-sizing: border-box;
+    }
+    
+    /* GLOBAL FORMS */
+    
+    .articleForm.columns-2 form {
+	flex-direction: column;
+    }
+    
+    .articleForm.columns-2 form>div, .articleForm.columns-disabled form {
+	width: 100%;
+    }
+    
+    .articleForm form input, .articleForm form select,.articleForm form textarea {
+	width: 100%;
+	padding: 10px 5px 7px 5px;
+	box-sizing: border-box;
+    }
+    
+    .articleForm form label {
+	width: 100%;
+	text-align:center;
+	margin: 10px 0px;
+    }
+    
+    .articleForm form button {
+	width: 70%;
+    }
+    
+    footer {
+	box-sizing: border-box;
+	padding: 10px 5px;
+    }
+}
+
+@media only screen and (min-width:621px) and (max-width:960px)
+{
+    .articleForm form input, .articleForm select,.articleForm textarea {
+	width: 300px;
+	display:block;
+	margin: 0 auto;
+	box-sizing: border-box;
+    }
+    
+    .noShow {
+	display:none !important;
+    }
+    
+    .articleForm form button {
+	width: 40%;
+    }
+}

@@ -1,8 +1,7 @@
 <section>
-    <article class="articleForm columns-2">
+    <article class="articleForm articlePadding columns-2">
 	<h2 class="center">{$user->getUsername()}</h2>
 	<h3 class="colored-title">Modifier l'utilisateur</h3>
-	<hr/>
 	<form>
 	    <div>
 		<input type="text" class="noShow" id="idUser" value="{$user->getIdUser()}">

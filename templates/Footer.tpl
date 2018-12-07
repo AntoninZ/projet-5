@@ -12,5 +12,7 @@
 	<script src="./Public/js/Company.js"></script>
 	<script src="./Public/js/Client.js"></script>
 	<script src="./Public/js/DataValidate.js"></script>
+	<script src="./Public/js/Responsive.js"></script>
+	<script src="./Public/js/Navigation.js"></script>
     </body>
 </html>

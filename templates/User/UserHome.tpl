@@ -1,5 +1,5 @@
-<section class="UserHome">
-    <article class="articleForm columns-disabled">
+<section class="userHome">
+    <article class="articleForm articlePadding columns-disabled">
 	<h2 class="center">{$user->getUsername()|ucfirst}</h2>
 	<h3 class="colored-title">Paramètre de compte</h3>
 	<form>

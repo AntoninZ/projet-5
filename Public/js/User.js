@@ -27,15 +27,15 @@ var User = {
             {
                 $.post('index.php?connexion',
                 {
-                    username : username,
-                    password : password
+                    username : $('#username').val(),
+                    password : $('#password').val()
                 },
                 
                 function(data)
                 {
                    if(data)
                    {
-                       $(location).attr('href',"?page=dashboard");
+                       location.reload();
                    }
                    else
                    {
@@ -53,7 +53,7 @@ var User = {
     
     signOut: function()
     {
-        $("#signOut").click(function()
+        $(".signOut").click(function()
         {
             $.get('index.php?signOut',
             function()
