@@ -1,4 +1,5 @@
 <?php
+ini_set('display_errors','off');
 session_start();
 
 require('vendor/autoload.php');
@@ -152,7 +153,12 @@ if(isset($_SESSION['username']))
         }
         elseif($_GET['action'] == 'updateCandidate')
         {
+
 	    $candidateController->updateCandidate();
+	    throw new \Exception('lol');
+	    echo $e->getMessage();
+
+
         }
 	elseif($_GET['action'] == 'createCandidateWithoutSession')
 	{
@@ -243,6 +249,10 @@ if(isset($_SESSION['username']))
 	    
 	    $smarty->assign('sessions', $sessions);
 	    $smarty->display('Session/getAllSessionByFilter.tpl');
+	}
+	elseif($_GET['action'] == 'createUser')
+	{
+	    $userController->createUser();
 	}
 	elseif($_GET['action'] == 'updateUserAccount')
 	{

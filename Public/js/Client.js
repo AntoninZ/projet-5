@@ -32,12 +32,20 @@ var Client = {
 			firstname : $('#firstname').val(),
 			lastname : $('#lastname').val(),
 			email : $('#email').val()    
-		    },
+		    })
 
-		    function(data){
-			location.reload();
-		    }
-		);
+		.done(function(data){
+		    location.reload();
+		})
+		
+		.fail(function(xhr, status, error){
+		    $('#btnCreateClient').after('<p id="confirm">Erreur '+xhr.status+' : '+error+' </p>');
+		    setInterval(function(){
+			$('#confirm').fadeOut('slow', function(){
+			    $('#confirm').remove();
+			});
+		    }, 5000);
+		});
 	    }
         });
     },
@@ -86,12 +94,21 @@ var Client = {
 			phoneNumber : $('#phoneNumber').val(),
 			cellphoneNumber : $('#cellphoneNumber').val(),
 			email : $('#email').val()
-		    },
+		    })
 
-		    function(data){
-			location.reload();
-		    }
-		);
+		.done(function(data){
+		    location.reload();
+		})
+		
+		.fail(function(xhr, status, error){
+		    $('#btnUpdateClient').after('<p id="confirm">Erreur '+xhr.status+' : '+error+' </p>');
+		    setInterval(function(){
+			$('#confirm').fadeOut('slow', function(){
+			    $('#confirm').remove();
+			});
+		    }, 5000);
+		});
+
 	    }
         });
     },
@@ -106,12 +123,15 @@ var Client = {
 		'index.php?action=deleteClient',
 		{
 		    idClient : idClient
-		},
+		})
 
-		function(data){
-		    location.reload();
-		}
-	    );
+	    .done(function(data){
+		location.reload();
+	    })
+	    
+	    .fail(function(xhr, status, error){
+		alert('Erreur '+xhr.status+' : '+error);
+	    });
 	}
     }
     

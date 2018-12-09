@@ -20,7 +20,7 @@ class UserController {
         $connection = new ConnectionController();
         $db = $connection->connect();
         $manager = new UserManager($db);
-        $manager->createUser($user);
+	$manager->createUser($user);
     }
     
     public function getUser()
@@ -141,15 +141,8 @@ class UserController {
             {
                 return $user;
             }
-            else
-            {
-                return $a = false;
-            }
         }
-        else
-        {
-            return $a = false;
-        }  
+
     }
     
 }

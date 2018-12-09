@@ -27,12 +27,20 @@ var Company = {
 		    'index.php?action=createCompany',
 		    {
 			name : $('#name').val()   
-		    },
+		    })
 
-		    function(data){
-			window.location.replace('?page=clients&idCompany='+data);
-		    }
-		);
+		.done(function(data){
+		    window.location.replace('?page=clients&idCompany='+data);
+		})
+		
+		.fail(function(xhr, status, error){
+		    $('#btnCreateCompany').after('<p id="confirm">Erreur '+xhr.status+' : '+error+' </p>');
+		    setInterval(function(){
+			$('#confirm').fadeOut('slow', function(){
+			    $('#confirm').remove();
+			});
+		    }, 5000);
+		});
 	    }
         });
     },
@@ -65,19 +73,26 @@ var Company = {
 		    {
 			name : $('#name').val(),
 			idCompany : $('#idCompany').val()
-		    },
+		    })
 
-		    function(){
-			
-			$('#btnUpdateCompany').after('<p id="confirm">Information sauvegardée.</p>')
-			
-			setInterval(function(){
-			    $('#confirm').fadeOut('slow', function(){
-				$('#confirm').remove();
-			    });
-			}, 2000);
-		    }
-		);
+		.done(function(){
+		    $('#btnUpdateCompany').after('<p id="confirm">Information sauvegardée.</p>')
+
+		    setInterval(function(){
+			$('#confirm').fadeOut('slow', function(){
+			    $('#confirm').remove();
+			});
+		    }, 2000);
+		})
+		
+		.fail(function(xhr, status, error){
+		    $('#btnUpdateCompany').after('<p id="confirm">Erreur '+xhr.status+' : '+error+' </p>');
+		    setInterval(function(){
+			$('#confirm').fadeOut('slow', function(){
+			    $('#confirm').remove();
+			});
+		    }, 5000);
+		});
 	    }
         });
     }

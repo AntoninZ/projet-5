@@ -2,6 +2,54 @@
 
 var User = {
     
+    createUser: function()
+    {
+	$('#btnCreateUser').click(function(e)
+	{
+	    e.preventDefault();
+	    
+	    var requiredUsername = DataValidate.required($('#username').attr('id'));
+            var requiredPassword = DataValidate.required($('#password').attr('id'));
+	    
+	    if(!requiredUsername || !requiredPassword)
+            {
+		if($('#confirm').length === 0)
+		{
+		    $('#connexion').after('<p id="confirm">Erreur : champs vide(s).</p>');
+		    setInterval(function(){
+			$('#confirm').fadeOut('slow', function(){
+			    $('#confirm').remove();
+			});
+		    }, 2000);
+		}
+            }
+	    else
+	    {
+		$.post('index.php?action=createUser',
+		{
+		    username: $('#username').val(),
+		    password: $('#password').val(),
+		    gender: $('#gender').val(),
+		    role: $('#role').val(),
+		    adeliNumber : $('#adeliNumber').val()
+		})
+		
+		.done(function(){
+		    location.reload();
+		})
+		
+		.fail(function(xhr, status, error){
+		    $('#btnCreateUser').after('<p id="confirm">Erreur '+xhr.status+' : '+error+' </p>');
+		    setInterval(function(){
+			$('#confirm').fadeOut('slow', function(){
+			    $('#confirm').remove();
+			});
+		    }, 5000);
+		});
+	    }
+	});
+    },
+    
     signIn: function()
     {
         $('#connexion').click(function(e)
@@ -29,9 +77,9 @@ var User = {
                 {
                     username : $('#username').val(),
                     password : $('#password').val()
-                },
+                })
                 
-                function(data)
+		.done(function(data)
                 {
                    if(data)
                    {
@@ -46,7 +94,16 @@ var User = {
 			    });
 			}, 2000);
                    }
-                });
+                })
+		
+		.fail(function(xhr, status, error){
+		    $('#connexion').after('<p id="confirm">Erreur '+xhr.status+' : '+error+' </p>');
+		    setInterval(function(){
+			$('#confirm').fadeOut('slow', function(){
+			    $('#confirm').remove();
+			});
+		    }, 5000);
+		});
             }
         });
     },
@@ -93,17 +150,25 @@ var User = {
 			role : $('#role').val(),
 			adeliNumber : $('#adeliNumber').val(),
 			idUser : $('#idUser').val()
-		    },
+		    })
 		    
-		    function(){
-			$('#btnUpdateUserAccount').after('<p id="confirm">Informations sauvegardées.</p>');
-			setInterval(function(){
-			    $('#confirm').fadeOut('slow', function(){
-				$('#confirm').remove();
-			    });
-			}, 2000);
-		    }
-		);
+		.done(function(){
+		    $('#btnUpdateUserAccount').after('<p id="confirm">Informations sauvegardées.</p>');
+		    setInterval(function(){
+			$('#confirm').fadeOut('slow', function(){
+			    $('#confirm').remove();
+			});
+		    }, 2000);
+		})
+		
+		.fail(function(xhr, status, error){
+		    $('#btnUpdateUserAccount').after('<p id="confirm">Erreur '+xhr.status+' : '+error+' </p>');
+		    setInterval(function(){
+			$('#confirm').fadeOut('slow', function(){
+			    $('#confirm').remove();
+			});
+		    }, 5000);
+		});
 	    }
 	});
     },
@@ -138,17 +203,25 @@ var User = {
 			{
 			    password : $('#password').val(),
 			    idUser : $('#idUser').val()
-			},
+			})
 		    
-			function(){
-			    $('#btnUpdateUserPassword').after('<p id="confirm">Informations sauvegardées.</p>');
-			    setInterval(function(){
-				$('#confirm').fadeOut('slow', function(){
-				    $('#confirm').remove();
-				});
-			    }, 2000);
-			}
-		    );
+		    .done(function(){
+			$('#btnUpdateUserPassword').after('<p id="confirm">Informations sauvegardées.</p>');
+			setInterval(function(){
+			    $('#confirm').fadeOut('slow', function(){
+				$('#confirm').remove();
+			    });
+			}, 2000);
+		    })
+		    
+		    .fail(function(xhr, status, error){
+			$('#btnUpdateUserPassword').after('<p id="confirm">Erreur '+xhr.status+' : '+error+' </p>');
+			setInterval(function(){
+			    $('#confirm').fadeOut('slow', function(){
+				$('#confirm').remove();
+			    });
+			}, 5000);
+		    });
 		}
 		else
 		{
@@ -165,6 +238,7 @@ var User = {
     
 };
 
+User.createUser();
 User.signIn();
 User.signOut();
 User.updateUserAccount();

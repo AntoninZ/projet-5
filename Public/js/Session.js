@@ -18,12 +18,20 @@ var Session = {
 		    psychologistNote : $('#psychologistNote').val(),
 		    price : $('#price').val(),
 		    computerStation : $('#computerStation').val()  
-                },
+                })
                 
-                function(data){
-		    location.reload();
-                }
-            );
+	    .done(function(data){
+		location.reload();
+	    })
+	    
+	    .fail(function(xhr, status, error){
+		$('#btnCreateSession').after('<p id="confirm">Erreur '+xhr.status+' : '+error+' </p>');
+		setInterval(function(){
+		    $('#confirm').fadeOut('slow', function(){
+			$('#confirm').remove();
+		    });
+		}, 5000);
+	    });
         });
     },
     
@@ -51,12 +59,20 @@ var Session = {
 		    psychologistNote : psychologistNote,
 		    price : $('#price').val(),
 		    computerStation : $('#computerStation').val()  
-                },
+                })
                 
-                function(data){
-                    location.reload();
-                }
-            );
+	    .done(function(data){
+		location.reload();
+	    })
+	    
+	    .fail(function(xhr, status, error){
+		$('#btnUpdateSession').after('<p id="confirm">Erreur '+xhr.status+' : '+error+' </p>');
+		setInterval(function(){
+		    $('#confirm').fadeOut('slow', function(){
+			$('#confirm').remove();
+		    });
+		}, 5000);
+	    });
         });
     },
     
@@ -74,13 +90,21 @@ var Session = {
 		  idCompany : $('#idCompany').val(),
 		  grade : $('#grade').val(),
 		  aptitude : $('#aptitude').val()
-		},
+		})
 		
-		function(data){
-		    $('#articleGetAllSessionByFilter').html(data);
-		    DataTable.init();
-		}
-	    );
+	    .done(function(data){
+		$('#articleGetAllSessionByFilter').html(data);
+		DataTable.init();
+	    })
+	    
+	    .fail(function(xhr, status, error){
+		$('#btnGetAllSessionByFilter').after('<p id="confirm">Erreur '+xhr.status+' : '+error+' </p>');
+		setInterval(function(){
+		    $('#confirm').fadeOut('slow', function(){
+			$('#confirm').remove();
+		    });
+		}, 5000);
+	    });
 	});
     },
     

@@ -18,14 +18,16 @@ class UserManager {
     
     public function createUser(User $user)
     {
-        $passwordHash = password_hash($user->getPassword(), PASSWORD_DEFAULT);
+        $passwordHash = password_hash($user->getPassword(), \PASSWORD_DEFAULT);
         
-        $req = $this->_db->prepare('INSERT INTO p5_users (username, password, gender, role) VALUES (:username, :password, :gender, :role)');
+        $req = $this->_db->prepare('INSERT INTO p5_users (username, password, gender, role, adeliNumber) VALUES (:username, :password, :gender, :role, :adeliNumber)');
         $req->bindValue(':username', $user->getUsername(), \PDO::PARAM_STR);
-        $req->bindValue(':password', $passwordHash , \PDO::PARAM_STR);
+        $req->bindValue(':password', $passwordHash, \PDO::PARAM_STR);
         $req->bindValue(':gender', $user->getGender(), \PDO::PARAM_STR);
         $req->bindValue(':role', $user->getRole(), \PDO::PARAM_STR);
+	$req->bindValue(':adeliNumber', $user->getAdeliNumber(), \PDO::PARAM_INT);
         $req->execute();
+
     }
     
     public function getUser(User $user)

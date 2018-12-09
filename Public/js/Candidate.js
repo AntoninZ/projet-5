@@ -16,14 +16,16 @@ var Candidate = {
 			email : $('#search').val(),
 			phoneNumber : $('#search').val(),
 			cellphoneNumber : $('#search').val()
-		    },
+		    })
 
-		    function(data)
-		    {
-			$('#getAllCandidate').html(data);
-			DataTable.init();
-		    }
-		);
+		.done(function(data){
+		    $('#getAllCandidate').html(data);
+		    DataTable.init();
+		})
+		
+		.fail(function(xhr, error){
+		    alert('Erreur '+xhr.status+' : '+error);
+		});
 	    }
         });
     },
@@ -54,12 +56,20 @@ var Candidate = {
 			lastname : $('#lastname').val(),
 			firstname : $('#firstname').val(),
 			birthDate : $('#birthDate').val()
-		    },
+		    })
 
-		    function(data){
-			window.location.replace("?page=candidates&idCandidate="+data);
-		    }
-		);
+		.done(function(data){
+		    window.location.replace("?page=candidates&idCandidate="+data);
+		})
+		
+		.fail(function(xhr, status, error){
+		    $('#btnCreateCandidate').after('<p id="confirm">Erreur '+xhr.status+' : '+error+' </p>');
+		    setInterval(function(){
+			$('#confirm').fadeOut('slow', function(){
+			    $('#confirm').remove();
+			});
+		    }, 5000);
+		});
 	    }
         });
     },
@@ -108,21 +118,30 @@ var Candidate = {
 			city : $('#city').val(),
 			allowable : $('#allowable').val(),
 			idCandidate : $('#idCandidate').val()
-		    },
+		    })
 
-		    function(data){
-			if($('#confirm').length === 0)
-			{
-			    $('#btnUpdateCandidate').after('<p id="confirm">Informations sauvegardées !</p>')
-			    console.log(data);
-			    setInterval(function(){
-				$('#confirm').fadeOut('slow', function(){
-				    $('#confirm').remove();
-				});
-			    }, 1000);
-			}
+		.done(function(){
+		    if($('#confirm').length === 0)
+		    {
+			$('#btnUpdateCandidate').after('<p id="confirm">Informations sauvegardées !</p>');
+			setInterval(function(){
+			    $('#confirm').fadeOut('slow', function(){
+				$('#confirm').remove();
+			    });
+			}, 1000);
 		    }
-		);
+		})
+
+		.fail(function(xhr, status, error){
+		    console.log(xhr);
+		    $('#btnUpdateCandidate').after('<p id="confirm">Erreur '+xhr.status+' : '+error+' </p>');
+		    setInterval(function(){
+			$('#confirm').fadeOut('slow', function(){
+			    $('#confirm').remove();
+			});
+		    }, 5000);
+		});
+		
 	    }
         });
     },
@@ -168,12 +187,20 @@ var Candidate = {
 			reservationDate : $('#reservationDate').val(),
 			meeting : $('#meeting').val(),
 			assistantNote : $('#assistantNote').val()
-		    },
+		    })
 
-		    function(data){
-			window.location.replace("?page=candidates&idCandidate="+data);
-		    }
-		);
+		.done(function(data){
+		    window.location.replace("?page=candidates&idCandidate="+data);
+		})
+		
+		.fail(function(xhr, status, error){
+		    $('#btnCreateCandidateWithoutSession').after('<p id="confirm">Erreur '+xhr.status+' : '+error+' </p>');
+		    setInterval(function(){
+			$('#confirm').fadeOut('slow', function(){
+			    $('#confirm').remove();
+			});
+		    }, 5000);
+		});
 	    }
 	});
     },
@@ -193,20 +220,28 @@ var Candidate = {
 		    assistantNote : $('#assistantNote').val(),
 		    meeting : $('#meeting').val(),
                     idCandidate : $('#idCandidate').val()
-                },
-                
-                function(data){
-		    if($('#confirm').length === 0)
-		    {
-			$('#btnUpdateCandidateWithoutSession').after('<p id="confirm">Informations sauvegardées !</p>');
-			setInterval(function(){
-			    $('#confirm').fadeOut('slow', function(){
-				$('#confirm').remove();
-			    });
-			}, 1000);
-		    }
+                })
+
+	    .done(function(){
+		if($('#confirm').length === 0)
+		{
+		    $('#btnUpdateCandidateWithoutSession').after('<p id="confirm">Informations sauvegardées !</p>');
+		    setInterval(function(){
+			$('#confirm').fadeOut('slow', function(){
+			    $('#confirm').remove();
+			});
+		    }, 1000);
 		}
-            );
+	    })
+
+	    .fail(function(xhr, status, error){
+		$('#btnUpdateCandidateWithoutSession').after('<p id="confirm">Erreur '+xhr.status+' : '+error+' </p>');
+		setInterval(function(){
+		    $('#confirm').fadeOut('slow', function(){
+			$('#confirm').remove();
+		    });
+		}, 5000);
+	    });
 	});
     },
     
@@ -220,12 +255,15 @@ var Candidate = {
 		'index.php?action=deleteCandidate',
 		{
 		    idCandidate : idCandidate
-		},
+		})
 
-		function(){
-		    window.location.replace("?page=candidates");
-		}
-	    );
+	    .done(function(){
+		window.location.replace("?page=candidates");
+	    })
+	    
+	    .fail(function(xhr, status, error){
+		alert('Erreur '+xhr.status+' : '+error);
+	    });
 	}
     }
     

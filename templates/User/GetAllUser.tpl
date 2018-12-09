@@ -28,7 +28,10 @@
 		</div>
 		<div>
 		    <label for="role">Rôle</label>
-		    <input type="text" id="role">
+		    <select id="role">
+			<option value="psychologist">Psychologue</option>
+			<option value="assistant">Assistant</option>
+		    </select>
 		</div>
 
 		<div>

@@ -117,6 +117,7 @@ class CandidateManager {
 	$req->bindValue('city', $candidate->getCity(), \PDO::PARAM_STR);
 	$req->bindValue('allowable', $candidate->getAllowable(), \PDO::PARAM_STR);
 	$req->execute();
+	
     }
     
     public function updateCandidateWithoutSession(Candidate $candidate)
