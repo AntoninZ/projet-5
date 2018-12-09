@@ -70,7 +70,7 @@
     <article class="articlePadding">
 	<h2>Récapitulatif des candidats indépendants</h2>
 	<hr />
-	<table class="dataTable responsive wrap" width="100%">
+	<table class="dataTable responsive wrap">
 	    <thead>
 		<tr>
 		    <th>N°</th>

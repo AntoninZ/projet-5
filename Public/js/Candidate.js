@@ -110,11 +110,11 @@ var Candidate = {
 			idCandidate : $('#idCandidate').val()
 		    },
 
-		    function(){
+		    function(data){
 			if($('#confirm').length === 0)
 			{
 			    $('#btnUpdateCandidate').after('<p id="confirm">Informations sauvegardées !</p>')
-			    
+			    console.log(data);
 			    setInterval(function(){
 				$('#confirm').fadeOut('slow', function(){
 				    $('#confirm').remove();
@@ -196,17 +196,16 @@ var Candidate = {
                 },
                 
                 function(data){
-			if($('#confirm').length === 0)
-			{
-			    $('#btnUpdateCandidateWithoutSession').after('<p id="confirm">Informations sauvegardées !</p>')
-			    
-			    setInterval(function(){
-				$('#confirm').fadeOut('slow', function(){
-				    $('#confirm').remove();
-				});
-			    }, 1000);
-			}
+		    if($('#confirm').length === 0)
+		    {
+			$('#btnUpdateCandidateWithoutSession').after('<p id="confirm">Informations sauvegardées !</p>');
+			setInterval(function(){
+			    $('#confirm').fadeOut('slow', function(){
+				$('#confirm').remove();
+			    });
+			}, 1000);
 		    }
+		}
             );
 	});
     },

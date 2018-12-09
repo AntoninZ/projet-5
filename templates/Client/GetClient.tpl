@@ -53,7 +53,7 @@
 
 		<div>
 		    <label for="email">Email :</label>
-		    <input type="text"id="email" value="{$client->getEmail()}">
+		    <input type="text" id="email" value="{$client->getEmail()}">
 		</div>
 	    </div>
 	    <div>

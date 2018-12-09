@@ -22,7 +22,7 @@
 		<div>
 		    <label for="idCompany">Entreprise :</label>
 		    <select id="idCompany">
-			<option value=""></option>
+			<option value="">Tout</option>
 			{foreach from=$companyList item=company}
 			    <option value="{$company->getIdCompany()}">{$company->getName()}</option>
 			{/foreach}
@@ -32,7 +32,7 @@
 		<div>
 		    <label for="grade">Degré d'évaluation :</label>
 		    <select id="grade">
-			<option value=""></option>
+			<option value="">Tout</option>
 			<option value="Degré 3">Degré 3</option>
 			<option value="Degré 2">Degré 2</option>
 			<option value="Degré 1">Degré 1</option>
@@ -44,7 +44,7 @@
 		<div>
 		    <label for="aptitude">Aptitude :</label>
 		    <select id="aptitude">
-			<option value=""></option>
+			<option value="">Tout</option>
 			<option value="Apte">Apte</option>
 			<option value="Inapte">Inapte</option>
 		    </select>

@@ -14,7 +14,6 @@
     <article class="articleForm columns-disabled">
 	<h2 class="colored-title"><i class="fas fa-plus"></i>Ajouter un client</h2>
 	<form>
-	    <input type="text" class="noShow" id="idCompany" value="{$smarty.get.idCompany}">
 	    <div>
 		<label for="lastname">Nom :</label>
 		<input type="text" id="lastname">

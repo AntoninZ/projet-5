@@ -26,7 +26,7 @@ class CandidateManager {
         $req->bindValue('allowable', 'true', \PDO::PARAM_STR);
         $req->execute();
         
-        $req = $this->_db->query('SELECT MAX(idCandidate) FROM candidates');
+        $req = $this->_db->query('SELECT MAX(idCandidate) FROM p5_candidates');
         $data = $req->fetch(\PDO::FETCH_ASSOC);
         
         return $data['MAX(idCandidate)'];
@@ -116,7 +116,7 @@ class CandidateManager {
 	$req->bindValue('zipCode', $candidate->getZipCode(), \PDO::PARAM_STR);
 	$req->bindValue('city', $candidate->getCity(), \PDO::PARAM_STR);
 	$req->bindValue('allowable', $candidate->getAllowable(), \PDO::PARAM_STR);
-        $req->execute();
+	$req->execute();
     }
     
     public function updateCandidateWithoutSession(Candidate $candidate)

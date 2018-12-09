@@ -10,24 +10,23 @@
     </head>
     
     <body class="homepage">
-        <header>
-            <h1><a href="index.php">Psychafeb Online</a></h1>
-        </header>
-    
-        <div>
-            <h2>Connexion</h2>
-            <form method="post">
-                <label for="username">Login</label>
-                <input type="text" id="username" name="username">
+	<header>
+	    <h1><a href="index.php">Psychafeb Online</a></h1>
+	</header>
+	<section>
+	    <article>
+		<h2>Connexion</h2>
+		<form method="post">
+		    <label for="username">Login</label>
+		    <input type="text" id="username" name="username">
 
-                <label for="password">Mot de passe</label>
-                <input type="password" id="password" name="password">
+		    <label for="password">Mot de passe</label>
+		    <input type="password" id="password" name="password">
 
-                <button type="submit" id="connexion">Valider</button>
-            </form>
-
-            <p id="error"></p>
-        </div>
+		    <button type="submit" id="connexion">Valider</button>
+		</form>
+	    </article>
+	</section>
        
         
 

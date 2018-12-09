@@ -40,11 +40,11 @@ var User = {
                    else
                    {
                        $('#connexion').after('<p id="confirm">Erreur : Le pseudo ou le mot de passe est invalide</p>');
-		    setInterval(function(){
-			$('#confirm').fadeOut('slow', function(){
-			    $('#confirm').remove();
-			});
-		    }, 2000);
+			setInterval(function(){
+			    $('#confirm').fadeOut('slow', function(){
+				$('#confirm').remove();
+			    });
+			}, 2000);
                    }
                 });
             }

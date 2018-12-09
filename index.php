@@ -152,7 +152,7 @@ if(isset($_SESSION['username']))
         }
         elseif($_GET['action'] == 'updateCandidate')
         {
-            $candidateController->updateCandidate();
+	    $candidateController->updateCandidate();
         }
 	elseif($_GET['action'] == 'createCandidateWithoutSession')
 	{

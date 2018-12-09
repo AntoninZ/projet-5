@@ -1,17 +1,17 @@
 @media only screen and (max-width: 480px), only screen and (min-width:481px) and (max-width: 620px), only screen and (min-width:621px) and (max-width:960px)
 {
     /* HOMEPAGE */
-    .homepage div {
+    .homepage section article {
 	box-sizing: border-box;
 	width: 100%;
-	margin-top: 20%;
+	margin-top: 10%;
     }
     
-    .homepage div h2 {
+    .homepage section article h2 {
 	margin-bottom: 20px;
     }
     
-    .homepage div input, .homepage div button {
+    .homepage section article input, .homepage section article button {
 	box-sizing: border-box;
 	width: 90%;
     }
@@ -127,6 +127,12 @@
 	box-sizing: border-box;
     }
     
+    .articleForm input, .articleForm select
+    {
+	-webkit-appearance: none !important;
+	-moz-appearance: none !important;
+    }
+    
     .articleForm form label {
 	width: 100%;
 	text-align:center;
@@ -145,12 +151,17 @@
 
 @media only screen and (min-width:621px) and (max-width:960px)
 {
-    .articleForm form input, .articleForm select,.articleForm textarea {
+    .articleForm form input, .articleForm form select, .articleForm form input[type="date"] {
 	width: 300px;
 	display:block;
 	margin: 0 auto;
 	box-sizing: border-box;
     }
+    
+    .articleForm form textarea {
+	width: 500px;
+    }
+    
     
     .noShow {
 	display:none !important;

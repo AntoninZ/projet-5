@@ -152,7 +152,7 @@
 		<div>
 		    <label for="aptitude">Aptitude :</label>
 		    <select id="aptitude">
-			<option value=""></option>
+			<option value="">Choisir</option>
 			<option value="Apte">Apte</option>
 			<option value="Inapte">Inapte</option>
 		    </select>
@@ -165,7 +165,7 @@
 		<div>
 		    <label for="computerStation">Ordinateur du candidat :</label>
 		    <select id="computerStation" name="computerStation">
-			<option value=""></option>
+			<option value="">Choisir</option>
 			<option value="4">4</option>
 			<option value="3">3</option>
 			<option value="2">2</option>
