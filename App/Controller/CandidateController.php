@@ -26,7 +26,8 @@ class CandidateController
 	return $lastId;
     }
 
-    public function getCandidateById($idCandidate){
+    public function getCandidateById($idCandidate)
+    {
 	$candidate = new Candidate(['idCandidate' => $idCandidate]);
 	
 	$connection = new ConnectionController();
@@ -91,7 +92,6 @@ class CandidateController
     
     public function updateCandidate()
     {
-
 	$candidate = new Candidate([
 	    'idCandidate' => $_POST['idCandidate'],
 	    'firstname' => $_POST['firstname'],
@@ -111,7 +111,6 @@ class CandidateController
 	$db = $connection->connect();
 	$manager = new CandidateManager($db);
 	$manager->updateCandidate($candidate);
-
     }
     
     public function updateCandidateWithoutSession()

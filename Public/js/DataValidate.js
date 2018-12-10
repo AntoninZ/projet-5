@@ -170,5 +170,23 @@ var DataValidate = {
 	    }
 	    
 	    return verifyZipCode;
+	},
+	
+	confirm: function(btn, msg) {
+	    if($('#confirm').length > 0)
+	    {
+		$('#confirm').html(msg);
+	    }
+	    else
+	    {
+		btn.after('<p id="confirm">'+msg+'</p>');
+	    }
+	    
+	    setInterval(function()
+	    {
+		$('#confirm').fadeOut('fast', function(){
+		    $('#confirm').remove();
+		});
+	    }, 5000);
 	}
 };

@@ -10,6 +10,7 @@
 	    <th>Entreprise</th>
 	    <th>Degré</th>
 	    <th>Aptitude</th>
+	    <th>Accéder</th>
 	</tr>
     </thead>
     <tbody>
@@ -24,6 +25,7 @@
 	    <td>{$companies.$idCompany}</td>
 	    <td>{$session->getGrade()}</td>
 	    <td>{$session->getAptitude()}</td>
+	    <td><a href="?page=candidates&amp;idCandidate={$session->getIdCandidate()}"><i class="fas fa-external-link-alt"></i></a></td>
 	</tr>
 	{/foreach}
     </tbody>

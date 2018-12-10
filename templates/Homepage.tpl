@@ -1,10 +1,10 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="fr">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width" />
         <title>Psychafeb - Intranet</title>
-        <link rel="icon" type="image/png" href="/Public/images/favicon.png" />
+        <link rel="icon" type="image/png" href="/Public/images/logo.png" />
 	<link rel="stylesheet" type="text/css" href="./Public/css/style.css" />
 	<link rel="stylesheet" type="text/css" href="./Public/css/mediaqueries.css" />
     </head>

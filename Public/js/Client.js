@@ -6,6 +6,8 @@ var Client = {
         {
             e.preventDefault();
 	    
+	    var btn = $(this);
+	    
 	    var verifyLastname = DataValidate.lastname();
 	    var verifyFirstname = DataValidate.firstname();
 	    var requiredEmail = DataValidate.required($('#email').attr('id'));
@@ -13,16 +15,7 @@ var Client = {
 	    
 	    if(!verifyLastname || !verifyFirstname || !verifyEmail || !requiredEmail)
 	    {
-		if($('#confirm').length === 0)
-		{
-		    $('#btnCreateClient').after('<p id="confirm">Erreur: champs vide(s) ou invalide()s</p>');
-
-		    setInterval(function(){
-			$('#confirm').fadeOut('slow', function(){
-			    $('#confirm').remove();
-			});
-		    }, 2000);
-		}
+		DataValidate.confirm(btn, 'Erreur : champs invalide(s)');
 	    }
 	    else {
 		$.post(
@@ -32,20 +25,20 @@ var Client = {
 			firstname : $('#firstname').val(),
 			lastname : $('#lastname').val(),
 			email : $('#email').val()    
-		    })
+		    },
 
-		.done(function(data){
-		    location.reload();
-		})
-		
-		.fail(function(xhr, status, error){
-		    $('#btnCreateClient').after('<p id="confirm">Erreur '+xhr.status+' : '+error+' </p>');
-		    setInterval(function(){
-			$('#confirm').fadeOut('slow', function(){
-			    $('#confirm').remove();
-			});
-		    }, 5000);
-		});
+		    function(data)
+		    {
+			if(data.error)
+			{
+			    DataValidate.confirm(btn, data.error);
+			}
+			else
+			{
+			    location.reload();
+			}
+		    }
+		);
 	    }
         });
     },
@@ -56,6 +49,8 @@ var Client = {
         {
             e.preventDefault();
             
+	    var btn = $(this);
+	    
 	    var verifyLastname = DataValidate.lastname();
 	    var verifyFirstname = DataValidate.firstname();
 	    var verifyPhoneNumber = DataValidate.phoneNumber();
@@ -65,19 +60,7 @@ var Client = {
 	    
 	    if(!verifyLastname || !verifyFirstname || !verifyPhoneNumber|| !verifyCellphoneNumber || !verifyEmail || !verifyZipCode)
 	    {
-		if($('#error').length === 0)
-		{
-		    if($('#confirm').length === 0)
-		    {
-			$('#btnUpdateClient').after('<p id="confirm">Erreur: champs vide(s) ou invalide()s</p>');
-
-			setInterval(function(){
-			    $('#confirm').fadeOut('slow', function(){
-				$('#confirm').remove();
-			    });
-			}, 2000);
-		    }
-		}
+		DataValidate.confirm(btn, 'Erreur : champs invalide(s).')
 	    }
 	    else {
 		$.post(
@@ -94,21 +77,19 @@ var Client = {
 			phoneNumber : $('#phoneNumber').val(),
 			cellphoneNumber : $('#cellphoneNumber').val(),
 			email : $('#email').val()
-		    })
+		    },
 
-		.done(function(data){
-		    location.reload();
-		})
-		
-		.fail(function(xhr, status, error){
-		    $('#btnUpdateClient').after('<p id="confirm">Erreur '+xhr.status+' : '+error+' </p>');
-		    setInterval(function(){
-			$('#confirm').fadeOut('slow', function(){
-			    $('#confirm').remove();
-			});
-		    }, 5000);
-		});
-
+		    function(data){
+			if(data.error)
+			{
+			    DataValidate.confirm(btn, data.error);
+			}
+			else
+			{
+			    DataValidate.confirm(btn, 'Informations sauvegardées !');
+			}
+		    }
+		);
 	    }
         });
     },
@@ -123,15 +104,20 @@ var Client = {
 		'index.php?action=deleteClient',
 		{
 		    idClient : idClient
-		})
+		},
 
-	    .done(function(data){
-		location.reload();
-	    })
-	    
-	    .fail(function(xhr, status, error){
-		alert('Erreur '+xhr.status+' : '+error);
-	    });
+		function(data)
+		{
+		    if(data.error)
+		    {
+			alert(data.error);
+		    }
+		    else
+		    {
+			location.reload();
+		    }
+		}
+	    );
 	}
     }
     

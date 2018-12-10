@@ -1,9 +1,9 @@
 <!DOCTYPE HTML>
-<html>
+<html lang="fr">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>Psychafeb - Intranet</title>
-        <link rel="icon" type="image/png" href="./Public/images/favicon.png" />
+        <link rel="icon" type="image/png" href="./Public/images/logo.png" />
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.2/css/responsive.dataTables.min.css">
 	<link rel="stylesheet" type="text/css" href="./Public/css/style.css" />
@@ -20,7 +20,7 @@
 		</p>
 	    </header>
 	    
-	    <div style="margin-bottom: 75px">
+	    <div>
 		<p class="bold center size-16">
 		    {if $session->getGrade() == 'Conducteur'}
 			Certificat initial d'aptitude psychologique pour l'habiliation de la fonction de sécurité du métier de conducteur de train
@@ -36,8 +36,8 @@
 			{/if}
 		    {/if}
 		</p>
-		{if $company->getName() != 'INDEPENDANT'}<p class="bold center size-16" style="margin-bottom:5px;">Pour le compte de la société {$company->getName()}</p>{/if}
-		<p class="center size-12" style="margin-top:5px;">
+		{if $company->getName() != 'INDEPENDANT'}<p class="bold center size-16">Pour le compte de la société {$company->getName()}</p>{/if}
+		<p class="center size-12">
 		    {if $session->getGrade() == 'Conducteur'}
 			(Décret N°2010-708 du 29 juin 2010 et arrêté du 17 juillet 2015 modifiant l'arrêté du 6 août 2010 relatifs à la certification des conducteurs de trains)
 		    {else}
@@ -115,7 +115,7 @@
 		</p>
 	    </div>
 	    
-	    <p class="italic" style="margin:30px 0;">Copie à transmettre à l’intéressé{if $candidate->getGender() == 'female'}e{/if}</p>
+	    <p class="italic marg-30">Copie à transmettre à l’intéressé{if $candidate->getGender() == 'female'}e{/if}</p>
 	    <hr />
 	    <p class="size-10 justify">
 		<sup>1</sup> En cas de difficulté ou de désaccord de l’intéressé ou de son employeur à propos du
@@ -126,7 +126,7 @@
 		Sud, 92055 LA DEFENSE Cedex]<br />
 		{if $session->getGrade() == 'Conducteur'}<sup>2</sup> Selon l'annexe II, partie II de l'arrêté du 6 août 2010 relatif à la certification des conducteurs de train modifié par l'arrêté du 17 juillet 2015.{/if}
 	    </p>
-	    <p style="color:#0521e4;margin-bottom:0;text-align:center;">53 rue Monttessuy 91260 Juvisy sur Orge Tél: 01.69.21.33.32 Email : dzimmer@psychafeb.com</p>
+	    <p class="printFooter">53 rue Monttessuy 91260 Juvisy sur Orge Tél: 01.69.21.33.32 Email : dzimmer@psychafeb.com</p>
 	</section>
     </body>
 </html>

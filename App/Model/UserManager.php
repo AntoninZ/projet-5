@@ -26,7 +26,12 @@ class UserManager {
         $req->bindValue(':gender', $user->getGender(), \PDO::PARAM_STR);
         $req->bindValue(':role', $user->getRole(), \PDO::PARAM_STR);
 	$req->bindValue(':adeliNumber', $user->getAdeliNumber(), \PDO::PARAM_INT);
-        $req->execute();
+        $success = $req->execute();
+	
+	if(!$success)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
 
     }
     
@@ -35,18 +40,25 @@ class UserManager {
         $req = $this->_db->prepare('SELECT * FROM p5_users WHERE idUser = :idUser OR username = :username');
 	$req->bindValue(':idUser', $user->getIdUser(), \PDO::PARAM_INT);
         $req->bindValue(':username', $user->getUsername(), \PDO::PARAM_STR);
-        $req->execute();
+        $success = $req->execute();
         
-        $data = $req->fetch(\PDO::FETCH_ASSOC);
-        
-        if(!empty($data))
-        {
-            return $user = new User($data);
-        }
-        else
-        {
-            return false;
-        }
+	if(!$success)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
+	else
+	{
+	    $data = $req->fetch(\PDO::FETCH_ASSOC);
+
+	    if(!empty($data))
+	    {
+		return $user = new User($data);
+	    }
+	    else
+	    {
+		return false;
+	    }
+	}
     }
     
     public function getAllUser()
@@ -54,12 +66,20 @@ class UserManager {
 	$users = [];
 	
         $req = $this->_db->query('SELECT * FROM p5_users');
-        while($data = $req->fetch(\PDO::FETCH_ASSOC))
-	{
-            $users[] = new User($data);
-	}
         
-        return $users;
+	if(!$req)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
+	else
+	{
+	    while($data = $req->fetch(\PDO::FETCH_ASSOC))
+	    {
+		$users[] = new User($data);
+	    }
+
+	    return $users;
+	}
     }
     
     public function getAllUserWherePsychologist()
@@ -67,12 +87,20 @@ class UserManager {
 	$users = [];
 	
 	$req = $this->_db->query('SELECT idUser, username FROM p5_users WHERE role="psychologist"');
-	while($data = $req->fetch(\PDO::FETCH_ASSOC))
-	{
-	    $users[] = new User($data);
-	}
 	
-	return $users;
+	if(!$req)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
+	else
+	{
+	    while($data = $req->fetch(\PDO::FETCH_ASSOC))
+	    {
+		$users[] = new User($data);
+	    }
+
+	    return $users;
+	}
     }
     
     public function updateUserAccount(User $user)
@@ -83,7 +111,12 @@ class UserManager {
         $req->bindValue(':role', $user->getRole(), \PDO::PARAM_STR);
 	$req->bindValue(':adeliNumber', $user->getAdeliNumber(), \PDO::PARAM_INT);
         $req->bindValue(':idUser', $user->getIdUser(), \PDO::PARAM_INT);
-        $req->execute();
+        $success = $req->execute();
+	
+	if(!$success)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
     }
     
     public function updateUserPassword(User $user)
@@ -93,14 +126,24 @@ class UserManager {
 	$req = $this->_db->prepare('UPDATE p5_users SET password = :password WHERE idUser = :idUser');
 	$req->bindValue(':password', $passwordHash, \PDO::PARAM_STR);
 	$req->bindValue(':idUser', $user->getIdUser(), \PDO::PARAM_INT);
-	$req->execute();
+	$succes = $req->execute();
+	
+	if(!$success)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
     }
     
     public function deleteUser(User $user)
     {
         $req = $this->_db->prepare('DELETE FROM p5_users WHERE idUser = :idUser');
         $req->bindValue(':idUser', $user->getIdUser(), PDO::PARAM_INT);
-        $req->execute();
+        $success = $req->execute();
+	
+	if(!$success)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
     }
     
    

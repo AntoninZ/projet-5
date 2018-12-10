@@ -24,12 +24,19 @@ class CandidateManager {
         $req->bindValue('birthDate', $candidate->getBirthDate(), \PDO::PARAM_STR);
         $req->bindValue('gender', 'male', \PDO::PARAM_STR);
         $req->bindValue('allowable', 'true', \PDO::PARAM_STR);
-        $req->execute();
+        $success = $req->execute();
         
-        $req = $this->_db->query('SELECT MAX(idCandidate) FROM p5_candidates');
-        $data = $req->fetch(\PDO::FETCH_ASSOC);
+	$req = $this->_db->query('SELECT MAX(idCandidate) FROM p5_candidates');
+	$data = $req->fetch(\PDO::FETCH_ASSOC);
         
-        return $data['MAX(idCandidate)'];
+	if(!$success || !$data)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
+	else
+	{
+	    return $data['MAX(idCandidate)'];
+	}
     }
     
     public function createCandidateWithoutSession(Candidate $candidate)
@@ -49,22 +56,35 @@ class CandidateManager {
 	$req->bindValue(':reservationDate', $candidate->getReservationDate(), \PDO::PARAM_STR);
 	$req->bindValue(':assistantNote', $candidate->getAssistantNote(), \PDO::PARAM_STR);
 	$req->bindValue(':meeting', $candidate->getMeeting(), \PDO::PARAM_STR);
-	$req->execute();
+	$success = $req->execute();
 	
 	$req = $this->_db->query('SELECT MAX(idCandidate) FROM p5_candidates');
         $data = $req->fetch(\PDO::FETCH_ASSOC);
         
-        return $data['MAX(idCandidate)'];
+        if(!$success || !$data)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
+	else
+	{
+	    return $data['MAX(idCandidate)'];
+	}
     }
     public function getCandidate(Candidate $candidate)
     {
         $req = $this->_db->prepare('SELECT * FROM p5_candidates WHERE idCandidate = :idCandidate');
         $req->bindValue(':idCandidate', $candidate->getIdCandidate(), \PDO::PARAM_INT);
-	$req->execute();
+	$success = $req->execute();
 	
-        $data = $req->fetch(\PDO::FETCH_ASSOC);
-        
-        return $candidate = new Candidate($data);
+	if(!$success)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
+	else
+	{
+	    $data = $req->fetch(\PDO::FETCH_ASSOC);
+	    return $candidate = new Candidate($data);
+	}
     }
     
     public function getAllCandidate(Candidate $candidate)
@@ -76,15 +96,20 @@ class CandidateManager {
         $req->bindValue(':email', $candidate->getEmail().'%', \PDO::PARAM_STR);
         $req->bindValue(':phoneNumber', $candidate->getPhoneNumber().'%', \PDO::PARAM_STR);
         $req->bindValue(':cellphoneNumber', $candidate->getCellphoneNumber().'%', \PDO::PARAM_STR);
-        $req->execute();
+        $success = $req->execute();
         
-        while($data = $req->fetch(\PDO::FETCH_ASSOC))
-        {
-            $candidates[] = new Candidate($data); 
-        }
-        
-        return $candidates;
-        
+	if(!$success)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
+	else
+	{
+	    while($data = $req->fetch(\PDO::FETCH_ASSOC))
+	    {
+		$candidates[] = new Candidate($data); 
+	    }
+	    return $candidates;
+	}
     }
     
     public function getAllCandidateWithoutSession()
@@ -93,12 +118,18 @@ class CandidateManager {
         
         $req = $this->_db->query('SELECT * FROM p5_candidates WHERE meeting = "true"');
         
-        while($data = $req->fetch(\PDO::FETCH_ASSOC))
-        {
-            $candidates[] = new Candidate($data);
-        }
-        
-        return $candidates;
+	if(!$req)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
+	else
+	{
+	    while($data = $req->fetch(\PDO::FETCH_ASSOC))
+	    {
+		$candidates[] = new Candidate($data);
+	    }
+	    return $candidates;
+	}
     }
     
     public function updateCandidate(Candidate $candidate)
@@ -116,7 +147,12 @@ class CandidateManager {
 	$req->bindValue('zipCode', $candidate->getZipCode(), \PDO::PARAM_STR);
 	$req->bindValue('city', $candidate->getCity(), \PDO::PARAM_STR);
 	$req->bindValue('allowable', $candidate->getAllowable(), \PDO::PARAM_STR);
-	$req->execute();
+	$success = $req->execute();
+	
+	if(!$success)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
 	
     }
     
@@ -135,14 +171,24 @@ class CandidateManager {
 	$req->bindValue(':reservationDate', $candidate->getReservationDate(), \PDO::PARAM_STR);
 	$req->bindValue(':assistantNote', $candidate->getAssistantNote(), \PDO::PARAM_STR);
 	$req->bindValue(':meeting', $candidate->getMeeting(), \PDO::PARAM_STR);
-	$req->execute();	
+	$success = $req->execute();
+
+	if(!$success)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
     }
     
     public function deleteCandidate(Candidate $candidate)
     {
-       $req = $this->_db->prepare('DELETE FROM p5_candidates WHERE idCandidate = :idCandidate');
-       $req->bindValue('idCandidate', $candidate->getIdCandidate(), \PDO::PARAM_INT);
-       $req->execute();
+	$req = $this->_db->prepare('DELETE FROM p5_candidates WHERE idCandidate = :idCandidate');
+	$req->bindValue('idCandidate', $candidate->getIdCandidate(), \PDO::PARAM_INT);
+	$success = $req->execute();
+       
+	if(!$success)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
     }
     
 }

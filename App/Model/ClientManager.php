@@ -32,22 +32,36 @@ class ClientManager {
         $req->bindValue(':phoneNumber', $client->getPhoneNumber(), \PDO::PARAM_INT);
         $req->bindValue(':cellphoneNumber', $client->getCellphoneNumber(), \PDO::PARAM_INT);
 	$req->bindValue(':email', $client->getEmail(), \PDO::PARAM_STR);
-        $req->execute();
+        $success = $req->execute();
 	
 	$req = $this->_db->query('SELECT MAX(idClient) FROM p5_clients');
 	$idClient = $req->fetch(\PDO::FETCH_ASSOC);
         
-        return $idClient['MAX(idClient)'];
+	if(!$success || !$idClient)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
+	else
+	{
+	    return $idClient['MAX(idClient)'];
+	}
     }
     
     public function getClient(Client $client)
     {
         $req = $this->_db->prepare('SELECT * FROM p5_clients WHERE idClient = :idClient');
         $req->bindValue(':idClient', $client->getIdClient(), \PDO::PARAM_INT);
-        $req->execute();
-        
-        $data = $req->fetch(\PDO::FETCH_ASSOC);
-        return $client = new Client($data);
+        $success = $req->execute();
+	
+	if(!$success)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
+	else
+	{
+	    $data = $req->fetch(\PDO::FETCH_ASSOC);
+            return $client = new Client($data);
+	}
     }
     
     public function getAllClient(Client $client)
@@ -56,14 +70,21 @@ class ClientManager {
 	
         $req = $this->_db->prepare('SELECT * FROM p5_clients WHERE idCompany = :idCompany');
 	$req->bindValue(':idCompany', $client->getIdCompany(), \PDO::PARAM_INT);
-        $req->execute();
+        $success = $req->execute();
         
-        while($data = $req->fetch(\PDO::FETCH_ASSOC))
-        {
-            $clients[] = new Client($data);
-        }
-        
-        return $clients;
+	if(!$success)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	} 
+	else
+	{
+	    while($data = $req->fetch(\PDO::FETCH_ASSOC))
+	    {
+		$clients[] = new Client($data);
+	    }
+
+	    return $clients;
+	}
     }
     
     public function updateClient(Client $client)
@@ -91,13 +112,23 @@ class ClientManager {
         $req->bindValue(':cellphoneNumber', $client->getCellphoneNumber(), \PDO::PARAM_STR);
 	$req->bindValue(':email', $client->getEmail(), \PDO::PARAM_STR);
         $req->bindValue(':idClient', $client->getIdClient(), \PDO::PARAM_INT);
-        $req->execute();
+        $success = $req->execute();
+	
+	if(!$success)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
     }
     
     public function deleteClient(Client $client)
     {
         $req = $this->_db->prepare('DELETE FROM p5_clients WHERE idClient = :idClient');
         $req->bindValue(':idClient', $client->getIdClient(), \PDO::PARAM_INT);
-        $req->execute();
+        $success = $req->execute();
+	
+	if(!$success)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
     }
 }

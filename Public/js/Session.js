@@ -6,6 +6,8 @@ var Session = {
         {
             e.preventDefault();
             
+	    var btn = $(this);
+	    
             $.post(
                 'index.php?action=createSession',
                 {
@@ -18,20 +20,19 @@ var Session = {
 		    psychologistNote : $('#psychologistNote').val(),
 		    price : $('#price').val(),
 		    computerStation : $('#computerStation').val()  
-                })
+                },
                 
-	    .done(function(data){
-		location.reload();
-	    })
-	    
-	    .fail(function(xhr, status, error){
-		$('#btnCreateSession').after('<p id="confirm">Erreur '+xhr.status+' : '+error+' </p>');
-		setInterval(function(){
-		    $('#confirm').fadeOut('slow', function(){
-			$('#confirm').remove();
-		    });
-		}, 5000);
-	    });
+		function(data){
+		    if(data.error)
+		    {
+			DataValidate.confirm(btn, data.error);
+		    }
+		    else
+		    {
+			location.reload();
+		    }
+		}
+	    );
         });
     },
     
@@ -41,6 +42,8 @@ var Session = {
         {
             e.preventDefault();
             
+	    var btn = $(this);
+	    
 	    var psychologistNote;
 	    
 	    if($('#psychologistNote')){
@@ -59,20 +62,19 @@ var Session = {
 		    psychologistNote : psychologistNote,
 		    price : $('#price').val(),
 		    computerStation : $('#computerStation').val()  
-                })
-                
-	    .done(function(data){
-		location.reload();
-	    })
-	    
-	    .fail(function(xhr, status, error){
-		$('#btnUpdateSession').after('<p id="confirm">Erreur '+xhr.status+' : '+error+' </p>');
-		setInterval(function(){
-		    $('#confirm').fadeOut('slow', function(){
-			$('#confirm').remove();
-		    });
-		}, 5000);
-	    });
+                },
+		function(data)
+		{
+		   if(data.error)
+		    {
+			DataValidate.confirm(btn, data.error);
+		    }
+		    else
+		    {
+			DataValidate.confirm(btn, 'Informations sauvegardées !');
+		    }
+		}
+	    );
         });
     },
     
@@ -82,6 +84,8 @@ var Session = {
 	{
 	    e.preventDefault();
 	    
+	    var btn = $(this);
+	    
 	    $.post(
 		'index.php?action=getAllSessionByFilter',
 		{
@@ -90,25 +94,22 @@ var Session = {
 		  idCompany : $('#idCompany').val(),
 		  grade : $('#grade').val(),
 		  aptitude : $('#aptitude').val()
-		})
+		},
 		
-	    .done(function(data){
-		$('#articleGetAllSessionByFilter').html(data);
-		DataTable.init();
-	    })
-	    
-	    .fail(function(xhr, status, error){
-		$('#btnGetAllSessionByFilter').after('<p id="confirm">Erreur '+xhr.status+' : '+error+' </p>');
-		setInterval(function(){
-		    $('#confirm').fadeOut('slow', function(){
-			$('#confirm').remove();
-		    });
-		}, 5000);
-	    });
+		function(data){
+		    if(data.error)
+		    {
+			DataValidate.confirm(btn, data.error);
+		    }
+		    else
+		    {
+			$('#articleGetAllSessionByFilter').html(data);
+			DataTable.init();
+		    }
+		}
+	    );
 	});
-    },
-    
-    
+    }
 };
 
 Session.createSession();

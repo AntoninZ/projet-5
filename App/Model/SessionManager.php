@@ -29,9 +29,17 @@ class SessionManager {
         $req->bindValue(':psychologistNote', $session->getPsychologistNote(), \PDO::PARAM_STR);
         $req->bindValue(':price', $session->getPrice(), \PDO::PARAM_STR);
         $req->bindValue(':computerStation', $session->getComputerStation(), \PDO::PARAM_STR);
-	$req->execute();
-	$data = $req->fetch(\PDO::FETCH_ASSOC);
-        return $data;
+	$success = $req->execute();
+	
+	if(!$success)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
+	else
+	{
+	    $data = $req->fetch(\PDO::FETCH_ASSOC);
+	    return $data;
+	}
 	
     }
     
@@ -39,10 +47,17 @@ class SessionManager {
     {
         $req = $this->_db->prepare('SELECT * FROM p5_sessions WHERE idSession = :idSession');
         $req->bindValue(':idSession', $session->getIdSession(), \PDO::PARAM_INT);
-        $req->execute();
+        $success = $req->execute();
         
-        $data = $req->fetch(\PDO::FETCH_ASSOC);
-        return $a = new Session($data);
+	if(!$success)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
+	else
+	{
+	    $data = $req->fetch(\PDO::FETCH_ASSOC);
+	    return $a = new Session($data);
+	}
     }
     
     public function getAllSession(Session $session)
@@ -51,14 +66,21 @@ class SessionManager {
         
         $req = $this->_db->prepare('SELECT * FROM p5_sessions WHERE idCandidate = :idCandidate ORDER BY date DESC');
         $req->bindValue(':idCandidate', $session->getIdCandidate(), \PDO::PARAM_STR);
-        $req->execute();
+        $success = $req->execute();
         
-        while($data = $req->fetch(\PDO::FETCH_ASSOC))
-        {
-            $sessions[] = new Session($data);
-        }
-        
-        return $sessions;
+	if(!$success)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
+	else
+	{
+	    while($data = $req->fetch(\PDO::FETCH_ASSOC))
+	    {
+		$sessions[] = new Session($data);
+	    }
+
+	    return $sessions;
+	}
     }
     
     public function getAllSessionByFilter(Session $session, $filterDate)
@@ -91,18 +113,22 @@ class SessionManager {
 	$req->bindValue(':grade', $session->getGrade(), \PDO::PARAM_STR);
 	$req->bindValue(':aptitude', $session->getAptitude(), \PDO::PARAM_STR);
 	$req->bindValue(':filterDate', $filterDate, \PDO::PARAM_STR);
-	$req->execute();
+	$success = $req->execute();
 	
-	$sessions = [];
+	if(!$success)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
+	else
+	{
+	    $sessions = [];
 
 	    while($data = $req->fetch(\PDO::FETCH_ASSOC))
 	    {
-		
 		$sessions[] = new Session ($data);
-		
 	    }
-	    
 	    return $sessions;
+	}
 	    
 	
     }
@@ -124,23 +150,40 @@ class SessionManager {
 	
         $req->bindValue(':price', $session->getPrice(), \PDO::PARAM_STR);
         $req->bindValue(':computerStation', $session->getComputerStation(), \PDO::PARAM_INT);
-        $req->execute();
+        $success = $req->execute();
 	
-        $data = $req->fetch(\PDO::FETCH_ASSOC);
+	if(!$success)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
+	else
+	{
+	    $data = $req->fetch(\PDO::FETCH_ASSOC);
+	}
     }
     
     public function deleteSession(Session $session)
     {
         $req = $this->_db->prepare('DELETE FROM p5_sessions WHERE idSession = :idSession');
         $req->bindValue('idSession', $session->getIdSession(), \PDO::PARAM_INT);
-        $req->execute();
+        $success = $req->execute();
+	
+	if(!$success)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
     }
     
     public function deleteSessionByIdCandidate(Session $session)
     {
 	$req = $this->_db->prepare('DELETE FROM p5_sessions WHERE idCandidate = :idCandidate');
 	$req->bindValue('idCandidate', $session->getIdCandidate(), \PDO::PARAM_INT);
-	$req->execute();
+	$success = $req->execute();
+	
+	if(!$success)
+	{
+	    throw new \Exception('Erreur serveur : la requête a échouée.');
+	}
     }
     
 }

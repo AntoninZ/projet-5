@@ -506,6 +506,28 @@ svg.svg-inline--fa.fa-print.fa-w-16:hover {
     margin-top: 175px;
 }
 
-.no-margin-top{
+.no-margin-top {
     margin-top:0;
+}
+
+.printFooter {
+    color:#0521e4;
+    margin-bottom:0;
+    text-align:center;
+}
+
+.printAttestation:first-child div {
+    margin-bottom: 75px
+}
+
+p.bold.center.size-16 {
+    margin-bottom: 0;
+}
+
+.printAttestation p.center.size-12 {
+    margin-top:5px;
+}
+
+.marg-30 {
+    margin:30px 0;
 }
